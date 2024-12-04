@@ -48,13 +48,24 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 0.25rem;
   }
 
   .navbar-mobile {
+    display: none;
+  }
+
+  .navbar-button-mobile {
     border: 2px solid green;
     padding: 30px;
+  }
+  .header-logo {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10rem;
+    height: 6vh;
   }
   .menu-burger {
     width: 35px;
