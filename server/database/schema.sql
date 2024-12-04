@@ -29,6 +29,7 @@ create table website_user (
   phone_number char(10) not null,
   password char(60) not null,
   is_admin boolean null
+  constraint chk_phone_number_length check (length(phone_number) = 10)
 );
 
 create table engine (
@@ -37,7 +38,7 @@ create table engine (
   power_type varchar(255) not null,
   consumption varchar(10) not null,
   autonomy_km int unsigned not null,
-  refill_price int unsigned not null
+  refill_price decimal(10, 2) unsigned not null
 );
 
 create table vehicle (
@@ -47,7 +48,7 @@ create table vehicle (
   model varchar(255) not null,
   license_plate varchar(255) not null,
   registration_date date not null,
-  price int unsigned null,
+  price decimal(10, 2) unsigned null,
   carbon_footprint float null,
   crit_air_card int unsigned null,
   engine_id int unsigned not null,
@@ -67,6 +68,6 @@ create table company (
 create table driving_habit (
   user_id int unsigned primary key auto_increment not null,
   driven_distance int unsigned not null,
-  fuel_cost float not null,
+  fuel_cost decimal(10, 2) not null,
   foreign key(user_id) references website_user(id)
 );
