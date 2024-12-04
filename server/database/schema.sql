@@ -28,7 +28,7 @@ create table website_user (
   email varchar(255) not null unique,
   phone_number char(10) not null,
   password char(60) not null,
-  is_admin boolean null
+  is_admin boolean null,
   constraint chk_phone_number_length check (length(phone_number) = 10)
 );
 
