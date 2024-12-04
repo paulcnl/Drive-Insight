@@ -5,16 +5,16 @@ function Header() {
     <>
       <header>
         <div className="nav">
-          <button type="button" className="button-2">
+          <button type="button">
             <p>contact</p>
           </button>
-          <button type="button" className="button-1">
+          <button type="button">
             <p>info</p>
           </button>
-          <button type="button" className="button-2">
+          <button type="button">
             <p>comparer</p>
           </button>
-          <button type="button" className="button-1">
+          <button type="button">
             <p>compte</p>
           </button>
         </div>

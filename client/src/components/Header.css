@@ -10,26 +10,6 @@
 }
 
 button {
-  transition: .4s;
-}
-
-.nav .button-1 {
-  display: flex;
-  align-items: center;
-  height: 50%;
-  background-color: #00bd84;
-  border: none;
-  color: white;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 30px;
-  width: 8rem;
-}
-
-.button-2 {
   height: 50%;
   background-color: white;
   border: 1px solid #00bd84;
@@ -41,18 +21,6 @@ button {
   cursor: pointer;
   border-radius: 30px;
   width: 8rem;
-}
-
-.nav .button-1:hover {
-  background-color: white;
-  color: #000000;
-  border: 1px solid #00bd84;
-}
-
-.button-2:hover {
-  background-color: #00bd84;
-  color: white;
-  border: none;
 }
 
 header {
