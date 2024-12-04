@@ -1,4 +1,21 @@
-.navbar {
+:root {
+  --background-color: #f0f0f0;
+  --primary-color: #27dda6;
+  --result-red-color: #ff000013;
+  --result-green-color: #00ff0013;
+  --font-color: black;
+  --font-family: ;
+}
+
+.header-mobile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navbar-mobile {
   border: 2px solid green;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
 }
