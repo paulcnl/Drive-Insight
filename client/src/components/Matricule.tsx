@@ -1,4 +1,4 @@
-import add_car from "../assets/images/add-line.png";
+import add_car from "../assets/images/add.png";
 
 export default function Matricule() {
   return (
@@ -14,25 +14,45 @@ export default function Matricule() {
           />
         </div>
       </div>
-      <button type="submit">Valider</button>
+      <button className="matricule" type="submit">
+        Valider
+      </button>
       <div className="separator">
         <hr />
         ou
         <hr />
       </div>
       <div className="registred_info">
-        <h3>informations du vehicule</h3>
+        <h3 className="matricule_h3">informations du vehicule</h3>
         <div className="car_info">
-          <input type="text" placeholder="Marque" />
-          <input type="text" placeholder="Modele" />
-          <input type="text" placeholder="Kilometrage" />
-          <input type="text" placeholder="Puissance" />
-          <input type="text" placeholder="Cylindre" />
-          <input type="text" placeholder="Année" />
-          <input type="text" placeholder="energie" />
-          <input type="text" placeholder="" />
+          <input className="matricule_input" type="text" placeholder="Marque" />
+          <input className="matricule_input" type="text" placeholder="Modele" />
+          <input
+            className="matricule_input"
+            type="text"
+            placeholder="Kilometrage"
+          />
+          <input
+            className="matricule_input"
+            type="text"
+            placeholder="Puissance"
+          />
+          <input
+            className="matricule_input"
+            type="text"
+            placeholder="Cylindre"
+          />
+          <input className="matricule_input" type="text" placeholder="Année" />
+          <input
+            className="matricule_input"
+            type="text"
+            placeholder="energie"
+          />
+          <input className="matricule_input" type="text" placeholder="" />
         </div>
-        <button type="button">Enregistrer</button>
+        <button className="matricule" type="button">
+          Enregistrer
+        </button>
       </div>
     </div>
   );

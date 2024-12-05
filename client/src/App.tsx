@@ -1,12 +1,12 @@
+import { Outlet } from "react-router-dom";
 import "./App.css";
-import FilAriane from "./components/Fil";
-import Matricule from "./components/Matricule";
+import Header from "./components/FilAriane";
 
 export default function App() {
   return (
     <div>
-      <FilAriane />
-      <Matricule />
+      <Header />
+      <Outlet />
     </div>
   );
 }

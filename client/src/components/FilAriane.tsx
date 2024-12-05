@@ -2,7 +2,8 @@ import car from "../assets/images/roadster.png";
 import volant from "../assets/images/sateering.png";
 import param from "../assets/images/settings.png";
 import men from "../assets/images/user.png";
-const FilDAriane = () => {
+import "./FilAriane.css";
+const FilAriane = () => {
   return (
     <div className="container-box">
       <ul className="fil-ariane">
@@ -31,4 +32,4 @@ const FilDAriane = () => {
   );
 };
 
-export default FilDAriane;
+export default FilAriane;
