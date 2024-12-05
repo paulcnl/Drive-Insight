@@ -1,9 +1,11 @@
+import "./InfosEnviro.css";
+
 const SensibilisationPage = () => {
   return (
     <div className="sensibilisation-page">
-      <header>
-        <h1>La Transition Écologique et Vous</h1>
-        <p>
+      <header className="header">
+        <h1 className="header-title">La Transition Écologique et Vous</h1>
+        <p className="header-text">
           Découvrez pourquoi passer à un véhicule électrique est bénéfique pour
           la planète et votre quotidien.
         </p>
