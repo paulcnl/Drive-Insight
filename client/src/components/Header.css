@@ -1,11 +1,3 @@
-:root {
-  --background-color: #f0f0f0;
-  --primary-color: #27dda6;
-  --result-red-color: #ff000013;
-  --result-green-color: #00ff0013;
-  --font-color: black;
-  --font-family: ;
-}
 @media screen and (min-width: 600px) {
   .nav {
     display: flex;
@@ -19,7 +11,7 @@
   }
 
   .button-desktop {
-    height: 50%;
+    height: 2rem;
     background-color: white;
     border: 1px solid #00bd84;
     color: #000000;

@@ -1,4 +1,15 @@
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background-color: #f0f0f0;
+  --primary-color: #27dda6;
+  --result-red-color: #ff000013;
+  --result-green-color: #00ff0013;
+  --font-color: black;
+  --font-family-title: "Oxanium", sans-serif;
+  --font-family-texte: "Roboto", sans-serif;
 }
