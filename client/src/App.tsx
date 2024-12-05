@@ -4,9 +4,9 @@ import Header from "./components/FilAriane";
 
 export default function App() {
   return (
-    <div>
+    <>
       <Header />
       <Outlet />
-    </div>
+    </>
   );
 }
