@@ -7,7 +7,7 @@ function Compte() {
         <div className="connexion">
           <h2>Connexion</h2>
           <label htmlFor="username">nom d'utilisateur</label>
-          <div className="input-container">
+          <div className="compte-input-container">
             <input
               type="text"
               id="username"
@@ -34,7 +34,7 @@ function Compte() {
         </div>
         <div className="inscription">
           <h2>Inscription</h2>
-          <div className="input-container">
+          <div className="compte-input-container">
             <label htmlFor="username">nom d'utilisateur</label>
             <input
               type="text"
