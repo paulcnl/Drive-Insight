@@ -1,0 +1,35 @@
+.vehicule-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: .5px solid var(--primary-color);
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  width: 250px;
+  height: 350px;
+  text-align: start;
+}
+
+h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-family: var(--font-family-title);
+  text-align: center;
+}
+
+img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.vehicule-description {
+  font-size: 1rem;
+  margin-bottom: 5px;
+  font-family: var(--font-family-texte);
+  text-align: start;
+}

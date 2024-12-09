@@ -88,7 +88,7 @@ function Header() {
             <p>info</p>
           </button>
         </Link>
-        <Link to="/">
+        <Link to="/comparer">
           <button type="button" className="button-desktop">
             <p>comparer</p>
           </button>
