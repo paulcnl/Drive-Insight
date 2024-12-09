@@ -1,7 +1,7 @@
 function Info() {
   return (
     <div>
-      <h2>Info</h2>
+      <h1>Info</h1>
     </div>
   );
 }

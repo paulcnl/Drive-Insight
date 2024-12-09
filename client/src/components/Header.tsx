@@ -80,22 +80,22 @@ function Header() {
       <div className="nav">
         <Link to="/contact">
           <button type="button" className="button-desktop">
-            <p>contact</p>
+            <p>Contact</p>
           </button>
         </Link>
         <Link to="/info">
           <button type="button" className="button-desktop">
-            <p>info</p>
+            <p>Info</p>
           </button>
         </Link>
         <Link to="/comparer">
           <button type="button" className="button-desktop">
-            <p>comparer</p>
+            <p>Comparer</p>
           </button>
         </Link>
         <Link to="/compte">
           <button type="button" className="button-desktop">
-            <p>compte</p>
+            <p>Compte</p>
           </button>
         </Link>
       </div>

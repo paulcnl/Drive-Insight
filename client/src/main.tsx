@@ -1,19 +1,13 @@
-// Import necessary modules from React and React Router
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-/* ************************************************************************* */
-
-// Import the main app component
 import App from "./App";
 import Comparer from "./pages/Comparer/Comparer";
 import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import Info from "./pages/Info/Info";
-
-/* ************************************************************************* */
 
 const router = createBrowserRouter([
   {
@@ -47,8 +41,6 @@ const router = createBrowserRouter([
     ],
   },
 ]);
-
-/* ************************************************************************* */
 
 const rootElement = document.getElementById("root");
 if (rootElement == null) {
