@@ -10,7 +10,9 @@ function Compte() {
           <div className="user-info">
             <div className="nickname">
               <h2>user_nickname</h2>
-              <button type="button" className="modif">✏️</button>
+              <button type="button" className="modif">
+                ✏️
+              </button>
             </div>
             <div className="user-info-perso">
               <p>information</p>
@@ -30,7 +32,9 @@ function Compte() {
           <div className="compte-box">
             <div className="vehicule">
               <p>Mes véhicules</p>
-              <button type="button" className="modif">✏️</button>
+              <button type="button" className="modif">
+                ✏️
+              </button>
             </div>
             <div className="box-contenu">
               <div className="car-card"> </div>

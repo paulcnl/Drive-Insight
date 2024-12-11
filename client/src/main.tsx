@@ -7,11 +7,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
-import Log from "./pages/Log/Log";
+import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import Info from "./pages/Info/Info";
-import Compte from "./pages/Compte/Compte";
+import Log from "./pages/Log/Log";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
