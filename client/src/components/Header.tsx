@@ -76,7 +76,6 @@ function Header() {
           </Link>
         </div>
       </div>
-
       <div className="nav">
         <Link to="/contact">
           <button type="button" className="button-desktop">

@@ -46,7 +46,6 @@
 .contact-zone-text {
   height: 15rem;
   width: 20rem;
-  text-align: center;
 }
 
 .contact input {
@@ -71,5 +70,6 @@
   .contact-zone-text {
     height: 15rem;
     width: 50rem;
+    align-items: center;
   }
 }

@@ -7,6 +7,12 @@ import Comparer from "./pages/Comparer/Comparer";
 import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
+import Log from "./pages/Log/Log";
+
+// import About from "./pages/About";
+// import Contact from "./pages/Contact";
+
+/* ************************************************************************* */
 import InfosEnviro from "./pages/Info/InfosEnviro";
 
 const router = createBrowserRouter([
@@ -21,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/Log",
+        element: <Log />,
       },
       {
         path: "/comparer",
