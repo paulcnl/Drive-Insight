@@ -7,9 +7,9 @@ function Header() {
   return (
     <header>
       <div className="header-mobile">
-        <div className="header-logo">
-          <h2>Insert Logo here</h2>
-          <button
+        <div className="header-nav">
+          <div className="header-logo">Insert Logo here</div>
+          {/* <button
             type="button"
             className="menu-burger"
             onClick={() => {
@@ -20,8 +20,23 @@ function Header() {
               src="./src/assets/images/menu-3-line (2).png"
               alt="menu-burger"
             />
-          </button>
+          </button> */}
+          <div className="menu-test">
+            <button
+              className="label-menu"
+              type="button"
+              onClick={() => {
+                setIsClicked(!isClicked);
+              }}
+            >
+              <input type="checkbox" id="check" />
+              <span />
+              <span />
+              <span />
+            </button>
+          </div>
         </div>
+
         <div className={isClicked ? "navbar-mobile" : "none"}>
           <Link to="/compte" className="navbar-button-mobile">
             <span>Compte</span>

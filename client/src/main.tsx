@@ -7,10 +7,10 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
-import Compte from "./pages/Compte";
-import Contact from "./pages/Contact";
-import Info from "./pages/Info";
-import Home from "./pages/home";
+import Compte from "./pages/Compte/Compte";
+import Contact from "./pages/Contact/Contact";
+import Home from "./pages/Home/Home";
+import Info from "./pages/Info/Info";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
