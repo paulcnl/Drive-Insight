@@ -19,9 +19,9 @@ export interface Vehicule {
   price?: number;
   carbonFootprint?: number;
   critAirCard?: number;
-  horsepower: number;
+  horsepower?: number;
   powerType: "électrique" | "essence" | "diesel";
-  consumption: number;
+  consumption?: number;
   autonomyKm?: number;
   refillPrice?: number;
   drivenDistance?: number;
