@@ -14,3 +14,11 @@
   --font-family-title: "Oxanium", sans-serif;
   --font-family-texte: "Roboto", sans-serif;
 }
+
+h1 {
+  font-family: var(--font-family-title);
+  font-size: 2rem;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}

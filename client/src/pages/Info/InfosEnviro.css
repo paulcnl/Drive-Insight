@@ -60,6 +60,7 @@
 
 .transition-ecologique h2,
 .avantages-electrique h2 {
+  font-size: 1.6rem;
   color: #00bd84;
   margin-bottom: 10px;
 }
@@ -88,6 +89,8 @@
 
 .faq h2 {
   margin-bottom: 10px;
+  text-align: left;
+  font-size: 1.6rem;
 }
 
 .faq ul {
@@ -104,15 +107,31 @@
 
 .sources h2 {
   color: #00bd84;
+  text-align: end;
 }
 
 .sources li {
   list-style: none;
 }
 
-.comparaison-co2 {
-  margin: 30px 100px;
+.sources a {
+  text-decoration: none;
 }
+
+.comparaison-co2 {
+  margin: 30px 25%;
+}
+
+.comparaison-co2-chart {
+  height: 350px;
+}
+
+@media screen and (max-width: 768px) {
+  .comparaison-co2-chart {
+    height: 280px;
+  }
+}
+
 .comparaison-co2 .buttons {
   display: flex;
   justify-content: center;
@@ -120,8 +139,29 @@
   margin-top: 20px;
 }
 
+.comparaison-co2 h2 {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.button-thermique {
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+.button-thermique:hover {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+.button-electrique {
+  background-color: rgba(0, 189, 132, 0.6);
+}
+
+.button-electrique:hover {
+  background-color: rgba(0, 189, 132, 1);
+}
+
 .comparaison-co2 button {
-  background-color: #00bd84;
   border: none;
   padding: 10px 20px;
   margin: 0 80px;
@@ -131,15 +171,12 @@
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-
-.comparaison-co2 button:hover {
-  background-color: #009e6b;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 768px) {
   .comparaison-co2 {
-    margin: 10px 0px;
+    margin: 10px;
     padding: 15px;
     height: 100%;
   }

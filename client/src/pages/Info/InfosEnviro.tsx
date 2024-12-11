@@ -48,13 +48,15 @@ const SensibilisationPage = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,
-      },
-      title: {
-        display: true,
-        text: "Émissions de CO2 (g/km) des Moteurs Thermiqu es et Électriques (2017-2023)",
+        labels: {
+          font: {
+            size: 16,
+          },
+        },
       },
     },
   };
@@ -97,17 +99,24 @@ const SensibilisationPage = () => {
       </section>
 
       <section className="comparaison-co2">
-        <h2>Comparaison des Émissions de CO2</h2>
-        <Line data={data} options={options} />
+        <h2>
+          Comparaison des Émissions de CO2 en g/km sur differents modèles
+          (2017-2023)
+        </h2>
+        <div className="comparaison-co2-chart">
+          <Line data={data} options={options} />
+        </div>
         <div className="buttons">
           <button
             type="button"
+            className="button-thermique"
             onClick={() => setShowThermique(!showThermique)}
           >
             {showThermique ? "Masquer" : "Afficher"} Moteurs Thermiques
           </button>
           <button
             type="button"
+            className="button-electrique"
             onClick={() => setShowElectrique(!showElectrique)}
           >
             {showElectrique ? "Masquer" : "Afficher"} Moteurs Électriques
