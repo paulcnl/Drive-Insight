@@ -1,0 +1,52 @@
+/* :root {
+  --background-color: #f0f0f0;
+  --primary-color: #27dda6;
+  --box-color: #27dda654;
+  --result-red-color: #ff000013;
+  --result-green-color: #00ff0013;
+  --font-color: black;
+  --font-family-title: "Oxanium", sans-serif;
+  --font-family-texte: "Roboto", sans-serif;
+} */
+
+footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: rgba(47, 46, 46, 0.495);
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.footer-button {
+  background-color: transparent;
+  border: none;
+  font-size: 1rem;
+}
+
+footer ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  list-style: none;
+  text-decoration: underline;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: var(--font-color);
+}
+
+.none {
+  display: none;
+}
+
+.footer-h3 {
+  font-family: var(--font-family-title);
+  color: var(--font-color);
+  text-decoration: underline;
+}
