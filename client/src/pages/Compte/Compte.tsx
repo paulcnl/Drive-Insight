@@ -1,77 +1,54 @@
 import "./Compte.css";
+import avatar from "../../assets/images/538474-user_512x512.webp";
 
 function Compte() {
   return (
     <>
-      <div className="compte-container">
-        <div className="connexion">
-          <h2>Connexion</h2>
-          <label htmlFor="username">nom d'utilisateur</label>
-          <div className="compte-input-container">
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="nom d'utilisateur"
-            />
-            <label htmlFor="username">mot de passe</label>
-            <input
-              type="password"
-              id="pass"
-              name="password"
-              required
-              placeholder="mot de passe"
-            />
+      <div className="compte">
+        <div className="user">
+          <img src={avatar} alt="" className="avatar" />
+          <div className="user-info">
+            <div className="nickname">
+              <h2>user_nickname</h2>
+              <button type="button" className="modif">✏️</button>
+            </div>
+            <div className="user-info-perso">
+              <p>information</p>
+              <p>information</p>
+              <p>information</p>
+              <p>information</p>
+              <p>information</p>
+              <p>information</p>
+              <p>information</p>
+              <p>information</p>
+            </div>
           </div>
-          <button type="button" className="button-compte">
-            Se connecter
-          </button>
         </div>
-        <div className="separateur">
-          <hr />
-          <p>ou</p>
-          <hr />
-        </div>
-        <div className="inscription">
-          <h2>Inscription</h2>
-          <div className="compte-input-container">
-            <label htmlFor="username">nom d'utilisateur</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="nom d'utilisateur"
-            />
-            <label htmlFor="username">confirmer le nom d'utilisateur</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              placeholder="confirmez le nom d'utilisateur"
-              autoComplete="current-password"
-            />
-            <label htmlFor="username">mot de passe</label>
-            <input
-              type="password"
-              id="pass"
-              name="password"
-              required
-              placeholder="mot de passe"
-              autoComplete="new-password"
-            />
-            <label htmlFor="username">confirmer le mot de passe</label>
-            <input
-              type="password"
-              id="pass"
-              name="password"
-              required
-              placeholder="confirmez le mot de passe"
-              autoComplete="current-password"
-            />
+        <hr />
+
+        <div className="user-info-vehicule">
+          <div className="compte-box">
+            <div className="vehicule">
+              <p>Mes véhicules</p>
+              <button type="button" className="modif">✏️</button>
+            </div>
+            <div className="box-contenu">
+              <div className="car-card"> </div>
+              <div className="car-card"> </div>
+            </div>
           </div>
-          <button type="button" className="button-compte">
-            S'inscrire
-          </button>
+          <div className="compte-box">
+            <p>Mes dernières comparaisons</p>
+            <div className="box-contenu">
+              <div className="box-card">
+                <div className="car-card"> </div>
+                <div className="car-card"> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="compte-question">
+          <button type="button">?</button>
         </div>
       </div>
     </>

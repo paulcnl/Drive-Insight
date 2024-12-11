@@ -7,10 +7,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Import the main app component
 import App from "./App";
-import Compte from "./pages/Compte/Compte";
+import Log from "./pages/Log/Log";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import Info from "./pages/Info/Info";
+import Compte from "./pages/Compte/Compte";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
@@ -31,12 +32,16 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/compte",
-        element: <Compte />,
+        path: "/Log",
+        element: <Log />,
       },
       {
         path: "/info",
         element: <Info />,
+      },
+      {
+        path: "/compte",
+        element: <Compte />,
       },
     ],
   },

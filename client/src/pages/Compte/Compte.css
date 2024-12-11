@@ -1,139 +1,208 @@
-.compte-container {
+.compte {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 7vh;
-  margin-top: 3rem;
-}
-
-.compte-container h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  font-family: var(--font-family-title);
-}
-
-.separateur {
-  display: flex;
-  align-items: center;
-}
-
-.separateur hr {
-  width: 40vw;
-  height: 0px;
-  border: .5px solid #0000008c;
-}
-
-.connexion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-label {
-  margin: 1rem 0 .35rem;
-  width: 80vw;
-  padding-left: 1rem;
   font-family: var(--font-family-texte);
-  font-size: 1rem;
+  height: 92vh;
 }
 
-.compte-input-container {
+.user {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
-.compte-container input {
-  width: 80vw;
-  height: 3vh;
-  border: .5px solid var(--primary-color);
-  border-radius: 20px;
-  padding-left: 1rem;
+.avatar {
+  height: 8rem;
+  margin-top: 3rem;
+  border: solid 2px var(--primary-color);
+  border-radius: 75px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 }
 
-.inscription {
+.user-info {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
 }
 
-.button-compte {
-  width: 30vw;
-  height: 5vh;
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  color: white;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
+.nickname {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-info button {
+  margin-left: 1rem;
   margin-top: 1rem;
-  cursor: pointer;
-  border-radius: 25px;
-  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
+  border: solid .5px;
+  border-radius: 5px;
+  height: 2rem;
+  width: 2rem;
+  font-size: 1.5rem;
+  background-color: white;
 }
 
-@media screen and (min-width: 600px) {
-  .compte-container {
+.compte h2 {
+  margin-top: 1rem;
+}
+
+.compte hr {
+  width: 70vw;
+  margin-top: 2rem;
+  border-width: .5px;
+  border-color: rgba(0, 0, 0, 0.135);
+}
+
+.compte-box {
+  height: 10rem;
+  background-color: var(--box-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90vw;
+  margin-top: 2rem;
+  border-radius: 15px;
+  border: none;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.compte-box p {
+  font-size: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.compte-question {
+  margin-top: 4rem;
+  width: 90vw;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  border-radius: 15px;
+}
+
+.compte-question button {
+  background-color: var(--box-color);
+  font-size: 1.75rem;
+  color: rgba(0, 0, 0, 0.615);
+  border: none;
+  border-radius: 50px;
+  height: 3.25rem;
+  width: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 768px) {
+  .user-info-perso {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .user {
+    display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: center;
+    margin-top: 2rem;
   }
 
-  .separateur {
+  .avatar {
+    margin: 0;
+    height: 10rem;
+    border-radius: 100px;
+  }
+
+  .compte h2 {
+    margin: 0;
+    height: 2rem;
+  }
+
+  .user-info button {
+    margin: 0 0 0 1rem;
+  }
+
+  .user-info {
+    width: 60vw;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1vw;
+    margin-left: 3rem;
   }
 
-  .compte-container h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    font-family: var(--font-family-title);
-  }
-
-  .separateur hr {
-    width: 0px;
-    height: 35vh;
-    border: .5px solid #0000008c;
-  }
-
-  .connexion {
+  .nickname {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
   }
 
-  label {
-    margin: 1rem 0 .35rem;
-    width: 40vw;
-    padding-left: 1rem;
-  }
-
-  .compte-container input {
-    width: 40vw;
-    height: 4vh;
-    border: .5px solid var(--primary-color);
-    border-radius: 20px;
-    padding-left: 1rem;
-  }
-
-  .inscription {
+  .user-info-perso {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .button-compte {
-    width: 10vw;
-    height: 5vh;
-    background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
-    color: white;
-    text-align: center;
-    display: inline-block;
-    font-size: 16px;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
     margin-top: 1rem;
-    cursor: pointer;
+  }
+
+  .user-info-perso p {
+    margin-right: 3rem;
+  }
+
+  .compte hr {
+    display: none;
+  }
+
+  .user-info-vehicule {
+    width: 90vw;
+    margin-top: 1rem;
+    height: 50rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .compte-box {
+    width: 44.5vw;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    box-shadow: none;
+  }
+
+  .compte-box p {
+    width: 100%;
+    text-align: start;
+    margin-left: 1.5rem;
+  }
+
+  .box-contenu {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    margin-top: 2rem;
+  }
+
+  .car-card {
+    height: 20rem;
+    width: 16rem;
+    border: solid 1px var(--primary-color);
+    border-radius: 15px;
+  }
+
+  .box-card {
+    border: solid 1px black;
+    padding: .5rem;
     border-radius: 25px;
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+  }
+
+  .vehicule {
+    display: flex;
+    flex-direction: row;
   }
 }
