@@ -16,7 +16,7 @@
 }
 
 .button-desktop {
-  height: 50%;
+  height: 1.75rem;
   background-color: white;
   border: 1px solid #00bd84;
   color: #000000;
@@ -27,6 +27,13 @@
   cursor: pointer;
   border-radius: 30px;
   width: 8rem;
+  transition: .4s;
+}
+
+.button-desktop:hover {
+  background-color: var(--primary-color);
+  border: none;
+  color: white;
 }
 
 @media screen and (max-width: 768px) {
