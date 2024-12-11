@@ -7,7 +7,7 @@ import Comparer from "./pages/Comparer/Comparer";
 import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
-import Info from "./pages/Info/Info";
+import InfosEnviro from "./pages/Info/InfosEnviro";
 
 const router = createBrowserRouter([
   {
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/info",
-        element: <Info />,
+        element: <InfosEnviro />,
       },
       {
         path: "*",

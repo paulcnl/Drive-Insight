@@ -60,6 +60,7 @@
 
 .transition-ecologique h2,
 .avantages-electrique h2 {
+  font-size: 1.6rem;
   color: #00bd84;
   margin-bottom: 10px;
 }
@@ -88,6 +89,8 @@
 
 .faq h2 {
   margin-bottom: 10px;
+  text-align: left;
+  font-size: 1.6rem;
 }
 
 .faq ul {
@@ -104,10 +107,15 @@
 
 .sources h2 {
   color: #00bd84;
+  text-align: end;
 }
 
 .sources li {
   list-style: none;
+}
+
+.sources a {
+  text-decoration: none;
 }
 
 .comparaison-co2 {
