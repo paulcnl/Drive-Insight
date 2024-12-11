@@ -133,6 +133,13 @@
     color: white;
     font-size: 1rem;
     box-shadow: var(--box-shadow);
+    transition: .4s;
+  }
+
+  .user-info button:hover {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    color: #000000;
   }
 
   .user-info {
@@ -158,7 +165,8 @@
   }
 
   .user-info-perso p {
-    margin-right: 3rem;
+    margin-right: 5rem;
+    width: 10rem;
   }
 
   .compte hr {
@@ -175,7 +183,7 @@
   }
 
   .compte-box {
-    width: 44.5vw;
+    width: 70rem;
     height: 30rem;
     display: flex;
     flex-direction: column;
@@ -186,7 +194,8 @@
   .compte-box p {
     width: 100%;
     text-align: start;
-    margin-left: 1.5rem;
+    margin-left: 4rem;
+    margin-top: .75rem;
   }
 
   .box-contenu {
@@ -198,7 +207,7 @@
 
   .car-card-green {
     height: 20rem;
-    width: 16rem;
+    width: 20rem;
     border: solid 1px var(--primary-color);
     border-radius: 15px;
     box-shadow: var(--box-shadow);
@@ -226,7 +235,7 @@
     display: flex;
     flex-direction: row;
     width: 44.5vw;
-    padding-right: 2rem;
+    padding-right: 1rem;
   }
 
   .vehicule p {
@@ -242,5 +251,16 @@
     border-radius: 25px;
     color: white;
     box-shadow: var(--box-shadow);
+    transition: .4s;
+  }
+
+  .vehicule button:hover {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    color: #000000;
+  }
+
+  .compte-question {
+    display: none;
   }
 }
