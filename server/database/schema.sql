@@ -1,25 +1,3 @@
-create table user (
-  id int unsigned primary key auto_increment not null,
-  email varchar(255) not null unique,
-  password varchar(255) not null
-);
-
-create table item (
-  id int unsigned primary key auto_increment not null,
-  title varchar(255) not null,
-  user_id int unsigned not null,
-  foreign key(user_id) references user(id)
-);
-
-insert into user(id, email, password)
-values
-  (1, "jdoe@mail.com", "123456");
-
-insert into item(id, title, user_id)
-values
-  (1, "Stuff", 1),
-  (2, "Doodads", 1);
-
 create table website_user (
   id int unsigned primary key auto_increment not null,
   lastname varchar(255) not null,
@@ -35,10 +13,10 @@ create table website_user (
 create table engine (
   id int unsigned primary key auto_increment not null,
   horsepower int unsigned not null,
-  power_type varchar(255) not null,
-  consumption varchar(10) not null,
+  power_type ENUM('electric', 'gas') not null,
+  consumption decimal(5, 2) not null,
   autonomy_km int unsigned not null,
-  refill_price decimal(10, 2) unsigned not null
+  refill_price decimal(5, 2) unsigned not null
 );
 
 create table vehicle (
@@ -46,14 +24,16 @@ create table vehicle (
   owner_id int unsigned not null,
   brand varchar(255) not null,
   model varchar(255) not null,
-  license_plate varchar(255) not null,
+  license_plate varchar(255) not null unique,
   registration_date date not null,
   price decimal(10, 2) unsigned null,
   carbon_footprint float null,
   crit_air_card int unsigned null,
   engine_id int unsigned not null,
   foreign key(owner_id) references website_user(id),
-  foreign key(engine_id) references engine(id)
+  foreign key(engine_id) references engine(id),
+  constraint chk_crit_air_card check (crit_air_card between 0 and 5),
+  constraint chk_license_plate check (length(license_plate) >= 7 and length(license_plate) <= 9)
 );
 
 create table company (
