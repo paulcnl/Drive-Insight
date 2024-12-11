@@ -41,6 +41,7 @@
   width: 2rem;
   font-size: 1.5rem;
   background-color: white;
+  cursor: pointer;
 }
 
 .compte h2 {
@@ -94,6 +95,7 @@
   align-items: center;
   justify-content: center;
   box-shadow: var(--box-shadow);
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {
@@ -134,6 +136,7 @@
     font-size: 1rem;
     box-shadow: var(--box-shadow);
     transition: .4s;
+    cursor: pointer;
   }
 
   .user-info button:hover {
@@ -252,6 +255,7 @@
     color: white;
     box-shadow: var(--box-shadow);
     transition: .4s;
+    cursor: pointer;
   }
 
   .vehicule button:hover {
