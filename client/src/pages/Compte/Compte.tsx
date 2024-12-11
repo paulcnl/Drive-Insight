@@ -28,19 +28,21 @@ function Compte() {
 
         <div className="user-info-vehicule">
           <div className="compte-box">
-            <p>Mes véhicules</p>
+            <div className="vehicule">
+              <p>Mes véhicules</p>
+              <button type="button">Modifier mes véhicules ✏️</button>
+            </div>
             <div className="box-contenu">
-              <div className="car-card"> </div>
-              <div className="car-card"> </div>
+              <div className="car-card-green"> </div>
+              <div className="car-card-green"> </div>
             </div>
           </div>
           <div className="compte-box">
             <p>Mes dernières comparaisons</p>
-
             <div className="box-contenu">
               <div className="box-card">
-                <div className="car-card"> </div>
-                <div className="car-card"> </div>
+                <div className="car-card-green"> </div>
+                <div className="car-card-red"> </div>
               </div>
             </div>
           </div>

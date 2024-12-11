@@ -19,7 +19,7 @@
   margin-top: 3rem;
   border: solid 2px var(--primary-color);
   border-radius: 100px;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .user-info {
@@ -64,7 +64,7 @@
   margin-top: 2rem;
   border-radius: 15px;
   border: none;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .compte-box p {
@@ -93,7 +93,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 @media screen and (max-width: 768px) {
@@ -120,11 +120,19 @@
 
   .compte h2 {
     margin: 0;
-    height: 2rem;
+    height: 1.5rem;
   }
 
   .user-info button {
     margin: 0 0 0 1rem;
+    height: 2rem;
+    width: 2rem;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    color: white;
+    font-size: 1rem;
+    box-shadow: var(--box-shadow);
   }
 
   .user-info {
@@ -137,6 +145,7 @@
   .nickname {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
   .user-info-perso {
@@ -187,11 +196,20 @@
     margin-top: 2rem;
   }
 
-  .car-card {
+  .car-card-green {
     height: 20rem;
     width: 16rem;
     border: solid 1px var(--primary-color);
     border-radius: 15px;
+    box-shadow: var(--box-shadow);
+  }
+
+  .car-card-red {
+    height: 20rem;
+    width: 16rem;
+    border: solid 1px rgba(255, 0, 0, 0.435);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
   }
 
   .box-card {
@@ -201,10 +219,28 @@
     display: flex;
     flex-direction: row;
     gap: .5rem;
+    box-shadow: var(--box-shadow);
   }
 
   .vehicule {
     display: flex;
     flex-direction: row;
+    width: 44.5vw;
+    padding-right: 2rem;
+  }
+
+  .vehicule p {
+    margin-left: 1rem;
+  }
+
+  .vehicule button {
+    margin-left: 1rem;
+    width: 23rem;
+    height: 2rem;
+    border: none;
+    background-color: var(--primary-color);
+    border-radius: 25px;
+    color: white;
+    box-shadow: var(--box-shadow);
   }
 }
