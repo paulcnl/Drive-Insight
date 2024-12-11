@@ -6,23 +6,21 @@ function Compte() {
       <div className="compte-container">
         <div className="connexion">
           <h2>Connexion</h2>
-          <label htmlFor="username">nom d'utilisateur</label>
+          <label htmlFor="username">Nom d'utilisateur</label>
           <div className="compte-input-container">
             <input
               type="text"
               id="username"
               name="username"
-              placeholder="nom d'utilisateur"
+              placeholder="Nom d'utilisateur"
             />
-            <label htmlFor="username" className="label-compte">
-              mot de passe
-            </label>
+            <label htmlFor="username">Mot de passe</label>
             <input
               type="password"
               id="pass"
               name="password"
               required
-              placeholder="mot de passe"
+              placeholder="Mot de passe"
             />
           </div>
           <button type="button" className="button-compte">
@@ -37,39 +35,37 @@ function Compte() {
         <div className="inscription">
           <h2>Inscription</h2>
           <div className="compte-input-container">
-            <label htmlFor="username" className="label-compte-2">
-              nom d'utilisateur
-            </label>
+            <label htmlFor="username">Nom d'utilisateur</label>
             <input
               type="text"
               id="username"
               name="username"
-              placeholder="nom d'utilisateur"
+              placeholder="Nom d'utilisateur"
             />
-            <label htmlFor="username">confirmer le nom d'utilisateur</label>
+            <label htmlFor="username">Confirmer le nom d'utilisateur</label>
             <input
               type="text"
               id="username"
               name="username"
-              placeholder="confirmez le nom d'utilisateur"
+              placeholder="Confirmez le nom d'utilisateur"
               autoComplete="current-password"
             />
-            <label htmlFor="username">mot de passe</label>
+            <label htmlFor="username">Mot de passe</label>
             <input
               type="password"
               id="pass"
               name="password"
               required
-              placeholder="mot de passe"
+              placeholder="Mot de passe"
               autoComplete="new-password"
             />
-            <label htmlFor="username">confirmer le mot de passe</label>
+            <label htmlFor="username">Confirmer le mot de passe</label>
             <input
               type="password"
               id="pass"
               name="password"
               required
-              placeholder="confirmez le mot de passe"
+              placeholder="Confirmez le mot de passe"
               autoComplete="current-password"
             />
           </div>

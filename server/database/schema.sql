@@ -32,7 +32,7 @@ create table vehicle (
   engine_id int unsigned not null,
   foreign key(owner_id) references website_user(id),
   foreign key(engine_id) references engine(id),
-  constraint chk_crit_air_card check (crit_air_card between 1 and 5),
+  constraint chk_crit_air_card check (crit_air_card between 0 and 5),
   constraint chk_license_plate check (length(license_plate) >= 7 and length(license_plate) <= 9)
 );
 
