@@ -1,6 +1,64 @@
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Title,
+  Tooltip,
+} from "chart.js";
+import { useState } from "react";
+import { Line } from "react-chartjs-2";
 import "./InfosEnviro.css";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+);
+
 const SensibilisationPage = () => {
+  const [showThermique, setShowThermique] = useState(true);
+  const [showElectrique, setShowElectrique] = useState(true);
+
+  const data = {
+    labels: ["2017", "2018", "2019", "2020", "2021", "2022", "2023"],
+    datasets: [
+      {
+        label: "Moteurs Thermiques (Diesel, Essence)",
+        data: [130, 125, 120, 115, 110, 105, 100],
+        borderColor: "#FF0000",
+        backgroundColor: "rgba(255, 0, 0, 0.5)",
+        hidden: !showThermique,
+      },
+      {
+        label: "Moteurs Électriques",
+        data: [40, 35, 30, 28, 25, 23, 20],
+        borderColor: "#00bd84",
+        backgroundColor: "rgba(0, 189, 132, 0.5)",
+        hidden: !showElectrique,
+      },
+    ],
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Émissions de CO2 (g/km) des Moteurs Thermiqu es et Électriques (2017-2023)",
+      },
+    },
+  };
+
   return (
     <div className="sensibilisation-page">
       <header className="header">
@@ -36,6 +94,25 @@ const SensibilisationPage = () => {
           </li>
           <li>Silence de fonctionnement pour un confort de conduite accru.</li>
         </ul>
+      </section>
+
+      <section className="comparaison-co2">
+        <h2>Comparaison des Émissions de CO2</h2>
+        <Line data={data} options={options} />
+        <div className="buttons">
+          <button
+            type="button"
+            onClick={() => setShowThermique(!showThermique)}
+          >
+            {showThermique ? "Masquer" : "Afficher"} Moteurs Thermiques
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowElectrique(!showElectrique)}
+          >
+            {showElectrique ? "Masquer" : "Afficher"} Moteurs Électriques
+          </button>
+        </div>
       </section>
 
       <section className="faq">

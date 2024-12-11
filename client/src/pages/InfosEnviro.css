@@ -17,7 +17,7 @@
   justify-content: center;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .header {
     padding: 40px 20px 20px 20px;
     background-position-y: 75%;
@@ -44,7 +44,7 @@
   margin-left: auto;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .header-text {
     width: 40%;
     text-wrap: wrap;
@@ -108,4 +108,44 @@
 
 .sources li {
   list-style: none;
+}
+
+.comparaison-co2 {
+  margin: 30px 100px;
+}
+.comparaison-co2 .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.comparaison-co2 button {
+  background-color: #00bd84;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 80px;
+  text-wrap: wrap;
+  width: 80ch;
+  color: #ffffff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.comparaison-co2 button:hover {
+  background-color: #009e6b;
+}
+
+@media screen and (max-width: 768px) {
+  .comparaison-co2 {
+    margin: 10px 0px;
+    padding: 15px;
+    height: 100%;
+  }
+
+  .comparaison-co2 button {
+    font-size: 0.7rem;
+    margin: 0 10px;
+  }
 }
