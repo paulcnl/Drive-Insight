@@ -100,7 +100,7 @@ const SensibilisationPage = () => {
 
       <section className="comparaison-co2">
         <h2>
-          Comparaison des Émissions de CO2 en g/km sur differents modèles
+          Comparaison des Émissions de CO2 en g/km sur différents modèles
           (2017-2023)
         </h2>
         <div className="comparaison-co2-chart">
