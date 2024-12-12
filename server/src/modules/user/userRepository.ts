@@ -40,7 +40,7 @@ class UserRepository {
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
     const [rows] = await databaseClient.query<Rows>(
-      "insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', ' [email protected]', '0123456789', 'password', true)",
+      "select * from website_user where id = ?",
       [id],
     );
 
@@ -50,7 +50,9 @@ class UserRepository {
 
   async readAll() {
     // Execute the SQL SELECT query to retrieve all items from the "item" table
-    const [rows] = await databaseClient.query<Rows>("select * from user");
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from website_user",
+    );
 
     // Return the array of items
     return rows as User[];
