@@ -1,54 +1,59 @@
 .nav-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
   width: 100%;
+  font-family: var(--font-family-texte);
+  position: fixed;
+  z-index: 1;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  background-color: rgb(246, 243, 243);
+  transition: 0.5s;
 }
 
 @media screen and (min-width: 600px) {
   .nav-container {
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.196);
   }
 }
 
 .navbar-button {
-  position: relative;
+  width: 90%;
   align-items: center;
-  z-index: 10;
   text-decoration: none;
   text-align: center;
   color: #27dda6;
-  font-weight: 400;
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(10, 218, 211, 0.356);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
   border: 1px solid rgba(2, 251, 209, 0.9);
   border-radius: 1rem;
-}
-
-/* .navbar-button span {
-  padding: 8px;
-  font-size: 20px;
+  padding: 20px;
   transition: 0.3s;
 }
-
-.navbar-button span:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-} */
 
 @media screen and (min-width: 600px) {
   .navbar-button {
     background-color: white;
-    border: 1px solid #00bd84;
+    border: 1px solid var(--primary-color);
     color: #000000;
     text-align: center;
     font-size: 16px;
     cursor: pointer;
     border-radius: 30px;
-    padding: 1rem;
-    margin-bottom: 1rem;
+    height: 2.5rem;
+    width: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .4s;
+  }
+
+  .navbar-button:hover {
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
   }
 }
