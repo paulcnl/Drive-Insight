@@ -1,28 +1,23 @@
-import { useState } from "react";
 import "./Footer.css";
 
 function Footer() {
-  const [showFooter, setShowFooter] = useState(false);
   return (
     <footer>
       <div className="footer-container">
-        <button
-          type="button"
-          onClick={() => setShowFooter(!showFooter)}
-          className="footer-button"
-        >
-          <h3 className="footer-h3">Footer</h3>
+        <button type="button" className="footer-button">
+          <h3 className="footer-h3">About us</h3>
         </button>
-        <div className={showFooter ? "show-footer" : "none"}>
+        <div className="spacer" />
+        <div>
           <ul>
             <li>
               <a href="https://github.com/login" className="footer-link">
-                Github
+                <span>Github</span>
               </a>
             </li>
             <li>
               <a href="https://www.yooliz.com/" className="footer-link">
-                Yooliz
+                <span>Yooliz</span>
               </a>
             </li>
             <li>
@@ -30,7 +25,7 @@ function Footer() {
                 href="https://www.instagram.com/yooliz_france/"
                 className="footer-link"
               >
-                Instagram
+                <span>Instagram</span>
               </a>
             </li>
           </ul>
