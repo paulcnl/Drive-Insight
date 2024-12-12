@@ -6,12 +6,12 @@ const router = express.Router();
 // Define Your API Routes Here
 /* ************************************************************************* */
 
-// Define item-related routes
-import itemActions from "./modules/item/itemActions";
+// Define engine-related routes
 
-router.get("/api/items", itemActions.browse);
-router.get("/api/items/:id", itemActions.read);
-router.post("/api/items", itemActions.add);
+import engineActions from "./modules/engine/engineActions";
+
+router.get("/api/engines", engineActions.browse);
+router.get("/api/engines/:id", engineActions.read);
 
 /* ************************************************************************* */
 
