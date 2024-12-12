@@ -19,6 +19,12 @@
   .nav-container {
     flex-direction: row;
     justify-content: space-between;
+    gap: none;
+    width: 100%;
+    position: relative;
+    z-index: none;
+    height: auto;
+    background-color: transparent;
   }
 }
 
@@ -32,6 +38,7 @@
   border-radius: 1rem;
   padding: 20px;
   transition: 0.3s;
+  box-shadow: var(--box-shadow);
 }
 
 @media screen and (min-width: 600px) {
@@ -49,6 +56,7 @@
     align-items: center;
     justify-content: center;
     transition: .4s;
+    box-shadow: var(--box-shadow);
   }
 
   .navbar-button:hover {
