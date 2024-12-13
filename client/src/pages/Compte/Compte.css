@@ -156,7 +156,7 @@
     display: none;
   }
 
-  .user-info-vehicule {
+  .user-info-vehicle {
     width: 90vw;
     margin-top: 1rem;
     height: 50rem;
@@ -203,7 +203,7 @@
     gap: .5rem;
   }
 
-  .vehicule {
+  .vehicle {
     display: flex;
     flex-direction: row;
   }
