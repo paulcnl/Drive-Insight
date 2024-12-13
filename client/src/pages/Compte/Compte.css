@@ -161,6 +161,7 @@
   }
 
   .user-info-perso {
+    display: block;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -239,11 +240,10 @@
     width: 100%;
   }
 
-  .vehicle {
+  .vehicule {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 44.5vw;
     padding-right: 1rem;
     width: 100%;
   }
@@ -263,6 +263,7 @@
     box-shadow: var(--box-shadow);
     transition: .4s;
     cursor: pointer;
+    display: block;
   }
 
   .vehicule button:hover {
