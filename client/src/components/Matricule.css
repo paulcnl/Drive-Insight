@@ -5,14 +5,14 @@
 }
 .box-comparator {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   height: 100%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) {
   .box-comparator {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
