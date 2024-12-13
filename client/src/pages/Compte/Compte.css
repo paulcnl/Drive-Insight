@@ -98,14 +98,12 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
-  .user-info-perso {
-    display: none;
-  }
+.user-info-perso {
+  display: none;
+}
 
-  .vehicule button {
-    display: none;
-  }
+.vehicule button {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
