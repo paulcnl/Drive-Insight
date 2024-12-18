@@ -1,9 +1,9 @@
 import "./Comparer.css";
-import VehiculeCard from "../../components/VehiculeCard/VehiculeCard";
-import type { Vehicule } from "../../types/types";
+import VehicleCard from "../../components/VehicleCard/VehicleCard";
+import type { Vehicle } from "../../types/types";
 
 function Comparer() {
-  const vehicule: Vehicule = {
+  const vehicle: Vehicle = {
     id: 1,
     brand: "Volskwagen",
     model: "Golf VII",
@@ -21,13 +21,11 @@ function Comparer() {
     fuelCost: 90,
   };
 
-  // const vehicules: Vehicule[] = [vehicule1];
-
   return (
     <div>
       <h1>Comparer les véhicules</h1>
-      <div className="vehicule-list">
-        <VehiculeCard key={vehicule.id} vehicule={vehicule} />
+      <div className="vehicle-list">
+        <VehicleCard key={vehicle.id} vehicle={vehicle} />
       </div>
     </div>
   );

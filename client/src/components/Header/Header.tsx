@@ -21,7 +21,7 @@ function Header() {
             handleClick();
           }}
         >
-          test
+          <img src="./src/assets/images/menu-3-line (2).png" alt="" />
         </button>
       </div>
       <nav className={`nav ${isClicked ? "show" : ""}`}>
