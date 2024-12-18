@@ -52,6 +52,14 @@ create table driving_habit (
   foreign key(user_id) references website_user(id)
 );
 
+create table queries (
+  id int unsigned primary key auto_increment not null,
+  contact_email varchar(255) not null,
+  submit_date timestamp not null default current_timestamp,
+  category ENUM('Administration', 'Flotte', 'Besoin', 'Autre') not null,
+  message text not null
+)
+
 
 insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', ' [email protected]', '0123456789', 'password', true);
 insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', ' [email protected2]', '0123456789', 'password', false);
