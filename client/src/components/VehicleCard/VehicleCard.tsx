@@ -18,38 +18,52 @@ function VehicleCard({ vehicle }: VehicleCardProps) {
       </h2>
       <div className="vehicle-description">
         <div className="vehicle-detail">
-          <span className="vehicle-data-label">Immatriculation</span>
+          <span className="vehicle-data-label">
+            Immatriculation <span className="two-points">:</span>
+          </span>
           <span className="value">{vehicle.licensePlate}</span>
         </div>
         <div className="vehicle-detail">
-          <span className="vehicle-data-label">Carburant</span>
+          <span className="vehicle-data-label">
+            Carburant <span className="two-points">:</span>
+          </span>
           <span className="value">
             {vehicle.powerType === "essence" ? "essence" : "diesel"}
           </span>
         </div>
         <div className="vehicle-detail">
-          <span className="vehicle-data-label">Puissance</span>
+          <span className="vehicle-data-label">
+            Puissance <span className="two-points">:</span>
+          </span>
           <span className="value">{vehicle.horsepower} chevaux</span>
         </div>
         <div className="vehicle-detail">
-          <span className="vehicle-data-label">Prix</span>
+          <span className="vehicle-data-label">
+            Prix <span className="two-points">:</span>
+          </span>
           <span className="value">
             {vehicle.price?.toLocaleString("fr-FR")} €
           </span>
         </div>
         <div className="vehicle-detail">
-          <span className="vehicle-data-label">Consommation</span>
+          <span className="vehicle-data-label">
+            Consommation <span className="two-points">:</span>
+          </span>
           <span className="value">
             {vehicle.consumption}{" "}
             {vehicle.powerType === "électrique" ? "kWh/100km" : "L/100km"}
           </span>
         </div>
         <div className="vehicle-detail">
-          <span className="vehicle-data-label">Distance mensuelle</span>
+          <span className="vehicle-data-label">
+            Distance mensuelle <span className="two-points">:</span>
+          </span>
           <span className="value">{vehicle.drivenDistance} km</span>
         </div>
         <div className="vehicle-detail">
-          <span className="vehicle-data-label">Empreinte carbone</span>
+          <span className="vehicle-data-label">
+            Empreinte carbone <span className="two-points">:</span>
+          </span>
           <span className="value">{vehicle.carbonFootprint} g/km</span>
         </div>
       </div>
