@@ -9,7 +9,7 @@ export interface WebsiteUser {
   isAdmin?: boolean;
 }
 
-export interface Vehicule {
+export interface Vehicle {
   id: number;
   brand: string;
   model: string;

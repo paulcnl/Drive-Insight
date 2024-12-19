@@ -48,15 +48,25 @@ footer ul {
 
 .footer-link {
   text-decoration: none;
-  font-family: var(--font-family-texte);
-  color: var(--font-color);
+  font-family: "Roboto", sans-serif;
+  color: black;
   position: relative;
   display: inline-block;
-  margin-right: 30px;
-  top: 10px;
-  opacity: 0;
-  transition: opacity 0.5s ease, top 0.5s ease;
-  transition-delay: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-link {
+    text-decoration: none;
+    font-family: "Roboto", sans-serif;
+    color: black;
+    position: relative;
+    display: inline-block;
+    margin-right: 30px;
+    top: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease, top 0.5s ease;
+    transition-delay: 0;
+  }
 }
 
 span {

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  font-family: var(--font-family-texte);
 }
 
 @media screen and (min-width: 600px) {
@@ -10,6 +11,7 @@
     align-items: center;
     justify-content: space-between;
     margin: 0.5rem 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.196);
   }
 }
 
@@ -17,6 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 100;
 }
 
 @media screen and (min-width: 600px) {
@@ -27,6 +30,8 @@
 
 .btn-menu {
   display: block;
+  border: none;
+  background-color: transparent;
 }
 
 @media screen and (min-width: 600px) {
@@ -48,45 +53,8 @@
     display: block;
     width: 80%;
   }
-}
 
-/*bouton animation*/
-/* .btn-menu span {
-  background: #fff;
-  border-radius: 10px;
-  height: 7px;
-  margin: 7px 0;
-  transition: .4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  .header-logo {
+    margin-left: 3rem;
+  }
 }
-
-span:nth-of-type(1) {
-  width: 50%;
-}
-
-span:nth-of-type(2) {
-  width: 100%;
-}
-
-span:nth-of-type(3) {
-  width: 75%;
-}
-
-input[type="checkbox"] {
-  display: none;
-}
-
-input[type="checkbox"]:checked ~ span:nth-of-type(1) {
-  transform-origin: bottom;
-  transform: rotatez(45deg) translate(8px, 0px);
-}
-
-input[type="checkbox"]:checked ~ span:nth-of-type(2) {
-  transform-origin: top;
-  transform: rotatez(-45deg);
-}
-
-input[type="checkbox"]:checked ~ span:nth-of-type(3) {
-  transform-origin: bottom;
-  width: 50%;
-  transform: translate(30px, -11px) rotatez(45deg);
-} */
