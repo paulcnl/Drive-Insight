@@ -119,3 +119,12 @@
     color: #000000;
   }
 }
+
+.error {
+  font-family: var(--font-family-texte);
+  color: red;
+  font-size: 0.75rem;
+  margin-left: 1rem;
+  margin-top: 0.2rem;
+  text-align: end;
+}

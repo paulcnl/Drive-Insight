@@ -6,7 +6,11 @@ function Contact() {
   const [email, setEmail] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
-  const [errors, setErrors] = useState({ email: "", description: "" });
+  const [errors, setErrors] = useState({
+    email: "",
+    category: "",
+    description: "",
+  });
 
   const validateEmail = (email: string) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,10 +20,15 @@ function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let valid = true;
-    const errors = { email: "", description: "" };
+    const errors = { email: "", category: "", description: "" };
 
     if (!validateEmail(email)) {
       errors.email = "Veuillez entrer une adresse mail valide.";
+      valid = false;
+    }
+
+    if (category === "") {
+      errors.category = "Veuillez sélectionner une catégorie.";
       valid = false;
     }
 
@@ -73,7 +82,6 @@ function Contact() {
             className="contact-mail"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            required
           />
           {errors.email && <span className="error">{errors.email}</span>}
           <label htmlFor="categorie">Catégorie de la demande</label>
@@ -89,6 +97,7 @@ function Contact() {
             <option value="Besoin">Besoin d'un conseil</option>
             <option value="Autre">Autre</option>
           </select>
+          {errors.category && <span className="error">{errors.category}</span>}
           <label htmlFor="texte">Description de la demande</label>
           <textarea
             id="texte"
@@ -99,7 +108,6 @@ function Contact() {
             cols={33}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            required
             maxLength={500}
           />
           {errors.description && (
