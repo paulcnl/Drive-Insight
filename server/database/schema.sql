@@ -77,9 +77,9 @@ create table queries (
 create index idx_contact_email on queries(contact_email);
 create index idx_category on queries(category);
 
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', '[email protected]', '0123456789', 'password', true);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', '[email protected]', '0123456789', 'password', false);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', '[email protected]', '0123456789', 'password', false);
+insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', 'email@example.com', '0123456789', 'password', true);
+insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', 'email2@example.com', '0123456789', 'password', false);
+insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', 'email3@example.com', '0123456789', 'password', false);
 
 insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'électrique', 0.0, 300, 50.0);
 insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'essence', 5.0, 300, 50.0);
