@@ -13,7 +13,7 @@ function Contact() {
     return re.test(String(email).toLowerCase());
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let valid = true;
     const errors = { email: "", description: "" };
@@ -31,7 +31,31 @@ function Contact() {
     setErrors(errors);
 
     if (valid) {
-      alert("Formulaire soumis");
+      try {
+        const response = await fetch("http://localhost:3315/api/queries", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            contact_email: email,
+            category,
+            message: description,
+          }),
+        });
+
+        if (response.ok) {
+          alert("Formulaire soumis");
+          setEmail("");
+          setCategory("");
+          setDescription("");
+        } else {
+          alert("Erreur lors de la soumission du formulaire");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Erreur lors de la soumission du formulaire");
+      }
     }
   };
 
@@ -60,10 +84,10 @@ function Contact() {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Choisissez une catégorie</option>
-            <option value="administration">Administration</option>
-            <option value="flotte">Flotte</option>
-            <option value="besoin d'un conseil">Besoin d'un conseil</option>
-            <option value="autre">Autre</option>
+            <option value="Administration">Administration</option>
+            <option value="Flotte">Flotte</option>
+            <option value="Besoin">Besoin d'un conseil</option>
+            <option value="Autre">Autre</option>
           </select>
           <label htmlFor="texte">Description de la demande</label>
           <textarea
