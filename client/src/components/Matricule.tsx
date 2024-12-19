@@ -14,7 +14,7 @@ export default function Matricule() {
               <input
                 type="text"
                 placeholder="Entrez votre plaque d'immatriculation"
-                className="matricule_input"
+                className="matricule_left_input"
               />
             </div>
           </div>
@@ -68,7 +68,7 @@ export default function Matricule() {
             <input className="matricule_input" type="text" placeholder="" />
           </div>
           <button className="matricule" type="button">
-            Enregistrer
+            Valider
           </button>
         </div>
       </div>

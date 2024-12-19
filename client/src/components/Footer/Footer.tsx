@@ -15,13 +15,13 @@ function Footer() {
                 <span>Github</span>
               </a>
             </li>
-            <hr />
+
             <li>
               <a href="https://www.yooliz.com/" className="footer-link">
                 <span>Yooliz</span>
               </a>
             </li>
-            <hr />
+
             <li>
               <a
                 href="https://www.instagram.com/yooliz_france/"
@@ -30,7 +30,6 @@ function Footer() {
                 <span>Instagram</span>
               </a>
             </li>
-            <hr />
           </ul>
         </div>
       </div>
