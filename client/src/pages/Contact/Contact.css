@@ -12,8 +12,13 @@
   font-size: 2rem;
 }
 
+.contact form {
+  display: flex;
+  flex-direction: column;
+}
+
 .contact label {
-  text-align: center;
+  text-align: left;
   padding: 0;
   margin: 0;
   margin-top: 2rem;
@@ -24,17 +29,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: .5rem;
+  gap: 0.5rem;
   margin-top: 2rem;
 }
 
 .contact select {
   height: 2rem;
   width: 20rem;
-  border: .5px solid var(--primary-color);
+  border: 0.5px solid var(--primary-color);
   border-radius: 20px;
   padding-left: 1rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-family: var(--font-family-texte);
 }
 
@@ -43,21 +48,31 @@
   width: 20rem;
 }
 
-.contact-zone-text {
-  height: 15rem;
-  width: 20rem;
-}
-
 .contact input {
-  border: .5px solid var(--primary-color);
+  border: 0.5px solid var(--primary-color);
   border-radius: 20px;
   padding-left: 1rem;
-  font-size: .75rem;
+  font-size: 0.75rem;
   font-family: var(--font-family-texte);
+}
+
+.contact textarea {
+  border: 0.5px solid var(--primary-color);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-family: var(--font-family-texte);
+  padding: 1rem;
+  resize: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
 }
 
 .button-contact {
   margin-left: 1rem;
+  margin-top: 1rem;
   width: 7rem;
   height: 2.5rem;
   border: none;
@@ -65,7 +80,7 @@
   border-radius: 25px;
   color: white;
   box-shadow: var(--box-shadow);
-  transition: .4s;
+  transition: 0.4s;
   cursor: pointer;
 }
 
@@ -85,12 +100,6 @@
     width: 50rem;
   }
 
-  .contact-zone-text {
-    height: 15rem;
-    width: 50rem;
-    align-items: center;
-  }
-
   .button-contact {
     margin-left: 1rem;
     width: 7rem;
@@ -100,7 +109,7 @@
     border-radius: 25px;
     color: white;
     box-shadow: var(--box-shadow);
-    transition: .4s;
+    transition: 0.4s;
     cursor: pointer;
   }
 
