@@ -6,7 +6,7 @@ type Query = {
   id: number;
   contact_email: string;
   submit_date: Date;
-  category: "Administration" | "Flotte" | "Besoin" | "Autre";
+  category: "Renouvelement" | "Flotte" | "Besoin" | "Autre";
   message: string;
 };
 

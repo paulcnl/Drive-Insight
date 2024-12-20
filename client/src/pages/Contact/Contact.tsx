@@ -95,7 +95,7 @@ function Contact() {
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="">Choisissez une catégorie</option>
-            <option value="Administration">Administration</option>
+            <option value="Renouvelement">Renouvelement de véhicule</option>
             <option value="Flotte">Flotte</option>
             <option value="Besoin">Besoin d'un conseil</option>
             <option value="Autre">Autre</option>
