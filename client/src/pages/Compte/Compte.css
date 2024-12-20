@@ -97,12 +97,14 @@
   cursor: pointer;
 }
 
-.user-info-perso {
-  display: none;
-}
+@media screen and (max-width: 768px) {
+  .user-info-perso {
+    display: none;
+  }
 
-.vehicule button {
-  display: none;
+  .vehicule button {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -142,7 +144,7 @@
 
   .user-info button:hover {
     background-color: white;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--secondary-color);
     color: #000000;
   }
 
@@ -266,7 +268,7 @@
 
   .vehicule button:hover {
     background-color: white;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--secondary-color);
     color: #000000;
   }
 

@@ -36,7 +36,7 @@
 .contact select {
   height: 2rem;
   width: 20rem;
-  border: 0.5px solid var(--primary-color);
+  border: .5px solid var(--secondary-color);
   border-radius: 20px;
   padding-left: 1rem;
   font-size: 0.75rem;
@@ -49,7 +49,7 @@
 }
 
 .contact input {
-  border: 0.5px solid var(--primary-color);
+  border: .5px solid var(--secondary-color);
   border-radius: 20px;
   padding-left: 1rem;
   font-size: 0.75rem;
@@ -57,7 +57,7 @@
 }
 
 .contact textarea {
-  border: 0.5px solid var(--primary-color);
+  border: 0.5px solid var(--secondary-color);
   border-radius: 20px;
   font-size: 0.75rem;
   font-family: var(--font-family-texte);
@@ -72,8 +72,8 @@
 
 .button-contact {
   margin-left: 1rem;
-  margin-top: 1rem;
-  width: 7rem;
+  margin-top: 2rem;
+  width: 8rem;
   height: 2.5rem;
   border: none;
   background-color: var(--primary-color);
@@ -82,17 +82,13 @@
   box-shadow: var(--box-shadow);
   transition: 0.4s;
   cursor: pointer;
+  display: block;
 }
 
 @media screen and (min-width: 768px) {
   .contact select {
     height: 2.5rem;
     width: 50rem;
-    font-size: 1rem;
-  }
-
-  .contact input {
-    font-size: 1rem;
   }
 
   .contact textarea {
@@ -104,23 +100,16 @@
     width: 50rem;
   }
 
-  .button-contact {
-    margin-left: 1rem;
-    width: 7rem;
-    height: 2.5rem;
-    border: none;
-    background-color: var(--primary-color);
-    border-radius: 25px;
-    color: white;
-    box-shadow: var(--box-shadow);
-    transition: 0.4s;
-    cursor: pointer;
+  .contact-zone-text {
+    height: 15rem;
+    width: 50rem;
+    align-items: center;
   }
 
   .button-contact:hover {
     background-color: white;
-    border: 1px solid var(--primary-color);
-    color: #000000;
+    color: black;
+    border: 1px solid var(--secondary-color);
   }
 }
 
