@@ -24,7 +24,7 @@ function Compte() {
         </div>
         <hr />
 
-        <div className="user-info-vehicule">
+        <div className="user-info-vehicle">
           <div className="compte-box">
             <div className="vehicule">
               <p>Mes véhicules</p>
@@ -36,7 +36,9 @@ function Compte() {
             </div>
           </div>
           <div className="compte-box">
-            <p>Mes dernières comparaisons</p>
+            <div className="comparaison">
+              <p>Mes dernières comparaisons</p>
+            </div>
             <div className="box-contenu">
               <div className="box-card">
                 <div className="car-card-red"> </div>

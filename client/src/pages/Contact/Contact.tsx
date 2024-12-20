@@ -29,7 +29,7 @@ function Contact() {
           placeholder="Zone de texte"
           className="contact-zone-text"
         />
-        <button type="button" className="button-compte">
+        <button type="button" className="button-contact">
           Envoyer
         </button>
       </div>
