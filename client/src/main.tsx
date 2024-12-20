@@ -11,6 +11,8 @@ import Home from "./pages/Home/Home";
 import InfosEnviro from "./pages/Info/InfosEnviro";
 import Log from "./pages/Log/Log";
 import Options from "./pages/Options/Options";
+import Confirm from "./pages/confirmVehicle/confirmVehicle";
+import Habits from "./pages/habits/Habits";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
@@ -45,6 +47,14 @@ const router = createBrowserRouter([
       {
         path: "/info",
         element: <InfosEnviro />,
+      },
+      {
+        path: "/confirm",
+        element: <Confirm />,
+      },
+      {
+        path: "/habits",
+        element: <Habits />,
       },
       {
         path: "*",
