@@ -145,7 +145,7 @@
 
   .user-info button:hover {
     background-color: white;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--secondary-color);
     color: #000000;
   }
 
@@ -270,7 +270,7 @@
 
   .vehicule button:hover {
     background-color: white;
-    border: 1px solid var(--primary-color);
+    border: 1px solid var(--secondary-color);
     color: #000000;
   }
 
