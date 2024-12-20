@@ -17,7 +17,6 @@ import Options from "./pages/Options/Options";
 
 /* ************************************************************************* */
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -48,16 +47,16 @@ const router = createBrowserRouter([
         element: <InfosEnviro />,
       },
       {
-        path: "/admin",
-        element: <Admin />,
-      },
-      {
         path: "*",
         element: <div>Page non trouvée</div>,
       },
       {
         path: "/options",
         element: <Options />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
     ],
   },
