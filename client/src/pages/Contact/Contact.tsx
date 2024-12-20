@@ -41,17 +41,20 @@ function Contact() {
 
     if (valid) {
       try {
-        const response = await fetch("http://localhost:3315/api/queries", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/queries`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              contact_email: email,
+              category,
+              message: description,
+            }),
           },
-          body: JSON.stringify({
-            contact_email: email,
-            category,
-            message: description,
-          }),
-        });
+        );
 
         if (response.ok) {
           alert("Formulaire soumis");
