@@ -5,8 +5,14 @@
   flex-direction: row;
   cursor: pointer;
   pointer-events: none;
-  margin-top: 5rem;
+  margin-top: 10rem;
   padding: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .footer-container {
+    margin-top: 5rem;
+  }
 }
 
 .footer-container:hover {
