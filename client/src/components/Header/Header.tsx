@@ -25,7 +25,7 @@ function Header() {
         </button>
       </div>
       <nav className={`nav ${isClicked ? "show" : ""}`}>
-        <Navigation />
+        <Navigation handleClick={handleClick} />
       </nav>
     </div>
   );

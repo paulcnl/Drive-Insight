@@ -1,47 +1,19 @@
 import { Link } from "react-router-dom";
 import "./Navigation.css";
 
-function Navigation() {
-  function handleClick(_noshow: boolean) {
-    throw new Error("Function not implemented.");
-  }
-
+function Navigation({ handleClick }: { handleClick: () => void }) {
   return (
     <div className="nav-container">
-      <Link
-        onClick={() => {
-          handleClick(false);
-        }}
-        to="/contact"
-        className="navbar-button"
-      >
+      <Link onClick={handleClick} to="/contact" className="navbar-button">
         Contact
       </Link>
-      <Link
-        onClick={() => {
-          handleClick(false);
-        }}
-        to="/info"
-        className="navbar-button"
-      >
+      <Link onClick={handleClick} to="/info" className="navbar-button">
         Info
       </Link>
-      <Link
-        onClick={() => {
-          handleClick(false);
-        }}
-        to="/comparer"
-        className="navbar-button"
-      >
+      <Link onClick={handleClick} to="/comparer" className="navbar-button">
         Comparer
       </Link>
-      <Link
-        onClick={() => {
-          handleClick(false);
-        }}
-        to="/compte"
-        className="navbar-button"
-      >
+      <Link onClick={handleClick} to="/compte" className="navbar-button">
         Compte
       </Link>
     </div>
