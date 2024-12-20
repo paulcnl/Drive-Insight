@@ -10,11 +10,13 @@ import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import InfosEnviro from "./pages/Info/InfosEnviro";
 import Log from "./pages/Log/Log";
+import Options from "./pages/Options/Options";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
 
 /* ************************************************************************* */
+
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <div>Page non trouvée</div>,
+      },
+      {
+        path: "/options",
+        element: <Options />,
       },
     ],
   },
