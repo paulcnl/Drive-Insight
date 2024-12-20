@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   font-family: var(--font-family-texte);
-  height: 92vh;
 }
 
 .user {
@@ -182,7 +181,6 @@
   .user-info-vehicle {
     width: 90vw;
     margin-top: 1rem;
-    height: 50rem;
     gap: 1rem;
     display: flex;
     flex-direction: row;
