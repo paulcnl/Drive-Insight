@@ -14,6 +14,7 @@ import Log from "./pages/Log/Log";
 
 /* ************************************************************************* */
 import InfosEnviro from "./pages/Info/InfosEnviro";
+import Options from "./pages/Options/Options";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: "*",
         element: <div>Page non trouvée</div>,
+      },
+      {
+        path: "/options",
+        element: <Options />,
       },
     ],
   },
