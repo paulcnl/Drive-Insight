@@ -59,7 +59,7 @@
 .contact textarea {
   border: 0.5px solid var(--primary-color);
   border-radius: 20px;
-  font-size: 1rem;
+  font-size: 0.75rem;
   font-family: var(--font-family-texte);
   padding: 0.6rem;
   resize: none;
@@ -92,6 +92,10 @@
   }
 
   .contact input {
+    font-size: 1rem;
+  }
+
+  .contact textarea {
     font-size: 1rem;
   }
 
