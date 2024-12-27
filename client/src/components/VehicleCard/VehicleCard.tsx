@@ -2,7 +2,7 @@ import type { Vehicle } from "../../types/types";
 import "./VehicleCard.css";
 
 type VehicleCardProps = {
-  vehicle: Vehicle;
+  vehicle: Partial<Vehicle>;
 };
 
 function VehicleCard({ vehicle }: VehicleCardProps) {
@@ -10,7 +10,7 @@ function VehicleCard({ vehicle }: VehicleCardProps) {
     <div className="vehicle-card">
       <img
         className="vehicle-image"
-        src={vehicle.imageUrl}
+        src={vehicle?.imageUrl}
         alt={`${vehicle.brand} ${vehicle.model}`}
       />
       <h2 className="vehicle-name">
@@ -28,7 +28,7 @@ function VehicleCard({ vehicle }: VehicleCardProps) {
             Carburant <span className="two-points">:</span>
           </span>
           <span className="value">
-            {vehicle.powerType === "essence" ? "essence" : "diesel"}
+            {vehicle?.powerType === "essence" ? "essence" : "diesel"}
           </span>
         </div>
         <div className="vehicle-detail">
