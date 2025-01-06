@@ -6,7 +6,7 @@ function Options() {
   return (
     <>
       <div className="options-container">
-        <FilAriane />
+        <FilAriane currentStep="1" />
         <h2 className="options-h2">Des Options ?</h2>
       </div>
       <div className="options-sub-container">
