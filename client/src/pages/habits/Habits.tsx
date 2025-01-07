@@ -1,8 +1,19 @@
+import { Link } from "react-router-dom";
+import FilAriane from "../../components/FilAriane";
 import "./Habits.css";
 
 function Habits() {
   return (
     <>
+      <FilAriane
+        currentStep="Habits"
+        progress={{
+          Matricule: true,
+          Habits: true,
+          Options: false,
+          Results: false,
+        }}
+      />
       <div className="habits">
         <h2>Mes habitudes</h2>
         <div className="habits-container">
@@ -63,8 +74,10 @@ function Habits() {
             </select>
           </div>
         </div>
-        <div className="button-cont">
-          <button type="button">valider</button>
+        <div className="options-button">
+          <Link to="/options" className="next-page">
+            Valider
+          </Link>
         </div>
       </div>
     </>

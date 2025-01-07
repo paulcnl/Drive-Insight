@@ -43,12 +43,20 @@ function Confirm() {
   };
 
   const handleConfirm = () => {
-    navigate("/options", { state: { vehicles } });
+    navigate("/habits", { state: { vehicles } });
   };
 
   return (
     <>
-      <FilAriane currentStep="step2" />
+      <FilAriane
+        currentStep="Matricule"
+        progress={{
+          Matricule: true,
+          Habits: false,
+          Options: false,
+          Results: false,
+        }}
+      />
       <h2>Confirmation des informations</h2>
       <div className="box-confirmation">
         {vehicles.map((vehicle) => (
