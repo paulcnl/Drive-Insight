@@ -10,6 +10,7 @@ import Home from "./pages/Home/Home";
 import Log from "./pages/Log/Log";
 import Confirm from "./pages/confirmVehicle/confirmVehicle";
 import Habits from "./pages/habits/Habits";
+import Result from "./pages/Result/Result";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
@@ -56,12 +57,16 @@ const router = createBrowserRouter([
         element: <Habits />,
       },
       {
-        path: "*",
-        element: <div>Page non trouvée</div>,
-      },
-      {
         path: "/options",
         element: <Options />,
+      },
+      {
+        path: "/result",
+        element: <Result />,
+      },
+      {
+        path: "*",
+        element: <div>Page non trouvée</div>,
       },
     ],
   },

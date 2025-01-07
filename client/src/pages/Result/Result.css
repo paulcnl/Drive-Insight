@@ -1,0 +1,20 @@
+.result_container h2 {
+  text-align: center;
+  font-family: var(--font-family-title);
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.result_card_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 768px) {
+  .result_card_container {
+    display: none;
+  }
+}
