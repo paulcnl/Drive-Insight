@@ -1,7 +1,53 @@
 import "./Compte.css";
+/*import { useEffect, useState } from "react";*/
 import avatar from "../../assets/images/538474-user_512x512.webp";
 
+/*interface Vehicle {
+  id: number;
+  brand: string;
+  model: string;
+  imageUrl: string;
+  licensePlate?: string;
+  registrationDate: string;
+  price?: number;
+  carbonFootprint?: number;
+  critAirCard?: number;
+  horsepower?: number;
+  powerType: "electric" | "gas" | "diesel";
+  consumption?: number;
+  autonomyKm?: number;
+  refillPrice?: number;
+  drivenDistance?: number;
+  fuelCost?: number;
+  year?: number;
+}*/
+
 function Compte() {
+  /*const [vehicle, setVehicle] = useState<Vehicle[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const userId = 1;
+      try {
+        const response = await fetch(
+          `http://localhost:3000/api/vehicle/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          },
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setVehicle(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);*/
   return (
     <>
       <div className="compte">
