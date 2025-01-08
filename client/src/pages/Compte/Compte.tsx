@@ -6,41 +6,29 @@ import VehicleCard from "../../components/VehicleCard/VehicleCard";
 interface Vehicle {
   id: number;
   brand: string;
-
   model: string;
+  licensePlate: string;
+  powerType: string;
+  horsepower: number;
+  price: number;
   imageUrl: string;
-  licensePlate?: string;
-  registrationDate: string;
-  price?: number;
-  carbonFootprint?: number;
-  critAirCard?: number;
-  horsepower?: number;
-  powerType: "diesel" | "électrique" | "essence";
-  consumption?: number;
-  autonomyKm?: number;
-  refillPrice?: number;
-  drivenDistance?: number;
-  fuelCost?: number;
-  year?: number;
 }
 
 function Compte() {
-  const [person, setPerson] = useState({
+  /* const[person , setPerson] = useState({person : {
     name: "compte",
     prenom: "user",
-    img: "avatar",
+    img:"avatar",
     pays: "user_info",
     ville: "nickname",
-    siret: "nickname",
-  });
+    siret: "nickname"
+  }})
 
-  const modifyPerson = () => {
-    setPerson(person);
-    console.info(person);
-  };
-
-  // Call the function
-  modifyPerson();
+const modifyPerson = () => {
+  setPerson(person)
+   
+  }
+  modifyPerson()*/
 
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   useEffect(() => {
@@ -76,9 +64,7 @@ function Compte() {
           <div className="user-info">
             <div className="nickname">
               <h2>user_nickname</h2>
-              <button type="button" onClick={modifyPerson}>
-                ✏️
-              </button>
+              <button type="button">✏️</button>
             </div>
             <div className="user-info-perso">
               <p>Nom</p>
@@ -100,7 +86,20 @@ function Compte() {
             </div>
             <div className="box-contenu">
               {vehicles?.map((vehicle) => (
-                <VehicleCard key={vehicle.id} vehicle={vehicle} />
+                <VehicleCard
+                  key={vehicle.id}
+                  vehicleData={{
+                    brand: vehicle.brand,
+                    model: vehicle.model,
+                    license_plate: vehicle.licensePlate,
+                    engine: {
+                      power_type: vehicle.powerType,
+                      horsepower: vehicle.horsepower,
+                    },
+                    price: vehicle.price,
+                    car_picture: vehicle.imageUrl,
+                  }}
+                />
               ))}
             </div>
           </div>
