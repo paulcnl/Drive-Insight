@@ -8,7 +8,9 @@ import vehicleRepository from "./vehicleRepository";
 const browse: RequestHandler = async (req, res, next) => {
   try {
     // Fetch all vehicles
-    const vehicles = await vehicleRepository.readAll();
+    const userId = Number(req.query.userId);
+    console.info("userId", userId);
+    const vehicles = await vehicleRepository.readAll(userId);
 
     // Respond with the vehicles in JSON format
     res.json(vehicles);

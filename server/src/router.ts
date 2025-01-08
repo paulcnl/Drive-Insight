@@ -29,8 +29,8 @@ router.delete("/api/queries/:id", queriesActions.remove);
 router.get("/api/user", userActions.browse);
 router.get("/api/user/:id", userActions.read);
 
-router.get("/api/vehicle", vehicleActions.browse);
-router.get("/api/vehicle/:id", vehicleActions.read);
+router.get("/api/vehicles", vehicleActions.browse);
+router.get("/api/vehicles/:id", vehicleActions.read);
 
 /* ************************************************************************* */
 
