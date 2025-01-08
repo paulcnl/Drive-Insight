@@ -70,7 +70,7 @@ create table queries (
   id int unsigned primary key auto_increment not null,
   contact_email varchar(255) not null,
   submit_date timestamp not null default current_timestamp,
-  category ENUM('Administration', 'Flotte', 'Besoin', 'Autre') not null,
+  category ENUM('Renouvelement', 'Flotte', 'Besoin', 'Autre') not null,
   message text not null
 );
 
