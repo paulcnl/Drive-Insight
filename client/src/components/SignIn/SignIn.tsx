@@ -12,11 +12,24 @@ function SignIn() {
   }>();
   const navigate = useNavigate();
 
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+    return emailRegex.test(email);
+  };
+
   const handleSignIn: FormEventHandler = async (event) => {
     event.preventDefault();
 
-    if (!emailRef.current || !passwordRef.current) {
+    const email = emailRef.current?.value || "";
+    const password = passwordRef.current?.value || "";
+
+    if (!email || !password) {
       alert("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      alert("Veuillez saisir une adresse email valide.");
       return;
     }
 
@@ -26,10 +39,7 @@ function SignIn() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-          }),
+          body: JSON.stringify({ email, password }),
         },
       );
 
