@@ -38,7 +38,7 @@
 .options-input {
   border: .5px solid var(--primary-color);
   border-radius: 20px;
-  height: 30px;
+  height: 2.25rem;
   padding: 0.5rem;
 }
 

@@ -58,5 +58,6 @@
   .navbar-button:hover {
     border-bottom: 2px solid var(--secondary-color);
     border-radius: 0px;
+    margin-top: 2px;
   }
 }
