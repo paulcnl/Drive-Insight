@@ -8,9 +8,9 @@ import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import Log from "./pages/Log/Log";
+import Result from "./pages/Result/Result";
 import Confirm from "./pages/confirmVehicle/confirmVehicle";
 import Habits from "./pages/habits/Habits";
-import Result from "./pages/Result/Result";
 
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";

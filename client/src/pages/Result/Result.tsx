@@ -1,7 +1,7 @@
 import "./Result.css";
-import FilAriane from "../../components/FilAriane";
 import CardResultGreen from "../../components/CardResultGreen/CardResultGreen";
 import CardResultRed from "../../components/CardResultRed/CardResultRed";
+import FilAriane from "../../components/FilAriane";
 
 function Result() {
   return (
