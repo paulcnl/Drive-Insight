@@ -13,7 +13,7 @@ function SignIn() {
   const navigate = useNavigate();
 
   const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/i;
+    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.{1}[a-z]{2,}$/i;
     return emailRegex.test(email);
   };
 
