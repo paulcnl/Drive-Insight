@@ -6,7 +6,15 @@ function Options() {
   return (
     <>
       <div className="options-container">
-        <FilAriane />
+        <FilAriane
+          currentStep="Options"
+          progress={{
+            Matricule: true,
+            Habits: true,
+            Options: true,
+            Results: false,
+          }}
+        />
         <h2 className="options-h2">Des Options ?</h2>
       </div>
       <form action="">
@@ -29,10 +37,10 @@ function Options() {
             autoComplete="off"
             className="options-input"
           />
+          <label htmlFor="text" className="options-label">
+            Nouvelles habitudes de roulage
+          </label>
           <div className="options-roulage-container">
-            <label htmlFor="text" className="options-label">
-              Nouvelles habitudes de roulage
-            </label>
             <input
               type="text"
               name="options"

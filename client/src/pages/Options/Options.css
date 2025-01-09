@@ -18,13 +18,13 @@
 .options-label {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
   width: 100%;
   font-family: var(--font-family-texte);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: px) {
   .options-label {
     width: 50%;
   }
@@ -42,6 +42,18 @@
 .options-roulage-container {
   display: flex;
   flex-direction: column;
+  gap: 2rem;
+  text-align: left;
+}
+
+.options-select {
+  height: 2rem;
+  width: 20rem;
+  border: .5px solid var(--secondary-color);
+  border-radius: 20px;
+  padding-left: 1rem;
+  font-size: 0.75rem;
+  font-family: var(--font-family-texte);
 }
 
 .options-button {
@@ -61,24 +73,12 @@
   text-decoration: none;
   font-family: var(--font-family-texte);
   background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  color: white;
-  text-align: center;
-  font-size: 16px;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  border-radius: 30px;
-  height: 2rem;
-  width: 5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: .4s;
-  box-shadow: var(--box-shadow);
-}
-
-@media screen and (min-width: 768px) {
-  .next-page:hover {
-    background-color: var(--background-color);
-    color: black;
-  }
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
