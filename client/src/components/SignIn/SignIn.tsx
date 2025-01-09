@@ -1,35 +1,32 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { FormEventHandler } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import type { WebsiteUser } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-
-  const { setUser } = useOutletContext<{
-    setUser: (user: WebsiteUser | null) => void;
-  }>();
   const navigate = useNavigate();
 
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
   const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.{1}[a-z]{2,}$/i;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
 
   const handleSignIn: FormEventHandler = async (event) => {
     event.preventDefault();
 
-    const email = emailRef.current?.value || "";
-    const password = passwordRef.current?.value || "";
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
 
     if (!email || !password) {
-      alert("Veuillez remplir tous les champs.");
+      setErrorMessage("Veuillez remplir tous les champs.");
       return;
     }
 
     if (!validateEmail(email)) {
-      alert("Veuillez saisir une adresse email valide.");
+      setErrorMessage("L'adresse email est invalide.");
       return;
     }
 
@@ -40,21 +37,22 @@ function SignIn() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
+          credentials: "include",
         },
       );
 
-      if (response.status === 200) {
-        const user = await response.json();
-        setUser(user);
+      if (response.ok) {
         navigate("/");
+      } else if (response.status === 401) {
+        setErrorMessage("Identifiants incorrects.");
       } else {
-        alert(
-          "Erreur lors de la connexion. Veuillez vérifier vos identifiants.",
-        );
+        setErrorMessage("Une erreur s'est produite. Veuillez réessayer.");
       }
     } catch (err) {
-      alert("Une erreur s'est produite. Veuillez réessayer.");
-      console.error(err);
+      console.error("Erreur lors de la connexion :", err);
+      setErrorMessage(
+        "Impossible de se connecter. Veuillez vérifier votre connexion.",
+      );
     }
   };
 
@@ -82,6 +80,7 @@ function SignIn() {
             required
           />
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="submit" className="button-log">
           Se connecter
         </button>
