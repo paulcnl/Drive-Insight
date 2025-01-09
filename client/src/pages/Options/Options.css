@@ -18,10 +18,10 @@
 .options-label {
   display: flex;
   flex-direction: column;
-  margin: 0;
-  padding: 1.5rem;
+  justify-content: flex-start;
+  padding: 1rem;
   width: 100%;
-  gap: 0.5rem;
+  font-family: var(--font-family-texte);
 }
 
 @media screen and (min-width: 768px) {
@@ -30,16 +30,18 @@
   }
 }
 
-.options-p {
-  text-align: left;
+.options-input {
+  border: .5px solid var(--secondary-color);
+  font-family: var(--font-family-texte);
+  border-radius: 20px;
+  height: 2rem;
+  width: 20rem;
   padding: 0.5rem;
 }
 
-.options-input {
-  border: .5px solid var(--primary-color);
-  border-radius: 20px;
-  height: 30px;
-  padding: 0.5rem;
+.options-roulage-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .options-button {
