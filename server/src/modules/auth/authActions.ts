@@ -1,9 +1,20 @@
 import argon2 from "argon2";
 import type { RequestHandler } from "express";
+import rateLimit from "express-rate-limit";
 import jwt from "jsonwebtoken";
 import userRepository from "../user/userRepository";
 
 import type { JwtPayload } from "jsonwebtoken";
+
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: {
+    message: "Trop de tentatives de connexion. Réessayez plus tard.",
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 const hashingOptions = {
   type: argon2.argon2id,
@@ -39,19 +50,20 @@ const login: RequestHandler = async (req, res, next) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      res.status(400).json({ message: "Email et mot de passe sont requis." });
+      res.status(400).json({ message: "Email et mot de passe requis." });
       return;
     }
 
     const user = await userRepository.findByEmail(email);
+
     if (!user) {
-      res.status(401).json({ message: "Utilisateur·ice non trouvé·e." });
+      res.status(401).json({ message: "Identifiants incorrects." });
       return;
     }
 
     const isPasswordValid = await argon2.verify(user.hashed_password, password);
     if (!isPasswordValid) {
-      res.status(401).json({ message: "Mot de passe incorrect." });
+      res.status(401).json({ message: "Identifiants incorrects." });
       return;
     }
 
@@ -61,27 +73,21 @@ const login: RequestHandler = async (req, res, next) => {
         isAdmin: user.isAdmin,
       },
       process.env.JWT_SECRET as string,
-      { expiresIn: "1h" },
+      {
+        expiresIn: "1h",
+      },
     );
 
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      maxAge: 3600000,
-    });
-
     const { hashed_password, ...userWithoutPassword } = user;
-
     res.status(200).json({
       token,
       user: userWithoutPassword,
     });
+
     return;
   } catch (err) {
     console.error("Erreur lors de la connexion :", err);
     next(err);
-    return;
   }
 };
 
@@ -119,4 +125,4 @@ const verifyToken: RequestHandler = (req, res, next) => {
     return;
   }
 };
-export default { hashPassword, login, verifyToken };
+export default { hashPassword, login: [loginLimiter, login], verifyToken };
