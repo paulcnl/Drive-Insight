@@ -60,7 +60,11 @@ function Confirm() {
       <h2>Confirmation des informations</h2>
       <div className="box-confirmation">
         {vehicles.map((vehicle) => (
-          <VehicleCard key={vehicle.license_plate} vehicleData={vehicle} />
+          <VehicleCard
+            key={vehicle.license_plate}
+            vehicleData={vehicle}
+            size="large"
+          />
         ))}
         <div className="add-item">
           <input

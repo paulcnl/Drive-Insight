@@ -15,21 +15,6 @@ interface Vehicle {
 }
 
 function Compte() {
-  /* const[person , setPerson] = useState({person : {
-    name: "compte",
-    prenom: "user",
-    img:"avatar",
-    pays: "user_info",
-    ville: "nickname",
-    siret: "nickname"
-  }})
-
-const modifyPerson = () => {
-  setPerson(person)
-   
-  }
-  modifyPerson()*/
-
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   useEffect(() => {
     const fetchData = async () => {
@@ -88,6 +73,7 @@ const modifyPerson = () => {
               {vehicles?.map((vehicle) => (
                 <VehicleCard
                   key={vehicle.id}
+                  size="small"
                   vehicleData={{
                     brand: vehicle.brand,
                     model: vehicle.model,
@@ -109,13 +95,7 @@ const modifyPerson = () => {
             </div>
             <div className="box-contenu">
               <div className="box-card">
-                <div className="car-card-red">
-                  {vehicles?.map((vehicle) => (
-                    <div key={vehicle.id}>
-                      {vehicle.brand} {vehicle.model}
-                    </div>
-                  ))}
-                </div>
+                <div className="car-card-red"> </div>
                 <div className="car-card-green"> </div>
               </div>
             </div>
