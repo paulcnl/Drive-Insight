@@ -68,35 +68,37 @@ function Options() {
               <option>année</option>
             </select>
           </div>
-          <label htmlFor="text" className="options-label">
-            Coût de l'assurance à l'année
-          </label>
-          <input
-            type="text"
-            name="options"
-            list="options-2"
-            autoComplete="off"
-            placeholder="Ex: 840€"
-            className="options-input"
-          />
-          <label htmlFor="text" className="options-label">
-            Type de déplacements
-          </label>
-          <select id="mode-de-vie" className="options-select">
-            <option>privé</option>
-            <option>travail</option>
-            <option>proffesionnel</option>
-            <option>mixte</option>
-          </select>
-          <label htmlFor="text" className="options-label">
-            Si mixte
-          </label>
-          <input
-            type="text"
-            name="options"
-            placeholder="Si mixte faites nous le savoir"
-            className="options-input"
-          />
+          <div className="right">
+            <label htmlFor="text" className="options-label">
+              Coût de l'assurance à l'année
+            </label>
+            <input
+              type="text"
+              name="options"
+              list="options-2"
+              autoComplete="off"
+              placeholder="Ex: 840€"
+              className="options-input"
+            />
+            <label htmlFor="text" className="options-label">
+              Type de déplacements
+            </label>
+            <select id="mode-de-vie" className="options-select">
+              <option>privé</option>
+              <option>travail</option>
+              <option>proffesionnel</option>
+              <option>mixte</option>
+            </select>
+            <label htmlFor="text" className="options-label">
+              Si mixte
+            </label>
+            <input
+              type="text"
+              name="options"
+              placeholder="Si mixte faites nous le savoir"
+              className="options-input"
+            />
+          </div>
         </div>
       </form>
       <div className="options-button">
