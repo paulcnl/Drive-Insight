@@ -40,7 +40,7 @@
     justify-content: center;
     background-color: var(--result-red-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .grid-red-col-top {
@@ -52,7 +52,7 @@
     justify-content: center;
     background-color: var(--result-red-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .grid-red-row {
@@ -64,7 +64,7 @@
     justify-content: center;
     background-color: var(--result-red-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .grid-red-col-bottom {
@@ -76,7 +76,7 @@
     justify-content: center;
     background-color: var(--result-red-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .grid-green-container {
@@ -97,7 +97,7 @@
     justify-content: center;
     background-color: var(--result-green-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .grid-green-row {
@@ -109,7 +109,7 @@
     justify-content: center;
     background-color: var(--result-green-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .grid-green-col-top {
@@ -121,7 +121,7 @@
     justify-content: center;
     background-color: var(--result-green-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .grid-green-col-bottom {
@@ -133,13 +133,13 @@
     justify-content: center;
     background-color: var(--result-green-color);
     border-radius: 15px;
-    box-shadow: 3px 0px 10px rgba(1, 1, 1, 0.091);
+    box-shadow: 2px 4px 12px #00000014;
   }
 
   .all-grid-container {
     display: flex;
     flex-direction: row;
     width: 100vw;
-    height: 10vh;
+    height: 60vh;
   }
 }

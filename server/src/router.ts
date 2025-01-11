@@ -7,6 +7,7 @@ const router = express.Router();
 /* ************************************************************************* */
 
 // Define item-related routes
+import authActions from "./modules/auth/authActions";
 import engineActions from "./modules/engine/engineActions";
 import itemActions from "./modules/item/itemActions";
 import queriesActions from "./modules/queries/queriesActions";
@@ -26,8 +27,9 @@ router.put("/api/queries/:id", queriesActions.edit);
 router.post("/api/queries", queriesActions.add);
 router.delete("/api/queries/:id", queriesActions.remove);
 
-router.get("/api/user", userActions.browse);
-router.get("/api/user/:id", userActions.read);
+router.get("/api/users", userActions.browse);
+router.get("/api/users/:id", userActions.read);
+router.post("/api/users", authActions.hashPassword, userActions.add);
 
 router.get("/api/vehicles", vehicleActions.browse);
 router.get("/api/vehicles/:id", vehicleActions.read);
