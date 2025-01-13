@@ -108,4 +108,10 @@ label {
     height: 5vh;
     margin: 1rem 0;
   }
+
+  .button-log:hover {
+    background-color: white;
+    color: black;
+    border: 1px solid var(--secondary-color);
+  }
 }
