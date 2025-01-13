@@ -57,7 +57,7 @@ function SignIn() {
   };
 
   return (
-    <div className="connexion">
+    <div className="login">
       <h2>Connexion</h2>
       <form onSubmit={handleSignIn}>
         <div className="log-input-container">
