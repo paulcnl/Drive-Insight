@@ -19,7 +19,8 @@
 
 /* à modifier la taille en version mobile */
 .card-size--small {
-  display: none;
+  width: 300px;
+  height: 200px;
 }
 
 @media (min-width: 768px) {
