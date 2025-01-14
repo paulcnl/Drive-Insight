@@ -1,12 +1,12 @@
 create table website_user (
   id int unsigned primary key auto_increment not null,
-  lastname varchar(255) not null,
-  firstname varchar(255) not null,
-  address tinytext not null,
+  lastname varchar(255) null,
+  firstname varchar(255) null,
+  address tinytext null,
   email varchar(255) not null unique,
-  phone_number char(10) not null,
-  password char(60) not null,
-  is_admin boolean null,
+  phone_number char(10) null,
+  hashed_password varchar(250) not null,
+  is_admin boolean default false,
   constraint chk_phone_number_length check (length(phone_number) = 10),
   constraint chk_email_format check (email like '%_@_%._%')
 );
@@ -77,9 +77,9 @@ create table queries (
 create index idx_contact_email on queries(contact_email);
 create index idx_category on queries(category);
 
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', 'email@example.com', '0123456789', 'password', true);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', 'email2@example.com', '0123456789', 'password', false);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', 'email3@example.com', '0123456789', 'password', false);
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', 'email@example.com', '0123456789', 'password', true);
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', 'email2@example.com', '0123456789', 'password', false);
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', 'email3@example.com', '0123456789', 'password', false);
 
 insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'électrique', 0.0, 300, 50.0);
 insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'essence', 5.0, 300, 50.0);
