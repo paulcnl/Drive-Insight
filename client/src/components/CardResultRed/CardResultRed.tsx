@@ -1,24 +1,52 @@
 import "./CardResultRed.css";
 
-function CardResultRed() {
+interface CardResultRedProps {
+  title: string;
+  vehicleImage: string;
+  vehicleName: string;
+  costs: {
+    fuel: string;
+    total: string;
+  };
+  emissions: {
+    co2: string;
+    difference: string;
+  };
+  consumption: string;
+}
+
+function CardResultRed({
+  title,
+  vehicleImage,
+  vehicleName,
+  costs,
+  emissions,
+  consumption,
+}: CardResultRedProps) {
   return (
-    <>
-      <div className="card_red">
-        <div className="card_red_content">
-          <img
-            src="https://wordpress-content.vroomly.com/wp-content/uploads/2023/03/5125257140_4dc4fb3d02_b.jpg"
-            alt=""
-          />
-          <div className="card_red_info">
-            <h3>nom du vehicule</h3>
-            <p>exemple : valeur</p>
-            <p>exemple : valeur</p>
-            <p>exemple : valeur</p>
-            <p>exemple : valeur</p>
+    <div className="card_red">
+      <div className="card_red_content">
+        <h2>{title}</h2>
+        <img src={vehicleImage} alt={vehicleName} />
+        <div className="card_red_info">
+          <h3>{vehicleName}</h3>
+          <div className="info_section">
+            <h4>Coûts</h4>
+            <p>Carburant: {costs.fuel}</p>
+            <p>Total: {costs.total}</p>
+          </div>
+          <div className="info_section">
+            <h4>Émissions</h4>
+            <p>CO2: {emissions.co2}</p>
+            <p>{emissions.difference}</p>
+          </div>
+          <div className="info_section">
+            <h4>Consommation</h4>
+            <p>{consumption}</p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -1,24 +1,55 @@
 import "./CardResultGreen.css";
 
-function CardResultGreen() {
+interface CardResultGreenProps {
+  title: string;
+  vehicleImage: string;
+  vehicleName: string;
+  costs: {
+    electricity: string;
+    savings: string;
+  };
+  emissions: {
+    co2: string;
+    difference: string;
+  };
+  consumption: string;
+  autonomy: string;
+}
+
+function CardResultGreen({
+  title,
+  vehicleImage,
+  vehicleName,
+  costs,
+  emissions,
+  consumption,
+  autonomy,
+}: CardResultGreenProps) {
   return (
-    <>
-      <div className="card_green">
-        <div className="card_green_content">
-          <img
-            src="https://www.usinenouvelle.com/mediatheque/9/8/1/000891189_896x598_c.jpg"
-            alt=""
-          />
-          <div className="card_green_info">
-            <h3>nom du vehicule</h3>
-            <p>exemple : valeur</p>
-            <p>exemple : valeur</p>
-            <p>exemple : valeur</p>
-            <p>exemple : valeur</p>
+    <div className="card_green">
+      <div className="card_green_content">
+        <h2>{title}</h2>
+        <img src={vehicleImage} alt={vehicleName} />
+        <div className="card_green_info">
+          <h3>{vehicleName}</h3>
+          <div className="info_section">
+            <h4>Coûts</h4>
+            <p>Électricité: {costs.electricity}</p>
+            <p>Économies: {costs.savings}</p>
+          </div>
+          <div className="info_section">
+            <h4>Émissions</h4>
+            <p>CO2: {emissions.co2}</p>
+            <p>{emissions.difference}</p>
+          </div>
+          <div className="info_section">
+            <h4>Performance</h4>
+            <p>Consommation: {consumption}</p>
+            <p>Autonomie: {autonomy}</p>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -143,3 +143,16 @@
     height: 60vh;
   }
 }
+
+.result_cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+  margin: 2rem 0;
+}
+
+.result_cards > * {
+  flex: 1;
+  max-width: 500px;
+}

@@ -1,8 +1,25 @@
 import "./Options.css";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import FilAriane from "../../components/FilAriane";
 
 function Options() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { vehicleData, habitsData } = location.state || {};
+
+  const handleSubmit = () => {
+    navigate("/result", {
+      state: {
+        vehicleData,
+        habitsData: {
+          ...habitsData,
+          fuelPrice: 1.8,
+          electricityPrice: 0.15,
+        },
+      },
+    });
+  };
+
   return (
     <>
       <div className="options-container">
@@ -20,7 +37,7 @@ function Options() {
       <form action="">
         <div className="options-sub-container">
           <label htmlFor="date" className="options-label">
-            Date prévisionnel du renouvellement de la flotte ou du vehicule ?
+            Date prévisionnelle du renouvellement de la flotte ou du vehicule ?
           </label>
           <select name="date" id="date" className="options-select">
             <option value="3-mois">3 mois</option>
@@ -28,7 +45,7 @@ function Options() {
             <option value="3-mois">1 an</option>
           </select>
           <label htmlFor="date" className="options-label">
-            Quelle est votre marque de voiture préférée ?
+            Envisageriez-vous d'utiliser une autre marque ?
           </label>
           <input
             type="text"
@@ -38,7 +55,7 @@ function Options() {
             className="options-input"
           />
           <label htmlFor="text" className="options-label">
-            Nouvelles habitudes de roulage
+            Modifications éventuelles des habitudes de déplacements ?
           </label>
           <div className="options-roulage-container">
             <input
@@ -50,22 +67,9 @@ function Options() {
               className="options-input"
             />
             <select id="options" className="options-select">
-              <option>jour</option>
-              <option>mois</option>
-              <option>année</option>
-            </select>
-            <input
-              type="text"
-              name="options"
-              list="options"
-              autoComplete="off"
-              placeholder="Fréquences"
-              className="options-input"
-            />
-            <select id="options" className="options-select">
-              <option>jour</option>
-              <option>mois</option>
-              <option>année</option>
+              <option>Quotidien</option>
+              <option>Mensuel</option>
+              <option>Annuel</option>
             </select>
           </div>
           <div className="right">
@@ -84,27 +88,26 @@ function Options() {
               Type de déplacements
             </label>
             <select id="mode-de-vie" className="options-select">
-              <option>privé</option>
-              <option>travail</option>
-              <option>proffesionnel</option>
-              <option>mixte</option>
+              <option>Privé</option>
+              <option>Professionnel</option>
+              <option>Mixte</option>
             </select>
             <label htmlFor="text" className="options-label">
-              Si mixte
+              Si mixte, merci de préciser
             </label>
             <input
               type="text"
               name="options"
-              placeholder="Si mixte faites nous le savoir"
+              placeholder="Préciser ici"
               className="options-input"
             />
           </div>
         </div>
       </form>
       <div className="options-button">
-        <Link to="/log" className="next-page">
+        <button type="button" onClick={handleSubmit} className="next-page">
           Valider
-        </Link>
+        </button>
       </div>
     </>
   );

@@ -43,7 +43,7 @@ function Confirm() {
   };
 
   const handleConfirm = () => {
-    navigate("/habits", { state: { vehicles } });
+    navigate("/habits", { state: { vehicleData: vehicles[0] } });
   };
 
   return (
@@ -82,6 +82,7 @@ function Confirm() {
           className="confirmation-button"
           type="button"
           onClick={handleConfirm}
+          disabled={vehicles.length === 0}
         >
           Valider et passer à l'étape suivante
         </button>
