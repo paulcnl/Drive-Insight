@@ -68,6 +68,7 @@ function Options() {
               <option>année</option>
             </select>
           </div>
+
           <div className="right">
             <label htmlFor="text" className="options-label">
               Coût de l'assurance à l'année
