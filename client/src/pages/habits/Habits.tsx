@@ -11,8 +11,44 @@ function Habits() {
   const [distance, setDistance] = useState("");
   const [frequency, setFrequency] = useState("");
   const [option, setOption] = useState("jour");
+  const [distanceError, setDistanceError] = useState("");
+  const [frequencyError, setFrequencyError] = useState("");
+
+  const validateNumber = (value: string) => {
+    return /^\d*\.?\d*$/.test(value);
+  };
+
+  const handleDistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (validateNumber(value)) {
+      setDistance(value);
+      setDistanceError("");
+    } else {
+      setDistanceError("Veuillez entrer un nombre valide");
+    }
+  };
+
+  const handleFrequencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (validateNumber(value)) {
+      setFrequency(value);
+      setFrequencyError("");
+    } else {
+      setFrequencyError("Veuillez entrer un nombre valide");
+    }
+  };
+
+  const isFormValid =
+    distance !== "" &&
+    frequency !== "" &&
+    !distanceError &&
+    !frequencyError &&
+    validateNumber(distance) &&
+    validateNumber(frequency);
 
   const handleSubmit = () => {
+    if (!isFormValid) return;
+
     const habitsData = {
       distance: Number.parseFloat(distance),
       frequency: Number.parseFloat(frequency),
@@ -36,44 +72,55 @@ function Habits() {
         <h2>Mes habitudes</h2>
         <div className="habits-container">
           <div className="input-container">
-            <label htmlFor="distance"> distance</label>
-            <input
-              type="text"
-              name="distance"
-              id="distance"
-              className="distance-input"
-              value={distance}
-              onChange={(e) => setDistance(e.target.value)}
-            />
-          </div>
-          <p>km</p>
-          <div className="input-container">
-            <label htmlFor="frequence"> frequence</label>
-            <input
-              type="text"
-              name="frequence"
-              id="frequence"
-              className="frequence-input"
-              value={frequency}
-              onChange={(e) => setFrequency(e.target.value)}
-            />
+            <div className="input-container-distance">
+              <label htmlFor="distance">Distance parcourue (en km)</label>
+              <input
+                type="text"
+                name="distance"
+                className={`distance-input ${distanceError ? "error" : ""}`}
+                value={distance}
+                onChange={handleDistanceChange}
+              />
+              {distanceError && (
+                <span className="error-message">{distanceError}</span>
+              )}
+            </div>
           </div>
           <div className="input-container">
-            <label htmlFor="frequence"> </label>
-            <select
-              name="option"
-              id="habits-option"
-              className="option"
-              value={option}
-              onChange={(e) => setOption(e.target.value)}
-            >
-              <option value="jour">jours </option>
-              <option value="mois">mois </option>
-              <option value="années">années </option>
-            </select>
+            <label className="frequency-label" htmlFor="frequence">
+              Quelle fréquence ?
+            </label>
+            <div className="input-container-frequency">
+              <input
+                type="text"
+                name="frequence"
+                className={`frequence-input ${frequencyError ? "error" : ""}`}
+                value={frequency}
+                onChange={handleFrequencyChange}
+              />
+              {frequencyError && (
+                <span className="error-message">{frequencyError}</span>
+              )}
+              <select
+                name="frequence"
+                className="option"
+                value={option}
+                onChange={(e) => setOption(e.target.value)}
+              >
+                <option value="jour">Quotidien </option>
+                <option value="semaine">Hebdomadaire </option>
+                <option value="mois">Mensuel </option>
+                <option value="années">Annuel </option>
+              </select>
+            </div>
           </div>
         </div>
-        <button type="button" onClick={handleSubmit}>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={!isFormValid}
+          className={`validate-button ${!isFormValid ? "disabled" : ""}`}
+        >
           Valider
         </button>
       </div>

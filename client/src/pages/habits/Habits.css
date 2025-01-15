@@ -1,5 +1,4 @@
 .habits {
-  height: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,62 +7,107 @@
 .habits h2 {
   font-family: var(--font-family-title);
   font-size: 2rem;
-  margin: 0;
-}
-
-.habits input {
-  width: 7rem;
-}
-
-@media screen and (min-width: 768px) {
-  .habits input {
-    width: 22vw;
-    height: 2rem;
-    border-radius: 15px;
-    border: .8px solid var(--primary-color);
-  }
-}
-
-.habits label {
-  width: 7rem;
-  text-align: center;
-  padding: 0;
+  margin-bottom: 2rem;
 }
 
 .habits-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 80vw;
+}
+
+.input-container input {
+  width: 40vw;
+  height: 2rem;
+  border-radius: 15px;
+  border: .8px solid var(--primary-color);
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.input-container input:focus {
+  outline: none;
+  border-color: var(--result-green-color);
+  box-shadow: 0 0 0 2px rgba(0, 200, 0, 0.1);
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.input-container input::placeholder {
+  color: #ccc;
+}
+
+.input-container-distance {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
 
-.input-container {
+.input-container-frequency {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .option {
-  margin-top: 1.2rem;
-  border-radius: 5px;
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: var(--font-family-texte);
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--result-green-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option:focus {
+  outline: none;
+  border-color: var(--result-green-color);
+  box-shadow: 0 0 0 2px rgba(0, 200, 0, 0.1);
+}
+
+.error-message {
+  color: #d32f2f;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.error {
+  border-color: #d32f2f !important;
+  background-color: #fff5f5;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .habits button {
-  width: 30vw;
-  height: 5vh;
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  color: white;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  margin-top: 2rem;
-  cursor: pointer;
-  border-radius: 25px;
-  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.1);
-}
-
-.next-page {
   background-color: var(--primary-color);
   color: #fff;
   padding: 10px 20px;
@@ -73,27 +117,24 @@
   font-weight: bold;
   font-size: 1rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 1.5rem 0;
 }
 
-@media screen and (min-width: 768px) {
-  .habits button {
-    width: 7rem;
-    transition: 0.4s;
-  }
+.habits button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+}
 
+.habits button:disabled {
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
   .habits-container {
-    width: 55vw;
+    width: 90vw;
   }
 
-  .habits button:hover {
-    background-color: white;
-    border: 1px solid var(--primary-color);
-    color: #000000;
-  }
-
-  .button-cont {
-    width: 55vw;
-    display: flex;
-    justify-content: end;
+  .input-container input,
+  .option {
+    width: 7rem;
   }
 }
