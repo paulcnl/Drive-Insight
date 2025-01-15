@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   font-family: var(--font-family-texte);
+  margin-bottom: 1rem;
 }
 
 .user {
