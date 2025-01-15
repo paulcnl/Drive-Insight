@@ -137,3 +137,21 @@ label {
     border-radius: 25px;
   }
 }
+
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-button {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.password-icon {
+  width: 20px;
+}

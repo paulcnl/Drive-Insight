@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { FormEventHandler } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import type { WebsiteUser } from "../../types/types";
@@ -6,6 +6,14 @@ import type { WebsiteUser } from "../../types/types";
 function SignIn() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+
+  const [passwordType, setPasswordType] = useState("password");
+  const [, setTogglePasswordIcon] = useState("");
+
+  const handlePasswordToggle = () => {
+    setPasswordType(passwordType === "password" ? "text" : "password");
+    setTogglePasswordIcon(passwordType === "password" ? "" : "");
+  };
 
   const { setUser } = useOutletContext<{
     setUser: (user: WebsiteUser | null) => void;
@@ -63,14 +71,35 @@ function SignIn() {
             required
           />
           <label htmlFor="password">Mot de passe</label>
-          <input
-            ref={passwordRef}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Votre mot de passe"
-            required
-          />
+          <div className="password-input-container">
+            <input
+              ref={passwordRef}
+              type={passwordType}
+              id="password"
+              name="password"
+              placeholder="Votre mot de passe"
+              required
+            />
+            <button
+              type="button"
+              onClick={handlePasswordToggle}
+              className="password-toggle-button"
+            >
+              {passwordType === "password" ? (
+                <img
+                  src="./src/assets/icons/close-eye.png"
+                  alt="Show password"
+                  className="password-icon"
+                />
+              ) : (
+                <img
+                  src="./src/assets/icons/view.png"
+                  alt="Hide password"
+                  className="password-icon"
+                />
+              )}
+            </button>
+          </div>
         </div>
         <button type="submit" className="button-log">
           Se connecter
