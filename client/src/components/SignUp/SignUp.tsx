@@ -76,7 +76,7 @@ function SignUp() {
   };
 
   return (
-    <div className="inscription">
+    <div className="register">
       <h2>Inscription</h2>
       <form onSubmit={handleSignUp}>
         <div className="log-input-container">
