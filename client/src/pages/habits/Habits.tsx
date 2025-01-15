@@ -77,14 +77,14 @@ function Habits() {
               <input
                 type="text"
                 name="distance"
-                className={`distance-input ${distanceError ? "error" : ""}`}
+                className={`distance-input ${distanceError ? "error-habits" : ""}`}
                 value={distance}
                 onChange={handleDistanceChange}
               />
-              {distanceError && (
-                <span className="error-message">{distanceError}</span>
-              )}
             </div>
+            {distanceError && (
+              <span className="error-message-habits">{distanceError}</span>
+            )}
           </div>
           <div className="input-container">
             <label className="frequency-label" htmlFor="frequence">
@@ -94,13 +94,10 @@ function Habits() {
               <input
                 type="text"
                 name="frequence"
-                className={`frequence-input ${frequencyError ? "error" : ""}`}
+                className={`frequence-input ${frequencyError ? "error-habits" : ""}`}
                 value={frequency}
                 onChange={handleFrequencyChange}
               />
-              {frequencyError && (
-                <span className="error-message">{frequencyError}</span>
-              )}
               <select
                 name="frequence"
                 className="option"
@@ -113,6 +110,9 @@ function Habits() {
                 <option value="années">Annuel </option>
               </select>
             </div>
+            {frequencyError && (
+              <span className="error-message-habits">{frequencyError}</span>
+            )}
           </div>
         </div>
         <button
