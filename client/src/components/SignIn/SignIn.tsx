@@ -1,22 +1,39 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import type { FormEventHandler } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
-import type { WebsiteUser } from "../../types/types";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const { setUser } = useOutletContext<{
-    setUser: (user: WebsiteUser | null) => void;
-  }>();
+  const [passwordType, setPasswordType] = useState("password");
+
+  const handlePasswordToggle = () => {
+    setPasswordType(passwordType === "password" ? "text" : "password");
+  };
+
   const navigate = useNavigate();
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
 
   const handleSignIn: FormEventHandler = async (event) => {
     event.preventDefault();
 
-    if (!emailRef.current || !passwordRef.current) {
-      alert("Veuillez remplir tous les champs.");
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+
+    if (!email || !password) {
+      setErrorMessage("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setErrorMessage("L'adresse email est invalide.");
       return;
     }
 
@@ -26,30 +43,28 @@ function SignIn() {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
-          }),
+          body: JSON.stringify({ email, password }),
+          credentials: "include",
         },
       );
 
-      if (response.status === 200) {
-        const user = await response.json();
-        setUser(user);
+      if (response.ok) {
         navigate("/");
+      } else if (response.status === 401) {
+        setErrorMessage("Identifiants incorrects.");
       } else {
-        alert(
-          "Erreur lors de la connexion. Veuillez vérifier vos identifiants.",
-        );
+        setErrorMessage("Une erreur s'est produite. Veuillez réessayer.");
       }
     } catch (err) {
-      alert("Une erreur s'est produite. Veuillez réessayer.");
-      console.error(err);
+      console.error("Erreur lors de la connexion :", err);
+      setErrorMessage(
+        "Impossible de se connecter. Veuillez vérifier votre connexion.",
+      );
     }
   };
 
   return (
-    <div className="connexion">
+    <div className="login">
       <h2>Connexion</h2>
       <form onSubmit={handleSignIn}>
         <div className="log-input-container">
@@ -63,15 +78,37 @@ function SignIn() {
             required
           />
           <label htmlFor="password">Mot de passe</label>
-          <input
-            ref={passwordRef}
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Votre mot de passe"
-            required
-          />
+          <div className="password-input-container">
+            <input
+              ref={passwordRef}
+              type={passwordType}
+              id="password"
+              name="password"
+              placeholder="Votre mot de passe"
+              required
+            />
+            <button
+              type="button"
+              onClick={handlePasswordToggle}
+              className="password-toggle-button"
+            >
+              {passwordType === "password" ? (
+                <img
+                  src="./src/assets/icons/close-eye.png"
+                  alt="Show password"
+                  className="password-icon"
+                />
+              ) : (
+                <img
+                  src="./src/assets/icons/view.png"
+                  alt="Hide password"
+                  className="password-icon"
+                />
+              )}
+            </button>
+          </div>
         </div>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
         <button type="submit" className="button-log">
           Se connecter
         </button>

@@ -1,12 +1,12 @@
-import "./Log.css";
+import "./Authentication.css";
 import SignIn from "../../components/SignIn/SignIn";
 import SignUp from "../../components/SignUp/SignUp";
 
-function Log() {
+function Authentication() {
   return (
     <div className="log-container">
       <SignIn />
-      <div className="separateur">
+      <div className="divider">
         <hr />
         <p>ou</p>
         <hr />
@@ -16,4 +16,4 @@ function Log() {
   );
 }
 
-export default Log;
+export default Authentication;

@@ -4,19 +4,16 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import Admin from "./pages/Admin/Admin";
+import Authentication from "./pages/Authentication/Authentication";
 import Comparer from "./pages/Comparer/Comparer";
 import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
 import InfosEnviro from "./pages/Info/InfosEnviro";
-import Log from "./pages/Log/Log";
 import Options from "./pages/Options/Options";
 import Result from "./pages/Result/Result";
 import Confirm from "./pages/confirmVehicle/confirmVehicle";
 import Habits from "./pages/habits/Habits";
-
-// import About from "./pages/About";
-// import Contact from "./pages/Contact";
 
 /* ************************************************************************* */
 
@@ -34,8 +31,8 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/Log",
-        element: <Log />,
+        path: "/authentication",
+        element: <Authentication />,
       },
       {
         path: "/comparer",
