@@ -10,21 +10,17 @@ function SignUp() {
   const confirmPasswordRef = useRef<HTMLInputElement>(null);
 
   const [passwordType, setPasswordType] = useState("password");
-  const [, setTogglePasswordIcon] = useState("");
 
   const [confirmpasswordType, setConfirmPasswordType] = useState("password");
-  const [, setToggleConfirmPasswordIcon] = useState("");
 
   const handlePasswordToggle = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
-    setTogglePasswordIcon(passwordType === "password" ? "" : "");
   };
 
   const handleConfirmPasswordToggle = () => {
     setConfirmPasswordType(
       confirmpasswordType === "password" ? "text" : "password",
     );
-    setToggleConfirmPasswordIcon(confirmpasswordType === "password" ? "" : "");
   };
 
   const { setUser } = useOutletContext<{

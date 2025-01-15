@@ -7,11 +7,9 @@ function SignIn() {
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const [passwordType, setPasswordType] = useState("password");
-  const [, setTogglePasswordIcon] = useState("");
 
   const handlePasswordToggle = () => {
     setPasswordType(passwordType === "password" ? "text" : "password");
-    setTogglePasswordIcon(passwordType === "password" ? "" : "");
   };
 
   const navigate = useNavigate();
