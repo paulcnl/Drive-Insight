@@ -7,7 +7,31 @@
 .habits h2 {
   font-family: var(--font-family-title);
   font-size: 2rem;
-  margin-bottom: 2rem;
+  margin: 0;
+}
+
+.habits input {
+  width: 20vw;
+  border: .5px solid var(--primary-color);
+  font-family: var(--font-family-texte);
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+  .habits input {
+    width: 30vw;
+    height: 4vh;
+  }
+}
+
+.habits label {
+  width: 7rem;
+  text-align: center;
+  padding: 0;
 }
 
 .habits-container {
@@ -15,50 +39,13 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 80vw;
+  height: 15vh;
 }
 
-.input-container input {
-  width: 40vw;
-  height: 2rem;
-  border-radius: 15px;
-  border: .8px solid var(--primary-color);
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-}
-
-.input-container input:focus {
-  outline: none;
-  border-color: var(--result-green-color);
-  box-shadow: 0 0 0 2px rgba(0, 200, 0, 0.1);
-}
-
-label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  color: #333;
-  font-size: 1rem;
-  text-align: center;
-}
-
-.input-container input::placeholder {
-  color: #ccc;
-}
-
-.input-container-distance {
+.input-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-}
-
-.input-container-frequency {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
 }
 
 .option {
@@ -130,11 +117,23 @@ label {
 
 @media screen and (max-width: 768px) {
   .habits-container {
-    width: 90vw;
+    width: 55vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
   }
 
-  .input-container input,
-  .option {
-    width: 7rem;
+  .habits button:hover {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    color: #000000;
+  }
+
+  .button-cont {
+    width: 55vw;
+    display: flex;
+    justify-content: end;
   }
 }
