@@ -95,6 +95,8 @@
 
 .matricule {
   background-color: var(--primary-color);
+  font-family: var(--font-family-texte);
+
   color: #fff;
   padding: 10px 20px;
   border: none;
