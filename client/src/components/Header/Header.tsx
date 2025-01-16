@@ -14,7 +14,9 @@ function Header() {
     <div className="header-container">
       <div className="sub-header-container">
         <div className="header-logo">
-          <Link to="/" className="header-logo-link">Accueil</Link>
+          <Link to="/" className="header-logo-link">
+            Accueil
+          </Link>
         </div>
         <button
           className={`btn-menu ${isClicked ? "show" : ""}`}
