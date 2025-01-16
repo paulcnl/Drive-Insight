@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CardResultGreen from "../../components/CardResultGreen/CardResultGreen";
 import CardResultRed from "../../components/CardResultRed/CardResultRed";
 import FilAriane from "../../components/FilAriane";
@@ -25,22 +25,33 @@ interface ElectricVehicle extends Vehicle {
 
 const Result = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { vehicleData, habitsData } = location.state || {};
+
   const [electricVehicle, setElectricVehicle] =
     useState<ElectricVehicle | null>(null);
+  const [comparisonData, setComparisonData] = useState<ComparisonData | null>(
+    null,
+  );
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedFrequency, setSelectedFrequency] = useState(habitsData.option);
 
   const formatFrequency = (value: number, frequency: string) => {
     switch (frequency) {
       case "jour":
         return `${value.toFixed(2)} € par jour`;
+      case "semaine":
+        return `${value.toFixed(2)} € par semaine`;
       case "mois":
         return `${value.toFixed(2)} € par mois`;
-      case "années":
+      case "an":
         return `${value.toFixed(2)} € par an`;
       default:
         return `${value.toFixed(2)} €`;
     }
   };
+
   interface ComparisonData {
     fuelCost: number;
     electricCost: number;
@@ -49,13 +60,12 @@ const Result = () => {
     electricConsumption: number;
   }
 
-  const [comparisonData, setComparisonData] = useState<ComparisonData | null>(
-    null,
-  );
-  const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
+    if (!vehicleData || !habitsData) {
+      navigate("/");
+      return;
+    }
+
     const fetchAndCalculate = async () => {
       setIsLoading(true);
       try {
@@ -74,39 +84,40 @@ const Result = () => {
         const fuelPrice = 1.8;
         const electricityPrice = 0.15;
 
+        const frequencyMultiplier = (option: string) => {
+          switch (option) {
+            case "jour":
+              return 1;
+            case "semaine":
+              return 7;
+            case "mois":
+              return 30;
+            case "an":
+              return 365;
+            default:
+              return 1;
+          }
+        };
+
+        const totalDistance =
+          habitsData.distance * frequencyMultiplier(habitsData.option);
+
+        const fuelCost =
+          (vehicleData.engine.consumption / 100) * totalDistance * fuelPrice;
+        const electricCost = similarElectricVehicle
+          ? (similarElectricVehicle.engine.consumption / 100) *
+            totalDistance *
+            electricityPrice
+          : 0;
+
         const comparison = {
-          fuelCost:
-            (vehicleData.engine.consumption / 100) *
-            habitsData.distance *
-            habitsData.frequency *
-            fuelPrice,
-          electricCost: similarElectricVehicle
-            ? (similarElectricVehicle.engine.consumption / 100) *
-              habitsData.distance *
-              habitsData.frequency *
-              electricityPrice
-            : 0,
-          co2Emission:
-            vehicleData.engine.consumption *
-            habitsData.distance *
-            habitsData.frequency *
-            2.31,
+          fuelCost,
+          electricCost,
+          co2Emission: vehicleData.engine.consumption * totalDistance * 2.31,
           electricConsumption: similarElectricVehicle
-            ? similarElectricVehicle.engine.consumption *
-              habitsData.distance *
-              habitsData.frequency
+            ? similarElectricVehicle.engine.consumption * totalDistance
             : 0,
-          savings:
-            (vehicleData.engine.consumption / 100) *
-              habitsData.distance *
-              habitsData.frequency *
-              fuelPrice -
-            (similarElectricVehicle
-              ? (similarElectricVehicle.engine.consumption / 100) *
-                habitsData.distance *
-                habitsData.frequency *
-                electricityPrice
-              : 0),
+          savings: fuelCost - electricCost,
         };
 
         setComparisonData(comparison);
@@ -123,7 +134,7 @@ const Result = () => {
     };
 
     fetchAndCalculate();
-  }, [vehicleData, habitsData]);
+  }, [vehicleData, habitsData, navigate]);
 
   if (isLoading) {
     return <div>Calcul des résultats en cours...</div>;
@@ -136,6 +147,39 @@ const Result = () => {
   if (!comparisonData) {
     return <div>Aucune donnée disponible</div>;
   }
+
+  const calculateCost = (
+    cost: number,
+    originalFrequency: string,
+    targetFrequency: string,
+  ) => {
+    const frequencyConversion = {
+      jour: 1,
+      semaine: 7,
+      mois: 30,
+      an: 365,
+    };
+
+    const originalMultiplier =
+      frequencyConversion[
+        originalFrequency as keyof typeof frequencyConversion
+      ];
+    const targetMultiplier =
+      frequencyConversion[targetFrequency as keyof typeof frequencyConversion];
+
+    return (cost / originalMultiplier) * targetMultiplier;
+  };
+
+  const fuelCost = calculateCost(
+    comparisonData.fuelCost,
+    habitsData.option,
+    selectedFrequency,
+  );
+  const electricCost = calculateCost(
+    comparisonData.electricCost,
+    habitsData.option,
+    selectedFrequency,
+  );
 
   return (
     <>
@@ -150,16 +194,64 @@ const Result = () => {
       />
       <div className="result_container">
         <h2>Résultat de la comparaison</h2>
+        <div className="annual_summary">
+          <div className="summary-header">
+            <h3>Votre bilan</h3>
+            <select
+              className="frequency-select"
+              value={selectedFrequency}
+              onChange={(e) => setSelectedFrequency(e.target.value)}
+            >
+              <option value="jour">Quotidien</option>
+              <option value="semaine">Hebdomadaire</option>
+              <option value="mois">Mensuel</option>
+              <option value="an">Annuel</option>
+            </select>
+          </div>
+          <p>
+            Coût en carburant : {formatFrequency(fuelCost, selectedFrequency)}
+          </p>
+          <p>
+            Coût en électricité :{" "}
+            {formatFrequency(electricCost, selectedFrequency)}
+          </p>
+          <p>
+            <strong>Économies potentielles :</strong>{" "}
+            {formatFrequency(
+              calculateCost(
+                comparisonData.savings,
+                habitsData.option,
+                selectedFrequency,
+              ),
+              selectedFrequency,
+            )}
+          </p>
+          <p>
+            <strong>Réduction d'émissions de CO2 :</strong>{" "}
+            {comparisonData.co2Emission.toFixed(2)} kg par an
+          </p>
+        </div>
         <div className="result_cards">
           <CardResultRed
             title="Votre véhicule actuel"
             vehicleImage={vehicleData.car_picture}
             vehicleName={`${vehicleData.brand} ${vehicleData.model}`}
             costs={{
-              fuel: formatFrequency(comparisonData.fuelCost, habitsData.option),
+              fuel: formatFrequency(
+                calculateCost(
+                  comparisonData.fuelCost,
+                  habitsData.option,
+                  "jour",
+                ),
+                "jour",
+              ),
               total: formatFrequency(
-                comparisonData.fuelCost,
-                habitsData.option,
+                calculateCost(
+                  comparisonData.fuelCost,
+                  habitsData.option,
+                  selectedFrequency,
+                ),
+                selectedFrequency,
               ),
             }}
             emissions={{
@@ -174,12 +266,20 @@ const Result = () => {
             vehicleName={`${electricVehicle?.brand || ""} ${electricVehicle?.model || ""}`}
             costs={{
               electricity: formatFrequency(
-                comparisonData.electricCost,
-                habitsData.option,
+                calculateCost(
+                  comparisonData.electricCost,
+                  habitsData.option,
+                  "jour",
+                ),
+                "jour",
               ),
               savings: formatFrequency(
-                comparisonData.savings,
-                habitsData.option,
+                calculateCost(
+                  comparisonData.savings,
+                  habitsData.option,
+                  selectedFrequency,
+                ),
+                selectedFrequency,
               ),
             }}
             emissions={{
@@ -189,17 +289,6 @@ const Result = () => {
             consumption={`${electricVehicle?.engine.consumption || 0}kWh/100km`}
             autonomy={`${electricVehicle?.engine.autonomy_km || 0} km`}
           />
-        </div>
-        <div className="annual_summary">
-          <h3>Bilan annuel</h3>
-          <p>
-            Économies potentielles:{" "}
-            {formatFrequency(comparisonData.savings * 12, "années")}
-          </p>
-          <p>
-            Réduction CO2: {(comparisonData.co2Emission * 12).toFixed(2)} kg par
-            an
-          </p>
         </div>
       </div>
     </>

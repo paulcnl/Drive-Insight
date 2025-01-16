@@ -9,10 +9,8 @@ function Habits() {
   const { vehicleData } = location.state || {};
 
   const [distance, setDistance] = useState("");
-  const [frequency, setFrequency] = useState("");
   const [option, setOption] = useState("jour");
   const [distanceError, setDistanceError] = useState("");
-  const [frequencyError, setFrequencyError] = useState("");
 
   const validateNumber = (value: string) => {
     return /^\d*\.?\d*$/.test(value);
@@ -28,30 +26,14 @@ function Habits() {
     }
   };
 
-  const handleFrequencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    if (validateNumber(value)) {
-      setFrequency(value);
-      setFrequencyError("");
-    } else {
-      setFrequencyError("Veuillez entrer un nombre valide");
-    }
-  };
-
   const isFormValid =
-    distance !== "" &&
-    frequency !== "" &&
-    !distanceError &&
-    !frequencyError &&
-    validateNumber(distance) &&
-    validateNumber(frequency);
+    distance !== "" && !distanceError && validateNumber(distance);
 
   const handleSubmit = () => {
     if (!isFormValid) return;
 
     const habitsData = {
       distance: Number.parseFloat(distance),
-      frequency: Number.parseFloat(frequency),
       option,
     };
     navigate("/options", { state: { vehicleData, habitsData } });
@@ -88,16 +70,9 @@ function Habits() {
           </div>
           <div className="input-container">
             <label className="frequency-label" htmlFor="frequence">
-              Quelle fréquence ?
+              Fréquence des déplacements
             </label>
             <div className="input-container-frequency">
-              <input
-                type="text"
-                name="frequence"
-                className={`frequence-input ${frequencyError ? "error-habits" : ""}`}
-                value={frequency}
-                onChange={handleFrequencyChange}
-              />
               <select
                 name="frequence"
                 className="option"
@@ -107,12 +82,9 @@ function Habits() {
                 <option value="jour">Quotidien </option>
                 <option value="semaine">Hebdomadaire </option>
                 <option value="mois">Mensuel </option>
-                <option value="années">Annuel </option>
+                <option value="an">Annuel </option>
               </select>
             </div>
-            {frequencyError && (
-              <span className="error-message-habits">{frequencyError}</span>
-            )}
           </div>
         </div>
         <button

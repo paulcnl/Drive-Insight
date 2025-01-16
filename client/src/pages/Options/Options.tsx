@@ -38,7 +38,8 @@ function Options() {
         <div className="option-cont">
           <div className="options-sub-container">
             <label htmlFor="date" className="options-label">
-              Date prévisionnel du renouvellement de la flotte ou du vehicule ?
+              Date prévisionnelle du renouvellement de la flotte ou du vehicule
+              ?
             </label>
             <select name="date" id="date" className="options-select">
               <option value="3-mois">3 mois</option>
@@ -46,7 +47,7 @@ function Options() {
               <option value="3-mois">1 an</option>
             </select>
             <label htmlFor="date" className="options-label">
-              Quelle est votre marque de voiture préférée ?
+              Envisageriez-vous une marque différente ?
             </label>
             <input
               type="text"
@@ -56,7 +57,7 @@ function Options() {
               className="options-input"
             />
             <label htmlFor="text" className="options-label">
-              Nouvelles habitudes de roulage
+              Modifications des déplacements
             </label>
             <div className="options-roulage-container">
               <input
@@ -67,23 +68,19 @@ function Options() {
                 placeholder="Ex: 20km"
                 className="options-input"
               />
-              <select id="options" className="options-select">
-                <option>jour</option>
-                <option>mois</option>
-                <option>année</option>
-              </select>
               <input
                 type="text"
                 name="options"
                 list="options"
                 autoComplete="off"
-                placeholder="Fréquences"
+                placeholder="Fréquence"
                 className="options-input"
               />
               <select id="options" className="options-select">
-                <option>jour</option>
-                <option>mois</option>
-                <option>année</option>
+                <option>Quotidien</option>
+                <option>Hebdomadaire</option>
+                <option>Mensuel</option>
+                <option>Annuel</option>
               </select>
             </div>
           </div>
@@ -110,12 +107,10 @@ function Options() {
             <label htmlFor="text" className="options-label">
               Si mixte, merci de préciser
             </label>
-            <input
-              type="text"
-              name="options"
-              placeholder="Préciser ici"
-              className="options-input"
-            />
+            <select name="options" className="options-input" defaultValue="Non">
+              <option value="Non">Non</option>
+              <option value="Oui">Oui</option>
+            </select>
           </div>
         </div>
       </form>

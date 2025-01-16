@@ -1,5 +1,5 @@
 import type React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import car from "../assets/images/roadster.png";
 import volant from "../assets/images/sateering.png";
 import param from "../assets/images/settings.png";
@@ -34,11 +34,18 @@ interface FilArianeProps {
 
 const FilAriane: React.FC<FilArianeProps> = ({ currentStep, progress }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { vehicleData, habitsData } = location.state || {};
 
   const handleNavigation = (step: keyof typeof stepRoutes) => {
-    if (progress[step]) {
-      navigate(stepRoutes[step]);
-    }
+    if (!progress[step]) return;
+
+    const state = {
+      vehicleData,
+      habitsData,
+    };
+
+    navigate(stepRoutes[step], { state });
   };
 
   return (

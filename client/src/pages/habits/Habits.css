@@ -11,7 +11,8 @@
 }
 
 .habits input {
-  width: 30vw;
+  width: 60vw;
+  max-width: 300px;
   border: .5px solid var(--primary-color);
   font-family: var(--font-family-texte);
   padding: 10px;
@@ -32,7 +33,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .input-container {
@@ -68,7 +69,9 @@
 .option {
   padding: 0 0.6rem;
   height: 2.6rem;
-  width: auto;
+  width: 60vw;
+  max-width: 300px;
+  text-align: start;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   font-family: var(--font-family-texte);
