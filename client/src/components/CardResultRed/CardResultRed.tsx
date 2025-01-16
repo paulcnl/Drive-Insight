@@ -32,12 +32,12 @@ function CardResultRed({
           <h3>{vehicleName}</h3>
           <div className="info_section">
             <h4>Coûts</h4>
-            <p>Carburant: {costs.fuel}</p>
-            <p>Total: {costs.total}</p>
+            <p>Carburant : {costs.fuel}</p>
+            <p>Total : {costs.total}</p>
           </div>
           <div className="info_section">
             <h4>Émissions</h4>
-            <p>CO2: {emissions.co2}</p>
+            <p>CO2 : {emissions.co2}</p>
             <p>{emissions.difference}</p>
           </div>
           <div className="info_section">

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Matricule.css";
-import add_car from "../assets/images/add.png";
 
 interface MatriculeProps {
   onValidate: () => void;
@@ -109,7 +108,6 @@ export default function Matricule({ onValidate }: MatriculeProps) {
           <div className="comparator_child">
             <h3 className="matricule_h3">Immatriculation</h3>
             <div className="add_car">
-              <img className="add_item" src={add_car} alt="" />
               <input
                 type="text"
                 placeholder="Entrez votre plaque d'immatriculation"
@@ -126,6 +124,7 @@ export default function Matricule({ onValidate }: MatriculeProps) {
                 fontSize: "12px",
                 fontFamily: "var(--font-family-texte)",
                 textAlign: "center",
+                marginBottom: "1.5rem",
               }}
             >
               Veuillez entrer une plaque valide au format AB-123-CD.

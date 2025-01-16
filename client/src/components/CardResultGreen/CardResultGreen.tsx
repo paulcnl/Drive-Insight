@@ -9,7 +9,6 @@ interface CardResultGreenProps {
     savings: string;
   };
   emissions: {
-    co2: string;
     difference: string;
   };
   consumption: string;
@@ -34,18 +33,17 @@ function CardResultGreen({
           <h3>{vehicleName}</h3>
           <div className="info_section">
             <h4>Coûts</h4>
-            <p>Électricité: {costs.electricity}</p>
-            <p>Économies: {costs.savings}</p>
+            <p>Électricité : {costs.electricity}</p>
+            <p>Économies : {costs.savings}</p>
           </div>
           <div className="info_section">
             <h4>Émissions</h4>
-            <p>CO2: {emissions.co2}</p>
             <p>{emissions.difference}</p>
           </div>
           <div className="info_section">
             <h4>Performance</h4>
-            <p>Consommation: {consumption}</p>
-            <p>Autonomie: {autonomy}</p>
+            <p>Consommation : {consumption}</p>
+            <p>Autonomie : {autonomy}</p>
           </div>
         </div>
       </div>

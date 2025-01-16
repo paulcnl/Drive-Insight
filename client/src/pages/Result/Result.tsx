@@ -8,6 +8,7 @@ import "./Result.css";
 interface Vehicle {
   brand: string;
   model: string;
+  car_picture: string;
   engine: {
     power_type: string;
     consumption: number;
@@ -23,10 +24,26 @@ interface ElectricVehicle extends Vehicle {
   };
 }
 
+interface ComparisonData {
+  fuelCost: number;
+  electricCost: number;
+  savings: number;
+  co2Emission: number;
+  electricConsumption: number;
+}
+
 const Result = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { vehicleData, habitsData } = location.state || {};
+
+  const multipliers = { jour: 1, semaine: 7, mois: 30, an: 365 };
+  const {
+    vehicleData,
+    habitsData,
+  }: {
+    vehicleData: Vehicle;
+    habitsData: { distance: number; option: keyof typeof multipliers };
+  } = location.state || {};
 
   const [electricVehicle, setElectricVehicle] =
     useState<ElectricVehicle | null>(null);
@@ -38,27 +55,8 @@ const Result = () => {
   const [selectedFrequency, setSelectedFrequency] = useState(habitsData.option);
 
   const formatFrequency = (value: number, frequency: string) => {
-    switch (frequency) {
-      case "jour":
-        return `${value.toFixed(2)} € par jour`;
-      case "semaine":
-        return `${value.toFixed(2)} € par semaine`;
-      case "mois":
-        return `${value.toFixed(2)} € par mois`;
-      case "an":
-        return `${value.toFixed(2)} € par an`;
-      default:
-        return `${value.toFixed(2)} €`;
-    }
+    return `${value.toFixed(2)} € par ${frequency}`;
   };
-
-  interface ComparisonData {
-    fuelCost: number;
-    electricCost: number;
-    savings: number;
-    co2Emission: number;
-    electricConsumption: number;
-  }
 
   useEffect(() => {
     if (!vehicleData || !habitsData) {
@@ -74,7 +72,7 @@ const Result = () => {
         );
         const data = await response.json();
 
-        const similarElectricVehicle: ElectricVehicle | undefined = data.find(
+        const similarElectricVehicle = data.find(
           (vehicle: ElectricVehicle) =>
             vehicle.brand === vehicleData.brand &&
             vehicle.engine.power_type === "électrique",
@@ -83,51 +81,32 @@ const Result = () => {
 
         const fuelPrice = 1.8;
         const electricityPrice = 0.15;
-
-        const frequencyMultiplier = (option: string) => {
-          switch (option) {
-            case "jour":
-              return 1;
-            case "semaine":
-              return 7;
-            case "mois":
-              return 30;
-            case "an":
-              return 365;
-            default:
-              return 1;
-          }
-        };
-
         const totalDistance =
-          habitsData.distance * frequencyMultiplier(habitsData.option);
+          habitsData.distance * multipliers[habitsData.option];
 
         const fuelCost =
-          (vehicleData.engine.consumption / 100) * totalDistance * fuelPrice;
+          (vehicleData.engine.consumption / 100) *
+          habitsData.distance *
+          fuelPrice;
         const electricCost = similarElectricVehicle
           ? (similarElectricVehicle.engine.consumption / 100) *
-            totalDistance *
+            habitsData.distance *
             electricityPrice
           : 0;
 
-        const comparison = {
+        setComparisonData({
           fuelCost,
           electricCost,
+          savings: fuelCost - electricCost,
           co2Emission: vehicleData.engine.consumption * totalDistance * 2.31,
           electricConsumption: similarElectricVehicle
             ? similarElectricVehicle.engine.consumption * totalDistance
             : 0,
-          savings: fuelCost - electricCost,
-        };
-
-        setComparisonData(comparison);
+        });
       } catch (error) {
-        console.error("Error:", error);
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
+        setError(
+          error instanceof Error ? error.message : "An unknown error occurred",
+        );
       } finally {
         setIsLoading(false);
       }
@@ -136,38 +115,37 @@ const Result = () => {
     fetchAndCalculate();
   }, [vehicleData, habitsData, navigate]);
 
-  if (isLoading) {
-    return <div>Calcul des résultats en cours...</div>;
-  }
-
-  if (error) {
-    return <div>Erreur: {error}</div>;
-  }
-
-  if (!comparisonData) {
-    return <div>Aucune donnée disponible</div>;
-  }
+  if (isLoading) return <div>Calcul des résultats en cours...</div>;
+  if (error) return <div>Erreur: {error}</div>;
+  if (!comparisonData) return <div>Aucune donnée disponible</div>;
 
   const calculateCost = (
     cost: number,
-    originalFrequency: string,
-    targetFrequency: string,
+    originalFrequency: keyof typeof multipliers,
+    targetFrequency: keyof typeof multipliers,
   ) => {
-    const frequencyConversion = {
-      jour: 1,
-      semaine: 7,
-      mois: 30,
-      an: 365,
+    return (
+      (cost / multipliers[originalFrequency]) * multipliers[targetFrequency]
+    );
+  };
+
+  const calculateDistance = (
+    distance: number,
+    originalFrequency: keyof typeof multipliers,
+    targetFrequency: keyof typeof multipliers,
+  ) => {
+    const distanceMultipliers = {
+      jour: { jour: 1, semaine: 1 * 7, mois: 1 * 30, an: 1 * 365 },
+      semaine: {
+        jour: 1 / 7,
+        semaine: 1,
+        mois: (1 / 7) * 30,
+        an: (1 / 7) * 365,
+      },
+      mois: { jour: 1 / 30, semaine: (1 / 30) * 7, mois: 1, an: 1 * 12 },
+      an: { jour: 1 / 365, semaine: (1 / 365) * 7, mois: 1 / 12, an: 1 },
     };
-
-    const originalMultiplier =
-      frequencyConversion[
-        originalFrequency as keyof typeof frequencyConversion
-      ];
-    const targetMultiplier =
-      frequencyConversion[targetFrequency as keyof typeof frequencyConversion];
-
-    return (cost / originalMultiplier) * targetMultiplier;
+    return distance * distanceMultipliers[originalFrequency][targetFrequency];
   };
 
   const fuelCost = calculateCost(
@@ -177,6 +155,11 @@ const Result = () => {
   );
   const electricCost = calculateCost(
     comparisonData.electricCost,
+    habitsData.option,
+    selectedFrequency,
+  );
+  const displayDistance = calculateDistance(
+    habitsData.distance,
     habitsData.option,
     selectedFrequency,
   );
@@ -196,11 +179,13 @@ const Result = () => {
         <h2>Résultat de la comparaison</h2>
         <div className="annual_summary">
           <div className="summary-header">
-            <h3>Votre bilan</h3>
+            <h3>Bilan</h3>
             <select
               className="frequency-select"
               value={selectedFrequency}
-              onChange={(e) => setSelectedFrequency(e.target.value)}
+              onChange={(e) =>
+                setSelectedFrequency(e.target.value as keyof typeof multipliers)
+              }
             >
               <option value="jour">Quotidien</option>
               <option value="semaine">Hebdomadaire</option>
@@ -216,6 +201,9 @@ const Result = () => {
             {formatFrequency(electricCost, selectedFrequency)}
           </p>
           <p>
+            Distance : {displayDistance} km par {selectedFrequency}
+          </p>
+          <p>
             <strong>Économies potentielles :</strong>{" "}
             {formatFrequency(
               calculateCost(
@@ -228,7 +216,7 @@ const Result = () => {
           </p>
           <p>
             <strong>Réduction d'émissions de CO2 :</strong>{" "}
-            {comparisonData.co2Emission.toFixed(2)} kg par an
+            {comparisonData.co2Emission.toFixed(0)} kg par an
           </p>
         </div>
         <div className="result_cards">
@@ -255,8 +243,8 @@ const Result = () => {
               ),
             }}
             emissions={{
-              co2: `${comparisonData.co2Emission.toFixed(2)} kg CO2`,
-              difference: `+${comparisonData.co2Emission.toFixed(2)} kg CO2 supplémentaires`,
+              co2: `${comparisonData.co2Emission.toFixed(0)} kg CO2`,
+              difference: `+${comparisonData.co2Emission.toFixed(0)} kg CO2 supplémentaires`,
             }}
             consumption={`${vehicleData.engine.consumption}L/100km`}
           />
@@ -283,8 +271,7 @@ const Result = () => {
               ),
             }}
             emissions={{
-              co2: "0 kg CO2",
-              difference: `${comparisonData.co2Emission.toFixed(2)} kg CO2 économisés`,
+              difference: `${comparisonData.co2Emission.toFixed(0)} kg CO2 économisés`,
             }}
             consumption={`${electricVehicle?.engine.consumption || 0}kWh/100km`}
             autonomy={`${electricVehicle?.engine.autonomy_km || 0} km`}

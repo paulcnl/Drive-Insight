@@ -68,14 +68,6 @@ function Options() {
                 placeholder="Ex: 20km"
                 className="options-input"
               />
-              <input
-                type="text"
-                name="options"
-                list="options"
-                autoComplete="off"
-                placeholder="Fréquence"
-                className="options-input"
-              />
               <select id="options" className="options-select">
                 <option>Quotidien</option>
                 <option>Hebdomadaire</option>
