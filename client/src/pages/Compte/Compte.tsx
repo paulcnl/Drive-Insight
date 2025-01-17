@@ -1,5 +1,6 @@
 import "./Compte.css";
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import avatar from "../../assets/images/538474-user_512x512.webp";
 import VehicleCard from "../../components/VehicleCard/VehicleCard";
 
@@ -14,11 +15,24 @@ interface Vehicle {
   imageUrl: string;
 }
 
+type User = {
+  id: number;
+  isAdmin: boolean;
+  email: string;
+};
+
+type Auth = {
+  token: string;
+  user: User;
+};
+
 function Compte() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const { auth } = useOutletContext() as { auth: Auth | null };
+
   useEffect(() => {
     const fetchData = async () => {
-      const userId = 1;
+      const userId = auth?.user.id;
       try {
         const response = await fetch(
           `http://localhost:3310/api/vehicles?userId=${userId}`,
@@ -26,6 +40,7 @@ function Compte() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${auth?.token}`,
             },
           },
         );
@@ -39,7 +54,7 @@ function Compte() {
       }
     };
     fetchData();
-  }, []);
+  }, [auth]);
 
   return (
     <>
