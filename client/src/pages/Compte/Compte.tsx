@@ -17,13 +17,13 @@ interface Vehicle {
 
 type User = {
   id: number;
-  isAdmin: boolean;
   email: string;
+  isAdmin?: boolean;
 };
 
 type Auth = {
-  token: string;
   user: User;
+  message: string;
 };
 
 function Compte() {
@@ -32,7 +32,7 @@ function Compte() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = auth?.user.id;
+      const userId = auth?.user?.id;
       try {
         const response = await fetch(
           `http://localhost:3310/api/vehicles?userId=${userId}`,
@@ -40,8 +40,8 @@ function Compte() {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${auth?.token}`,
             },
+            credentials: "include",
           },
         );
         if (!response.ok) {
