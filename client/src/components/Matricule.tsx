@@ -101,7 +101,7 @@ export default function Matricule({ onValidate }: MatriculeProps) {
   );
 
   return (
-    <div>
+    <div className="matricule_container">
       <h2 className="h2_vehicule">Mon véhicule</h2>
       <div className="box-comparator">
         <div className="box_immatriculation">
