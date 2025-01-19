@@ -201,7 +201,7 @@ const Result = () => {
             {formatFrequency(electricCost, selectedFrequency)}
           </p>
           <p>
-            Distance : {displayDistance} km par {selectedFrequency}
+            Distance : {displayDistance.toFixed(0)} km par {selectedFrequency}
           </p>
           <p>
             <strong>Économies potentielles :</strong>{" "}

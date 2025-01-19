@@ -127,7 +127,7 @@ export default function Matricule({ onValidate }: MatriculeProps) {
                 marginBottom: "1.5rem",
               }}
             >
-              Veuillez entrer une plaque valide au format AB-123-CD.
+              Veuillez entrer une plaque valide au format AB-123-CD. <br />
               <br /> Si vous disposez d'une ancienne plaque, veuillez nous
               contacter via <a href="/contact">notre formulaire</a>.
             </p>
