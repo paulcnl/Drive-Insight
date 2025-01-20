@@ -17,7 +17,7 @@ function Footer() {
             Contact
           </Link>
           <Link to="/info" className="footer-link">
-            Info environnement
+            Vers demain
           </Link>
           <Link to="/about-us" className="footer-link">
             Qui sommes-nous ?
