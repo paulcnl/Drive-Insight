@@ -37,13 +37,14 @@ const Result = () => {
   const navigate = useNavigate();
 
   const multipliers = { jour: 1, semaine: 7, mois: 30, an: 365 };
-  const {
-    vehicleData,
-    habitsData,
-  }: {
-    vehicleData: Vehicle;
-    habitsData: { distance: number; option: keyof typeof multipliers };
-  } = location.state || {};
+  const { vehicleData, habitsData, optionsData, user } = location.state || {};
+
+  useEffect(() => {
+    if (!vehicleData || !habitsData || !habitsData.option) {
+      navigate("/");
+      return;
+    }
+  }, [vehicleData, habitsData, navigate]);
 
   const [electricVehicle, setElectricVehicle] =
     useState<ElectricVehicle | null>(null);
@@ -52,7 +53,9 @@ const Result = () => {
   );
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedFrequency, setSelectedFrequency] = useState(habitsData.option);
+  const [selectedFrequency, setSelectedFrequency] = useState<
+    keyof typeof multipliers
+  >((habitsData?.option as keyof typeof multipliers) || "jour");
 
   const formatFrequency = (value: number, frequency: string) => {
     return `${value.toFixed(2)} € par ${frequency}`;
@@ -82,7 +85,8 @@ const Result = () => {
         const fuelPrice = 1.8;
         const electricityPrice = 0.15;
         const totalDistance =
-          habitsData.distance * multipliers[habitsData.option];
+          habitsData.distance *
+          multipliers[habitsData.option as keyof typeof multipliers];
 
         const fuelCost =
           (vehicleData.engine.consumption / 100) *
@@ -103,6 +107,29 @@ const Result = () => {
             ? similarElectricVehicle.engine.consumption * totalDistance
             : 0,
         });
+
+        await fetch(`${import.meta.env.VITE_API_URL}/api/history`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            user_id: user?.id || 0,
+            email: user?.email || "",
+            vehicle_brand: vehicleData.brand,
+            vehicle_model: vehicleData.model,
+            compared_vehicle_brand: similarElectricVehicle?.brand || "",
+            compared_vehicle_model: similarElectricVehicle?.model || "",
+            yearly_savings: (fuelCost - electricCost) * 365,
+            distance: habitsData.distance,
+            insurance_cost: optionsData.insuranceCost || null,
+            trip_type: optionsData.tripType || null,
+            mixed_trip_details: optionsData.mixedTripDetails || null,
+            renewal_date: optionsData.renewalDate || null,
+            different_brand: optionsData.differentBrand || null,
+            trip_modifications: optionsData.tripModifications || null,
+          }),
+        });
       } catch (error) {
         setError(
           error instanceof Error ? error.message : "An unknown error occurred",
@@ -113,7 +140,19 @@ const Result = () => {
     };
 
     fetchAndCalculate();
-  }, [vehicleData, habitsData, navigate]);
+  }, [
+    vehicleData,
+    habitsData,
+    navigate,
+    user?.id,
+    user?.email,
+    optionsData?.insuranceCost,
+    optionsData?.tripType,
+    optionsData?.mixedTripDetails,
+    optionsData?.renewalDate,
+    optionsData?.differentBrand,
+    optionsData?.tripModifications,
+  ]);
 
   if (isLoading) return <div>Calcul des résultats en cours...</div>;
   if (error) return <div>Erreur: {error}</div>;
@@ -163,6 +202,10 @@ const Result = () => {
     habitsData.option,
     selectedFrequency,
   );
+
+  if (!vehicleData || !habitsData) {
+    return <div>Données manquantes. Redirection...</div>;
+  }
 
   return (
     <>
