@@ -1,8 +1,63 @@
 import "./Options.css";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import FilAriane from "../../components/FilAriane";
 
+type User = {
+  id: number;
+  email: string;
+  isAdmin: boolean;
+};
+
+type Auth = {
+  user: User;
+  token: string;
+};
+
 function Options() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { auth } = useOutletContext<{ auth: Auth | null }>();
+  const { vehicleData, habitsData } = location.state || {};
+
+  const [insuranceCost, setInsuranceCost] = useState("");
+  const [tripType, setTripType] = useState("");
+  const [mixedTripDetails, setMixedTripDetails] = useState("");
+  const [renewalDate, setRenewalDate] = useState("");
+  const [differentBrand, setDifferentBrand] = useState("");
+  const [tripModifications, setTripModifications] = useState("");
+
+  const handleSubmit = () => {
+    const optionsData = {
+      insuranceCost: insuranceCost ? Number.parseFloat(insuranceCost) : null,
+      tripType: tripType || null,
+      mixedTripDetails: mixedTripDetails || null,
+      renewalDate: renewalDate || null,
+      differentBrand: differentBrand || null,
+      tripModifications: tripModifications || null,
+    };
+
+    if (!auth) {
+      navigate("/authentication", {
+        state: {
+          redirectTo: "/result",
+          vehicleData,
+          habitsData,
+          optionsData,
+        },
+      });
+    } else {
+      navigate("/result", {
+        state: {
+          vehicleData,
+          habitsData,
+          optionsData,
+          user: auth.user,
+        },
+      });
+    }
+  };
+
   return (
     <>
       <div className="options-container">
@@ -21,15 +76,23 @@ function Options() {
         <div className="option-cont">
           <div className="options-sub-container">
             <label htmlFor="date" className="options-label">
-              Date prévisionnel du renouvellement de la flotte ou du vehicule ?
+              Date prévisionnelle du renouvellement de la flotte ou du vehicule
+              ?
             </label>
-            <select name="date" id="date" className="options-select">
+            <select
+              name="date"
+              id="date"
+              className="options-select"
+              value={renewalDate}
+              onChange={(e) => setRenewalDate(e.target.value)}
+            >
+              <option value="">Sélectionnez une option</option>
               <option value="3-mois">3 mois</option>
-              <option value="3-mois">6 mois</option>
-              <option value="3-mois">1 an</option>
+              <option value="6-mois">6 mois</option>
+              <option value="1-an">1 an</option>
             </select>
             <label htmlFor="date" className="options-label">
-              Quelle est votre marque de voiture préférée ?
+              Envisageriez-vous une marque différente ?
             </label>
             <input
               type="text"
@@ -37,9 +100,11 @@ function Options() {
               placeholder="Ex: Mercedes"
               autoComplete="off"
               className="options-input"
+              value={differentBrand}
+              onChange={(e) => setDifferentBrand(e.target.value)}
             />
             <label htmlFor="text" className="options-label">
-              Nouvelles habitudes de roulage
+              Modifications des déplacements
             </label>
             <div className="options-roulage-container">
               <input
@@ -49,24 +114,14 @@ function Options() {
                 autoComplete="off"
                 placeholder="Ex: 20km"
                 className="options-input"
+                value={tripModifications}
+                onChange={(e) => setTripModifications(e.target.value)}
               />
               <select id="options" className="options-select">
-                <option>jour</option>
-                <option>mois</option>
-                <option>année</option>
-              </select>
-              <input
-                type="text"
-                name="options"
-                list="options"
-                autoComplete="off"
-                placeholder="Fréquences"
-                className="options-input"
-              />
-              <select id="options" className="options-select">
-                <option>jour</option>
-                <option>mois</option>
-                <option>année</option>
+                <option>Quotidien</option>
+                <option>Hebdomadaire</option>
+                <option>Mensuel</option>
+                <option>Annuel</option>
               </select>
             </div>
           </div>
@@ -81,32 +136,43 @@ function Options() {
               autoComplete="off"
               placeholder="Ex: 840€"
               className="options-input"
+              value={insuranceCost}
+              onChange={(e) => setInsuranceCost(e.target.value)}
             />
             <label htmlFor="text" className="options-label">
               Type de déplacements
             </label>
-            <select id="mode-de-vie" className="options-select">
-              <option>privé</option>
-              <option>travail</option>
-              <option>proffesionnel</option>
-              <option>mixte</option>
+            <select
+              id="mode-de-vie"
+              className="options-select"
+              value={tripType}
+              onChange={(e) => setTripType(e.target.value)}
+            >
+              <option value="">Sélectionnez une option</option>
+              <option value="Privé">Privé</option>
+              <option value="Professionnel">Professionnel</option>
+              <option value="Mixte">Mixte</option>
             </select>
             <label htmlFor="text" className="options-label">
-              Si mixte
+              Si mixte, merci de préciser
             </label>
-            <input
-              type="text"
+            <select
               name="options"
-              placeholder="Si mixte faites nous le savoir"
               className="options-input"
-            />
+              value={mixedTripDetails}
+              onChange={(e) => setMixedTripDetails(e.target.value)}
+              defaultValue="Non"
+            >
+              <option value="Non">Non</option>
+              <option value="Oui">Oui</option>
+            </select>
           </div>
         </div>
       </form>
       <div className="options-button">
-        <Link to="/authentication" className="next-page">
+        <button type="button" onClick={handleSubmit} className="next-page">
           Valider
-        </Link>
+        </button>
       </div>
     </>
   );
