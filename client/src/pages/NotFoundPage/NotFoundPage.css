@@ -40,15 +40,6 @@
   text-decoration: underline;
 }
 
-:focus {
-  outline: none;
-}
-
-:focus-visible {
-  outline: var(--focus-style) var(--focus-color);
-  outline-offset: var(--focus-offset);
-}
-
 .back-to-home-link a:focus-visible {
   text-decoration: underline;
 }
