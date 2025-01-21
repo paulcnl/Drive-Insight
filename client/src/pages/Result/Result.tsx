@@ -39,7 +39,6 @@ const Result = () => {
   const multipliers = { jour: 1, semaine: 7, mois: 30, an: 365 };
   const { vehicleData, habitsData, optionsData, user } = location.state || {};
 
-  // Validate required data
   useEffect(() => {
     if (!vehicleData || !habitsData || !habitsData.option) {
       navigate("/");

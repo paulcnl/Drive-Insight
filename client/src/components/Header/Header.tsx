@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "./Header.css";
+import logo from "../../assets/images/drive_insight_logo.png";
 import Navigation from "../Navigation/Navigation";
 
 function Header() {
@@ -14,9 +14,7 @@ function Header() {
     <div className="header-container">
       <div className="sub-header-container">
         <div className="header-logo">
-          <Link to="/" className="header-logo-link">
-            Accueil
-          </Link>
+          <img src={logo} alt="Drive Insight Logo" className="logo-image" />
         </div>
         <button
           className={`btn-menu ${isClicked ? "show" : ""}`}

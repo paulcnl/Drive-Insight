@@ -3,6 +3,12 @@
   margin: 0;
   padding: 0;
 }
+
+.matricule_container {
+  height: 100%;
+  margin-top: 1rem;
+}
+
 .box-comparator {
   display: flex;
   flex-direction: column;
@@ -44,7 +50,6 @@
   font-family: var(--font-family-texte);
   text-align: center;
   font-size: 1.5rem;
-  margin-bottom: 10px;
   color: #333;
 }
 
@@ -53,26 +58,12 @@
   flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
-  width: 0px;
-  height: 30;
-  margin-right: 10px;
-}
-
-.add_item {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f5f5f5;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .matricule_input[type="text"] {
   font-family: var(--font-family-texte);
   padding: 10px;
   font-size: 16px;
-  margin: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -81,8 +72,9 @@
 .matricule_left_input {
   font-family: var(--font-family-texte);
   padding: 10px;
+  margin: 50px 10px 10px 10px;
   font-size: 16px;
-  margin: 10px;
+  width: 18rem;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -100,6 +92,7 @@
 
   color: #fff;
   padding: 10px 20px;
+  margin-bottom: 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -150,13 +143,24 @@
   margin: 10px;
   width: 50vw;
   justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .car_info {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .car_info select {
+    width: 25vw;
+  }
 }
 
 .car_info input[type="text"] {
@@ -167,4 +171,37 @@
   border-radius: 5px;
   font-size: 16px;
   color: #333;
+}
+
+.car_info select {
+  padding: 0.8rem 1rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: var(--font-family-texte);
+  font-size: 1rem;
+  color: #333;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.car_info select:hover:not(:disabled) {
+  border-color: var(--result-green-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.car_info select:focus {
+  outline: none;
+  border-color: var(--result-green-color);
+  box-shadow: 0 0 0 2px rgba(0, 200, 0, 0.1);
+}
+
+.car_info select:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.car_info select option {
+  padding: 0.5rem;
 }
