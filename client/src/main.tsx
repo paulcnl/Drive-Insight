@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import QuiSommesNous from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Authentication from "./pages/Authentication/Authentication";
 import Compte from "./pages/Compte/Compte";
@@ -71,12 +72,12 @@ const router = createBrowserRouter([
         element: <NotFoundPage />,
       },
       {
-        path: "/options",
-        element: <Options />,
-      },
-      {
         path: "/admin",
         element: <Admin />,
+      },
+      {
+        path: "/quisommesnous",
+        element: <QuiSommesNous />,
       },
     ],
   },
