@@ -1,4 +1,4 @@
-import "./Comparer.css";
+import "./MonComparatif.css";
 import VehicleCard from "../../components/VehicleCard/VehicleCard";
 
 function Comparer() {
