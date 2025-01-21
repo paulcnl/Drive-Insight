@@ -6,10 +6,10 @@ import App from "./App";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Admin from "./pages/Admin/Admin";
 import Authentication from "./pages/Authentication/Authentication";
-import Comparer from "./pages/Comparer/Comparer";
 import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
+import MonComparatif from "./pages/MonComparatif/MonComparatif";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Options from "./pages/Options/Options";
 import Result from "./pages/Result/Result";
@@ -35,8 +35,8 @@ const router = createBrowserRouter([
         element: <Authentication />,
       },
       {
-        path: "/comparer",
-        element: <Comparer />,
+        path: "/moncomparatif",
+        element: <MonComparatif />,
       },
       {
         path: "/compte",
