@@ -6,6 +6,26 @@ function Navigation({ handleClick }: { handleClick: () => void }) {
     <nav className="nav-container" aria-label="Navigation principale">
       <Link
         onClick={handleClick}
+        to="/comparer"
+        className="nav-link"
+        aria-current={
+          window.location.pathname === "/comparer" ? "page" : undefined
+        }
+      >
+        Mon comparatif
+      </Link>
+      <Link
+        onClick={handleClick}
+        to="/versdemain"
+        className="nav-link"
+        aria-current={
+          window.location.pathname === "/versdemain" ? "page" : undefined
+        }
+      >
+        Vers demain
+      </Link>
+      <Link
+        onClick={handleClick}
         to="/contact"
         className="nav-link"
         aria-current={
@@ -16,31 +36,13 @@ function Navigation({ handleClick }: { handleClick: () => void }) {
       </Link>
       <Link
         onClick={handleClick}
-        to="/info"
-        className="nav-link"
-        aria-current={window.location.pathname === "/info" ? "page" : undefined}
-      >
-        Info
-      </Link>
-      <Link
-        onClick={handleClick}
-        to="/comparer"
-        className="nav-link"
-        aria-current={
-          window.location.pathname === "/comparer" ? "page" : undefined
-        }
-      >
-        Comparer
-      </Link>
-      <Link
-        onClick={handleClick}
         to="/compte"
         className="nav-link"
         aria-current={
           window.location.pathname === "/compte" ? "page" : undefined
         }
       >
-        Compte
+        Mon compte
       </Link>
     </nav>
   );

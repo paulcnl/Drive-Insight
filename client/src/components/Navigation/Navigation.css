@@ -6,6 +6,8 @@
   gap: 2rem;
   width: 100%;
   font-family: var(--font-family-texte);
+  font-weight: 400;
+  text-transform: uppercase;
   position: fixed;
   z-index: 1;
   height: 100vh;
@@ -37,7 +39,7 @@
 
 @media screen and (min-width: 768px) {
   .nav-link {
-    width: 10%;
+    width: auto;
     color: #000000;
     text-align: center;
     font-size: 16px;
