@@ -19,6 +19,10 @@ type User = {
   id: number;
   email: string;
   isAdmin?: boolean;
+  firstname: string;
+  lastname: string;
+  adress: string;
+  phoneNumber: string;
 };
 
 type Auth = {
@@ -29,6 +33,48 @@ type Auth = {
 function Compte() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const { auth } = useOutletContext() as { auth: Auth | null };
+  const [isdisabled, setIsDisabled] = useState(false);
+  const [firstname, setFirstname] = useState(auth?.user?.firstname || "");
+  const [lastname, setLastname] = useState(auth?.user?.lastname || "");
+  const [email, setEmail] = useState(auth?.user?.email || "");
+  const [phoneNumber, setPhoneNumber] = useState(auth?.user?.phoneNumber || "");
+  const [adress, setAdress] = useState(auth?.user?.adress || "");
+
+  const handleInputChange =
+    (setter: React.Dispatch<React.SetStateAction<string>>) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setter(event.target.value);
+    };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const userId = auth?.user?.id;
+    const updatedUser = {
+      firstname,
+      lastname,
+      email,
+      phoneNumber,
+      adress,
+    };
+    try {
+      const response = await fetch(
+        `http://localhost:3310/api/users/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(updatedUser),
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.info("handleSubmit", error);
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,7 +100,7 @@ function Compte() {
       }
     };
     fetchData();
-  }, [auth]);
+  }, [auth?.user?.id]);
 
   return (
     <>
@@ -64,16 +110,46 @@ function Compte() {
           <div className="user-info">
             <div className="nickname">
               <h2>user_nickname</h2>
-              <button type="button">✏️</button>
+              <button
+                type="button"
+                onClick={() => setIsDisabled(!isdisabled)}
+                disabled={false}
+              >
+                {isdisabled ? "Modifier" : "Enregistrer"}
+              </button>
             </div>
-            <div className="user-info-perso">
-              <p>Nom</p>
-              <p>Prénom</p>
-              <p>Nombre de véhicules</p>
-              <p>Pays</p>
-              <p>Ville</p>
-              <p>Numéro de siret</p>
-            </div>
+            <form className="user-info-perso" onSubmit={handleSubmit}>
+              <input
+                type="text"
+                title={firstname}
+                disabled={isdisabled}
+                onChange={handleInputChange(setFirstname)}
+              />
+              <input
+                type="text"
+                title={lastname}
+                disabled={isdisabled}
+                onChange={handleInputChange(setLastname)}
+              />
+              <input
+                type="text"
+                title={email}
+                disabled={isdisabled}
+                onChange={handleInputChange(setEmail)}
+              />
+              <input
+                type="text"
+                title={phoneNumber}
+                disabled={isdisabled}
+                onChange={handleInputChange(setPhoneNumber)}
+              />
+              <input
+                type="text"
+                title={adress}
+                disabled={isdisabled}
+                onChange={handleInputChange(setAdress)}
+              />
+            </form>
           </div>
         </div>
         <hr />
