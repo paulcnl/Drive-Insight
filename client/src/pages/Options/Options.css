@@ -47,6 +47,13 @@
   margin-bottom: 10px;
 }
 
+.options-input::placeholder {
+  font-family: var(--font-family-texte);
+  font-size: 16px;
+  opacity: 0.7;
+  font-style: italic;
+}
+
 .options-roulage-container {
   display: flex;
   flex-direction: column;
@@ -76,6 +83,7 @@
   display: flex;
   justify-content: center;
   margin: 1rem;
+  font-family: var(--font-family-texte);
 }
 
 @media screen and (min-width: 768px) {
@@ -84,6 +92,7 @@
     width: 85vw;
     height: 5vh;
     margin: 1rem 0;
+    font-family: var(--font-family-texte);
   }
 
   .right-cont {

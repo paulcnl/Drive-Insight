@@ -41,7 +41,6 @@
   font-family: var(--font-family-texte);
   padding: 10px;
   font-size: 16px;
-  margin: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -57,5 +56,21 @@
   font-weight: bold;
   font-size: 1rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  font-family: var(--font-family-texte);
+  width: 300px;
+}
+
+.modify-button {
+  background-color: var(--secondary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   margin-bottom: 2rem;
+  font-family: var(--font-family-texte);
+  width: 300px;
 }

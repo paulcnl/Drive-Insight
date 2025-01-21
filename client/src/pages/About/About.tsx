@@ -1,15 +1,15 @@
 import "./About.css";
 
-function About() {
+function QuiSommesNous() {
   return (
     <section className="about-section">
       <div className="about-container">
         <div className="about-content">
           <div className="about-info">
             <h2 className="about-logo">
-              About
+              Qui sommes
               <br />
-              <span> Us</span>
+              <span> Nous ?</span>
             </h2>
             <div className="about-card">
               <p>
@@ -28,7 +28,7 @@ function About() {
               href="https://www.yooliz.com/qui-sommes-nous/"
               className="about-btn"
             >
-              More Info
+              plus d'info
             </a>
           </div>
         </div>
@@ -37,4 +37,4 @@ function About() {
   );
 }
 
-export default About;
+export default QuiSommesNous;

@@ -1,4 +1,4 @@
-import "./Comparer.css";
+import "./MonComparatif.css";
 import VehicleCard from "../../components/VehicleCard/VehicleCard";
 
 function Comparer() {
@@ -7,6 +7,7 @@ function Comparer() {
       <h1>Comparer les véhicules</h1>
       <div className="vehicle-list">
         <VehicleCard
+          size="large"
           vehicleData={{
             brand: "Toyota",
             model: "Corolla",

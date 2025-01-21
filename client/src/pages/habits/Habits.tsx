@@ -1,8 +1,44 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import FilAriane from "../../components/FilAriane";
 import "./Habits.css";
 
 function Habits() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { vehicleData } = location.state || {};
+
+  const [distance, setDistance] = useState("");
+  const [option, setOption] = useState("jour");
+  const [distanceError, setDistanceError] = useState("");
+
+  const validateNumber = (value: string) => {
+    return /^\d*\.?\d*$/.test(value);
+  };
+
+  const handleDistanceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (validateNumber(value)) {
+      setDistance(value);
+      setDistanceError("");
+    } else {
+      setDistanceError("Veuillez entrer un nombre valide");
+    }
+  };
+
+  const isFormValid =
+    distance !== "" && !distanceError && validateNumber(distance);
+
+  const handleSubmit = () => {
+    if (!isFormValid) return;
+
+    const habitsData = {
+      distance: Number.parseFloat(distance),
+      option,
+    };
+    navigate("/options", { state: { vehicleData, habitsData } });
+  };
+
   return (
     <>
       <FilAriane
@@ -15,70 +51,47 @@ function Habits() {
         }}
       />
       <div className="habits">
-        <h2>Mes habitudes</h2>
+        <h2>Mes habitudes de déplacement</h2>
         <div className="habits-container">
           <div className="input-container">
-            <label htmlFor="distance"> distance</label>
-            <input
-              type="text"
-              name="distance"
-              id="distance"
-              className="distance-input"
-            />
-          </div>
-          <p>km</p>
-          <div className="input-container">
-            <label htmlFor="frequence"> frequence</label>
-            <input
-              type="text"
-              name="frequence"
-              id="frequence"
-              className="frequence-input"
-            />
-          </div>
-          <div className="input-container">
-            <label htmlFor="frequence"> </label>
-            <select name="option" id="habits-option" className="option">
-              <option value="jour">jours </option>
-              <option value="mois">mois </option>
-              <option value="années">années </option>
-            </select>
-          </div>
-        </div>
-        <div className="habits-container">
-          <div className="input-container">
-            <label htmlFor="distance"> distance</label>
-            <input
-              type="text"
-              name="distance"
-              id="distance"
-              className="distance-input"
-            />
-          </div>
-          <p>km</p>
-          <div className="input-container">
-            <label htmlFor="frequence"> frequence</label>
-            <input
-              type="text"
-              name="frequence"
-              id="frequence"
-              className="frequence-input"
-            />
-          </div>
-          <div className="input-container">
-            <label htmlFor="frequence"> </label>
-            <select name="option" id="habits-option" className="option">
-              <option value="jour">jours </option>
-              <option value="mois">mois </option>
-              <option value="années">années </option>
-            </select>
+            <div className="input-line-container">
+              <span>Je parcours en moyenne</span>
+              <input
+                type="text"
+                name="distance"
+                placeholder="Ex: 15"
+                className={`distance-input ${distanceError ? "error-habits" : ""}`}
+                value={distance}
+                onChange={handleDistanceChange}
+              />
+              <span>
+                <strong>km</strong> &nbsp;par
+              </span>
+              <select
+                name="frequence"
+                className="option"
+                value={option}
+                onChange={(e) => setOption(e.target.value)}
+              >
+                <option value="jour">Jour</option>
+                <option value="semaine">Semaine</option>
+                <option value="mois">Mois</option>
+                <option value="an">An</option>
+              </select>
+            </div>
+            {distanceError && (
+              <span className="error-message-habits">{distanceError}</span>
+            )}
           </div>
         </div>
-        <div className="options-button">
-          <Link to="/options" className="next-page">
-            Valider
-          </Link>
-        </div>
+        <button
+          type="button"
+          onClick={handleSubmit}
+          disabled={!isFormValid}
+          className={`validate-button ${!isFormValid ? "disabled" : ""}`}
+        >
+          Valider
+        </button>
       </div>
     </>
   );

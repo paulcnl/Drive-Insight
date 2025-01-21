@@ -5,7 +5,26 @@
   font-family: var(--font-family-texte);
 }
 
-@media screen and (min-width: 600px) {
+.header-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-image {
+  max-width: 100%;
+  height: 80px;
+  position: relative;
+  top: 0;
+  left: 20px;
+  z-index: 100;
+}
+
+.header-logo-link {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+@media screen and (min-width: 768px) {
   .header-container {
     flex-direction: row;
     align-items: center;
@@ -14,6 +33,15 @@
     padding: 1rem 7rem;
     height: 4rem;
     border-bottom: 1px solid rgba(0, 0, 0, 0.196);
+  }
+
+  .logo-image {
+    max-width: 100%;
+    height: 160px;
+    position: relative;
+    top: 40px;
+    left: -45px;
+    z-index: 100;
   }
 }
 
@@ -24,7 +52,7 @@
   z-index: 100;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .sub-header-container {
     width: 20%;
   }
@@ -38,7 +66,7 @@
   color: inherit;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .btn-menu {
     display: none;
   }
@@ -52,7 +80,7 @@
   display: block;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .nav {
     display: block;
     width: 80%;
@@ -62,8 +90,6 @@
     padding: 4px;
   }
 }
-
-/*aniamation*/
 
 .burger-bars,
 .burger-bars::before,
