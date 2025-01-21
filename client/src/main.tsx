@@ -3,18 +3,19 @@ import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
-import Comparer from "./pages/Comparer/Comparer";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import Admin from "./pages/Admin/Admin";
+import Authentication from "./pages/Authentication/Authentication";
 import Compte from "./pages/Compte/Compte";
 import Contact from "./pages/Contact/Contact";
 import Home from "./pages/Home/Home";
-import Log from "./pages/Log/Log";
-
-// import About from "./pages/About";
-// import Contact from "./pages/Contact";
-
-/* ************************************************************************* */
-import InfosEnviro from "./pages/Info/InfosEnviro";
+import MonComparatif from "./pages/MonComparatif/MonComparatif";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import Options from "./pages/Options/Options";
+import Result from "./pages/Result/Result";
+import VersDemain from "./pages/VersDemain/VersDemain";
+import Confirm from "./pages/confirmVehicle/confirmVehicle";
+import Habits from "./pages/habits/Habits";
 
 const router = createBrowserRouter([
   {
@@ -30,28 +31,52 @@ const router = createBrowserRouter([
         element: <Contact />,
       },
       {
-        path: "/Log",
-        element: <Log />,
+        path: "/authentication",
+        element: <Authentication />,
       },
       {
-        path: "/comparer",
-        element: <Comparer />,
+        path: "/moncomparatif",
+        element: <MonComparatif />,
       },
       {
         path: "/compte",
         element: <Compte />,
       },
       {
-        path: "/info",
-        element: <InfosEnviro />,
+        path: "/versdemain",
+        element: <VersDemain />,
       },
       {
-        path: "*",
-        element: <div>Page non trouvée</div>,
+        path: "/confirm",
+        element: <Confirm />,
+      },
+      {
+        path: "/habits",
+        element: <Habits />,
       },
       {
         path: "/options",
         element: <Options />,
+      },
+      {
+        path: "/result",
+        element: (
+          <ProtectedRoute>
+            <Result />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
+      },
+      {
+        path: "/options",
+        element: <Options />,
+      },
+      {
+        path: "/admin",
+        element: <Admin />,
       },
     ],
   },
@@ -59,7 +84,7 @@ const router = createBrowserRouter([
 
 const rootElement = document.getElementById("root");
 if (rootElement == null) {
-  throw new Error(`Your HTML Document should contain a <div id="root"></div>`);
+  throw new Error("Failed to find the root element");
 }
 
 createRoot(rootElement).render(

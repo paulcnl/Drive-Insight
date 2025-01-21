@@ -1,70 +1,61 @@
-import type { Vehicle } from "../../types/types";
 import "./VehicleCard.css";
 
+interface VehicleData {
+  brand: string;
+  model: string;
+  license_plate: string;
+  engine: {
+    power_type: string;
+    horsepower: number;
+  };
+  price: number;
+  car_picture: string;
+}
+
 type VehicleCardProps = {
-  vehicle: Vehicle;
+  vehicleData: VehicleData;
+  size: "small" | "large";
 };
 
-function VehicleCard({ vehicle }: VehicleCardProps) {
+function VehicleCard({ vehicleData, size }: VehicleCardProps) {
+  if (!vehicleData || !vehicleData.engine) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="vehicle-card">
+    <div className={`vehicle-card card-size--${size}`}>
       <img
         className="vehicle-image"
-        src={vehicle.imageUrl}
-        alt={`${vehicle.brand} ${vehicle.model}`}
+        src={vehicleData.car_picture}
+        alt={`${vehicleData.brand} ${vehicleData.model}`}
       />
       <h2 className="vehicle-name">
-        {vehicle.brand} {vehicle.model}
+        {vehicleData.brand} {vehicleData.model}
       </h2>
       <div className="vehicle-description">
         <div className="vehicle-detail">
           <span className="vehicle-data-label">
             Immatriculation <span className="two-points">:</span>
           </span>
-          <span className="value">{vehicle.licensePlate}</span>
+          <span className="value">{vehicleData.license_plate}</span>
         </div>
         <div className="vehicle-detail">
           <span className="vehicle-data-label">
             Carburant <span className="two-points">:</span>
           </span>
-          <span className="value">
-            {vehicle.powerType === "essence" ? "essence" : "diesel"}
-          </span>
+          <span className="value">{vehicleData.engine.power_type}</span>
         </div>
         <div className="vehicle-detail">
           <span className="vehicle-data-label">
             Puissance <span className="two-points">:</span>
           </span>
-          <span className="value">{vehicle.horsepower} chevaux</span>
+          <span className="value">{vehicleData.engine.horsepower} chevaux</span>
         </div>
         <div className="vehicle-detail">
           <span className="vehicle-data-label">
             Prix <span className="two-points">:</span>
           </span>
-          <span className="value">
-            {vehicle.price?.toLocaleString("fr-FR")} €
-          </span>
-        </div>
-        <div className="vehicle-detail">
-          <span className="vehicle-data-label">
-            Consommation <span className="two-points">:</span>
-          </span>
-          <span className="value">
-            {vehicle.consumption}{" "}
-            {vehicle.powerType === "électrique" ? "kWh/100km" : "L/100km"}
-          </span>
-        </div>
-        <div className="vehicle-detail">
-          <span className="vehicle-data-label">
-            Distance mensuelle <span className="two-points">:</span>
-          </span>
-          <span className="value">{vehicle.drivenDistance} km</span>
-        </div>
-        <div className="vehicle-detail">
-          <span className="vehicle-data-label">
-            Empreinte carbone <span className="two-points">:</span>
-          </span>
-          <span className="value">{vehicle.carbonFootprint} g/km</span>
+          <span className="value">{vehicleData.price} €</span>
         </div>
       </div>
     </div>

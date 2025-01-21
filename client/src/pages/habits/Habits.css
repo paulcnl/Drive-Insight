@@ -1,0 +1,185 @@
+.habits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0.5rem;
+  height: 100%;
+}
+
+.habits h2 {
+  font-family: var(--font-family-title);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.habits label {
+  width: 50rem;
+  text-align: center;
+  padding: 0;
+}
+
+.habits-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.input-line-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  line-height: 1.5;
+  flex-wrap: nowrap;
+  width: 100%;
+  justify-content: center;
+  font-family: var(--font-family-texte);
+  font-size: larger;
+}
+
+.distance-input {
+  width: 80px;
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.distance-input::placeholder {
+  font-style: italic;
+  color: #999;
+}
+
+.distance-input.error-habits {
+  border-color: #ff0000;
+}
+
+.input-container-distance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.input-container-frequency {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.input-container-distance,
+.input-container-frequency {
+  position: relative;
+  width: 100%;
+}
+
+.option {
+  min-width: 100px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+}
+
+.option:hover:not(:disabled) {
+  border-color: var(--result-green-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option:focus {
+  outline: none;
+  border-color: var(--result-green-color);
+  box-shadow: 0 0 0 2px rgba(0, 200, 0, 0.1);
+}
+
+.error-message-habits {
+  color: #ff0000;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 5px;
+  vertical-align: middle;
+}
+
+.error-habits {
+  border-color: #d32f2f !important;
+  background-color: #fff5f5;
+  text-align: start;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.habits button {
+  background-color: var(--primary-color);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  margin: 1.5rem 0;
+}
+
+.habits button:hover:not(:disabled) {
+  background-color: var(--primary-color);
+}
+
+.habits button:disabled {
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .habits-container {
+    width: 55vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .habits button:hover {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    color: #000000;
+  }
+
+  .button-cont {
+    width: 55vw;
+    display: flex;
+    justify-content: end;
+  }
+  .input-line-container {
+    font-size: 14px;
+    gap: 5px;
+  }
+
+  .distance-input {
+    width: 60px;
+    padding: 6px;
+  }
+
+  .option {
+    min-width: 80px;
+    padding: 6px;
+  }
+}

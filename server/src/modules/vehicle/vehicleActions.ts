@@ -1,20 +1,24 @@
-import type { RequestHandler } from "express";
+import type { NextFunction, Request, RequestHandler, Response } from "express";
 
 // To infity and beyond
 // Import access to data
 import vehicleRepository from "./vehicleRepository";
 
-// The B of BREAD - Browse (Read All) operation
-const browse: RequestHandler = async (req, res, next) => {
+const browse: RequestHandler = async (req, res, next): Promise<void> => {
   try {
-    // Fetch all vehicles
-    const vehicles = await vehicleRepository.readAll();
+    const token = req.cookies.authToken;
 
-    // Respond with the vehicles in JSON format
-    res.json(vehicles);
+    if (!token) {
+      res.status(401).json({ message: "Accès non autorisé : Token manquant." });
+      return;
+    }
+
+    const userId = Number(req.auth?.sub ?? 4); // Utilise 4 comme valeur par défaut
+    const vehicles = await vehicleRepository.readAll(userId);
+
+    res.json(vehicles); // Envoie la réponse
   } catch (err) {
-    // Pass any errors to the error-handling middleware
-    next(err);
+    next(err); // Passer les erreurs au middleware de gestion des erreurs
   }
 };
 
@@ -39,23 +43,26 @@ const read: RequestHandler = async (req, res, next) => {
 };
 
 // The A of BREAD - Add (Create) operation
-// const add: RequestHandler = async (req, res, next) => {
-//   try {
-// Extract the vehicle data from the request body
-// const newvehicle = {
-//   title: req.body.title,
-//   user_id: req.body.user_id,
-// };
+const add: RequestHandler = async (req, res, next) => {
+  try {
+    const newVehicle = {
+      owner_id: req.body.owner_id,
+      brand: req.body.brand,
+      model: req.body.model,
+      license_plate: req.body.license_plate,
+      registration_date: req.body.registration_date,
+      price: req.body.price,
+      engine_id: req.body.engine_id,
+      carbon_footprint: req.body.carbon_footprint || 0,
+    };
 
-// Create the vehicle
-// const insertId = await vehicleRepository.create(newVehicle); // TODO: Modify this line to insert the vehicle data
+    const insertId = await vehicleRepository.create(newVehicle);
 
-// Respond with HTTP 201 (Created) and the ID of the newly inserted vehicle
-// res.status(201).json({ insertId }); // TODO: Modify this line to return the ID of the newly inserted vehicle
-// } catch (err) { // TODO: Modify this line to catch the error
-// Pass any errors to the error-handling middleware
-//     next(err);
-//   }
-// };
+    res.status(201).json({ insertId });
+  } catch (err) {
+    console.error("Erreur lors de l'ajout d'un véhicule :", err);
+    next(err);
+  }
+};
 
-export default { browse, read /*add */ };
+export default { browse, read, add };

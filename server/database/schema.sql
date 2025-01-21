@@ -1,12 +1,12 @@
 create table website_user (
   id int unsigned primary key auto_increment not null,
-  lastname varchar(255) not null,
-  firstname varchar(255) not null,
-  address tinytext not null,
+  lastname varchar(255) null,
+  firstname varchar(255) null,
+  address tinytext null,
   email varchar(255) not null unique,
-  phone_number char(10) not null,
-  password char(60) not null,
-  is_admin boolean null,
+  phone_number char(10) null,
+  hashed_password varchar(250) not null,
+  is_admin boolean default false,
   constraint chk_phone_number_length check (length(phone_number) = 10),
   constraint chk_email_format check (email like '%_@_%._%')
 );
@@ -70,16 +70,37 @@ create table queries (
   id int unsigned primary key auto_increment not null,
   contact_email varchar(255) not null,
   submit_date timestamp not null default current_timestamp,
-  category ENUM('Administration', 'Flotte', 'Besoin', 'Autre') not null,
+  category ENUM('Renouvelement', 'Flotte', 'Besoin', 'Autre') not null,
   message text not null
 );
 
 create index idx_contact_email on queries(contact_email);
 create index idx_category on queries(category);
 
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', 'email@example.com', '0123456789', 'password', true);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', 'email2@example.com', '0123456789', 'password', false);
-insert into website_user (lastname, firstname, address, email, phone_number, password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', 'email3@example.com', '0123456789', 'password', false);
+create table history (
+  id int unsigned primary key auto_increment not null,
+  user_id int unsigned not null,
+  email varchar(255) not null,
+  vehicle_brand varchar(255) not null,
+  vehicle_model varchar(255) not null,
+  compared_vehicle_brand varchar(255) not null,
+  compared_vehicle_model varchar(255) not null,
+  yearly_savings decimal(10, 2) not null,
+  distance decimal(10, 2) not null,
+  insurance_cost decimal(10, 2) default null,
+  trip_type varchar(255) default null,
+  mixed_trip_details varchar(255) default null,
+  renewal_date varchar(255) default null,
+  different_brand varchar(255) default null,
+  trip_modifications varchar(255) default null,
+  comparison_date timestamp not null default current_timestamp,
+  foreign key(user_id) references website_user(id)
+);
+create index idx_user_id on history(user_id);
+
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'John', '1, rue de la Paix, 75000 Paris', 'email@example.com', '0123456789', 'password', true);
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'Jane', '1, rue de la Paix, 75000 Paris', 'email2@example.com', '0123456789', 'password', false);
+insert into website_user (lastname, firstname, address, email, phone_number, hashed_password, is_admin) values ('Doe', 'Jack', '1, rue de la Paix, 75000 Paris', 'email3@example.com', '0123456789', 'password', false);
 
 insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'électrique', 0.0, 300, 50.0);
 insert into engine (horsepower, power_type, consumption, autonomy_km, refill_price) values (100, 'essence', 5.0, 300, 50.0);
@@ -98,3 +119,7 @@ insert into driving_habit (user_id, driven_distance, fuel_cost) values (3, 3000,
 
 insert into company (company_name, owner_id, fleet_size, company_address) values ('Company', 1, 10, '1, rue de la Paix, 75000 Paris');
 insert into company (company_name, owner_id, fleet_size, company_address) values ('Company 2', 1, 20, '1, rue de la Paix, 75000 Paris');
+
+insert into queries (contact_email, category, submit_date, message) values ('email@example.com', 'Renouvelement', '2025-01-19', 'Bonjour, ceci est un message.');
+
+insert into history (user_id, email, vehicle_brand, vehicle_model, compared_vehicle_brand, compared_vehicle_model, yearly_savings, distance, insurance_cost, trip_type, mixed_trip_details, renewal_date, different_brand, trip_modifications) values (1, 'email@example.com', 'Renault', 'Zoe', 'VW', 'Golf', 1000.0, 10000.0, 840.0, 'Mixte', 'Oui', '3 mois', 'Mercedes', '20km');
