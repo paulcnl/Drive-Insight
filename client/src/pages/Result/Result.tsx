@@ -132,6 +132,7 @@ const Result = () => {
           headers: {
             "Content-Type": "application/json",
           },
+          credentials: "include",
           body: JSON.stringify({
             user_id: user?.id || 0,
             email: user?.email || "",
