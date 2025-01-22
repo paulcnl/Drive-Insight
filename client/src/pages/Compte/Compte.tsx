@@ -21,7 +21,7 @@ type User = {
   isAdmin?: boolean;
   firstname: string;
   lastname: string;
-  adress: string;
+  address: string;
   phoneNumber: string;
 };
 
@@ -30,22 +30,29 @@ type Auth = {
   message: string;
 };
 
+type Context = {
+  auth: Auth | null;
+  setAuth: (auth: Auth | null) => void;
+};
+
 function Compte() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
-  const { auth } = useOutletContext() as { auth: Auth | null };
-  const [isdisabled, setIsDisabled] = useState(false);
+  const { auth, setAuth } = useOutletContext() as Context;
+  const [isdisabled, setIsDisabled] = useState(true);
   const [firstname, setFirstname] = useState(auth?.user?.firstname || "");
   const [lastname, setLastname] = useState(auth?.user?.lastname || "");
   const [email, setEmail] = useState(auth?.user?.email || "");
-  const [phoneNumber, setPhoneNumber] = useState(auth?.user?.phoneNumber || "");
-  const [adress, setAdress] = useState(auth?.user?.adress || "");
+  const [phone_number, setPhone_number] = useState(
+    auth?.user?.phoneNumber || "",
+  );
+  const [address, setAddress] = useState(auth?.user?.address || "");
 
   useEffect(() => {
     const fetchData = async () => {
       const userId = auth?.user?.id;
       try {
         const response = await fetch(
-          `http://localhost:3310/api/vehicles?userId=${userId}`,
+          `${import.meta.env.VITE_API_URL}/api/vehicles?userId=${userId}`,
           {
             method: "GET",
             headers: {
@@ -74,13 +81,13 @@ function Compte() {
       firstname,
       lastname,
       email,
-      phoneNumber,
-      adress,
+      phone_number,
+      address,
     };
-    console.info(updatedUser);
+    console.info("hundlesub", updatedUser);
     try {
       const response = await fetch(
-        `http://localhost:3310/api/users/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
         {
           method: "PUT",
           headers: {
@@ -93,6 +100,9 @@ function Compte() {
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+      const data = await response.json();
+      setAuth(data);
+      setIsDisabled(true);
     } catch (error) {
       console.info("handleSubmit", error);
     }
@@ -123,30 +133,35 @@ function Compte() {
                       title={firstname}
                       disabled={isdisabled}
                       onChange={(e) => setFirstname(e.target.value)}
+                      value={firstname}
                     />
                     <input
                       type="text"
                       title={lastname}
                       disabled={isdisabled}
                       onChange={(e) => setLastname(e.target.value)}
+                      value={lastname}
                     />
                     <input
                       type="text"
                       title={email}
                       disabled={isdisabled}
                       onChange={(e) => setEmail(e.target.value)}
+                      value={email}
                     />
                     <input
                       type="text"
-                      title={phoneNumber}
+                      title={"phoneNumber"}
                       disabled={isdisabled}
-                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      onChange={(e) => setPhone_number(e.target.value)}
+                      value={phone_number}
                     />
                     <input
                       type="text"
-                      title={adress}
+                      title={address}
                       disabled={isdisabled}
-                      onChange={(e) => setAdress(e.target.value)}
+                      onChange={(e) => setAddress(e.target.value)}
+                      value={address}
                     />
                   </div>
                 </div>
