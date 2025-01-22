@@ -48,7 +48,6 @@ function Contact() {
             headers: {
               "Content-Type": "application/json",
             },
-            credentials: "include",
             body: JSON.stringify({
               contact_email: email,
               category,
