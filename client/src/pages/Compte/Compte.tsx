@@ -40,42 +40,6 @@ function Compte() {
   const [phoneNumber, setPhoneNumber] = useState(auth?.user?.phoneNumber || "");
   const [adress, setAdress] = useState(auth?.user?.adress || "");
 
-  const handleInputChange =
-    (setter: React.Dispatch<React.SetStateAction<string>>) =>
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setter(event.target.value);
-    };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const userId = auth?.user?.id;
-    const updatedUser = {
-      firstname,
-      lastname,
-      email,
-      phoneNumber,
-      adress,
-    };
-    try {
-      const response = await fetch(
-        `http://localhost:3310/api/users/${userId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(updatedUser),
-        },
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-    } catch (error) {
-      console.info("handleSubmit", error);
-    }
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       const userId = auth?.user?.id;
@@ -102,54 +66,92 @@ function Compte() {
     fetchData();
   }, [auth?.user?.id]);
 
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.info("click");
+    const userId = auth?.user?.id;
+    const updatedUser = {
+      firstname,
+      lastname,
+      email,
+      phoneNumber,
+      adress,
+    };
+    console.info(updatedUser);
+    try {
+      const response = await fetch(
+        `http://localhost:3310/api/users/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify(updatedUser),
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.info("handleSubmit", error);
+    }
+  };
+
   return (
     <>
       <div className="compte">
         <div className="user">
           <img src={avatar} alt="" className="avatar" />
-          <div className="user-info">
-            <div className="nickname">
-              <h2>user_nickname</h2>
-              <button
-                type="button"
-                onClick={() => setIsDisabled(!isdisabled)}
-                disabled={false}
-              >
-                {isdisabled ? "Modifier" : "Enregistrer"}
-              </button>
+          <div className="info-box">
+            <div className="user-info">
+              <form className="user-info-perso" onSubmit={handleSubmit}>
+                <div className="info-box">
+                  <div className="nickname">
+                    <h2>user_nickname</h2>
+                    <button
+                      type="submit"
+                      onClick={() => setIsDisabled(!isdisabled)}
+                      disabled={false}
+                    >
+                      {isdisabled ? "Modifier" : "Enregistrer"}
+                    </button>
+                  </div>
+                  <div className="input-compte">
+                    <input
+                      type="text"
+                      title={firstname}
+                      disabled={isdisabled}
+                      onChange={(e) => setFirstname(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      title={lastname}
+                      disabled={isdisabled}
+                      onChange={(e) => setLastname(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      title={email}
+                      disabled={isdisabled}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      title={phoneNumber}
+                      disabled={isdisabled}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                    />
+                    <input
+                      type="text"
+                      title={adress}
+                      disabled={isdisabled}
+                      onChange={(e) => setAdress(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </form>
             </div>
-            <form className="user-info-perso" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                title={firstname}
-                disabled={isdisabled}
-                onChange={handleInputChange(setFirstname)}
-              />
-              <input
-                type="text"
-                title={lastname}
-                disabled={isdisabled}
-                onChange={handleInputChange(setLastname)}
-              />
-              <input
-                type="text"
-                title={email}
-                disabled={isdisabled}
-                onChange={handleInputChange(setEmail)}
-              />
-              <input
-                type="text"
-                title={phoneNumber}
-                disabled={isdisabled}
-                onChange={handleInputChange(setPhoneNumber)}
-              />
-              <input
-                type="text"
-                title={adress}
-                disabled={isdisabled}
-                onChange={handleInputChange(setAdress)}
-              />
-            </form>
           </div>
         </div>
         <hr />
