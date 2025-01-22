@@ -12,8 +12,8 @@ import historyActions from "./modules/history/historyActions";
 import itemActions from "./modules/item/itemActions";
 import queriesActions from "./modules/queries/queriesActions";
 import userActions from "./modules/user/userActions";
-import vehicleActions from "./modules/vehicle/vehicleActions";
 import userInfoActions from "./modules/userInfo/userInfoAction";
+import vehicleActions from "./modules/vehicle/vehicleActions";
 
 router.post("/api/users", authActions.hashPassword, userActions.add);
 router.post("/api/login", authActions.login);
