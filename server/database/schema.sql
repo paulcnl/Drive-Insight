@@ -93,8 +93,7 @@ create table history (
   renewal_date varchar(255) default null,
   different_brand varchar(255) default null,
   trip_modifications varchar(255) default null,
-  comparison_date timestamp not null default current_timestamp,
-  foreign key(user_id) references website_user(id)
+  comparison_date timestamp not null default current_timestamp
 );
 create index idx_user_id on history(user_id);
 
