@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import { ComparisonProvider } from "./context/ComparisonContext";
 import QuiSommesNous from "./pages/About/About";
 import Admin from "./pages/Admin/Admin";
 import Authentication from "./pages/Authentication/Authentication";
@@ -37,7 +38,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/moncomparatif",
-        element: <MonComparatif />,
+        element: (
+          <ProtectedRoute>
+            <MonComparatif />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/compte",
@@ -90,6 +95,8 @@ if (rootElement == null) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ComparisonProvider>
+      <RouterProvider router={router} />
+    </ComparisonProvider>
   </StrictMode>,
 );
