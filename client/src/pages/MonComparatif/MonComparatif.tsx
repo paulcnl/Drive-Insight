@@ -23,19 +23,24 @@ function MonComparatif() {
   const { auth } = useOutletContext<{ auth: Auth }>();
 
   if (!auth?.user) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/authentication" />;
   }
 
   if (!lastComparison) {
     return (
-      <div className="no-comparison">
-        <h2>Aucune comparaison trouvée</h2>
-        <p>Effectuez une comparaison pour voir les résultats ici.</p>
+      <div className="no-comparison-container">
+        <div className="no-comparison">
+          <h2>Aucune comparaison trouvée</h2>
+          <p>
+            Nous vous invitons à cliquer sur notre logo et effectuer une
+            comparaison afin de voir celle-ci s'afficher ici.
+          </p>
+        </div>
       </div>
     );
   }
 
-  function formatFrequency(cost: number, frequency: string): string {
+  function normalizeToDaily(value: number, originalFrequency: string): number {
     const frequencies = {
       jour: 1,
       semaine: 7,
@@ -43,10 +48,30 @@ function MonComparatif() {
       an: 365,
     };
 
-    const factor = frequencies[frequency as keyof typeof frequencies] || 1;
-    const formattedCost = (cost * factor).toFixed(2);
+    return (
+      value / (frequencies[originalFrequency as keyof typeof frequencies] || 1)
+    );
+  }
 
-    return `${formattedCost} €/${frequency}`;
+  function formatFrequency(
+    cost: number,
+    originalFrequency: string,
+    targetFrequency: string,
+  ): string {
+    const frequencies = {
+      jour: 1,
+      semaine: 7,
+      mois: 30,
+      an: 365,
+    };
+
+    const dailyValue = normalizeToDaily(cost, originalFrequency);
+
+    const factor =
+      frequencies[targetFrequency as keyof typeof frequencies] || 1;
+    const formattedCost = (dailyValue * factor).toFixed(2);
+
+    return `${formattedCost} €/${targetFrequency}`;
   }
 
   return (
@@ -72,6 +97,7 @@ function MonComparatif() {
           Coût en carburant :{" "}
           {formatFrequency(
             lastComparison.calculations.fuelCost,
+            lastComparison.calculations.frequency,
             selectedFrequency,
           )}
         </p>
@@ -79,6 +105,7 @@ function MonComparatif() {
           Coût en électricité :{" "}
           {formatFrequency(
             lastComparison.calculations.electricCost,
+            lastComparison.calculations.frequency,
             selectedFrequency,
           )}
         </p>
@@ -90,6 +117,7 @@ function MonComparatif() {
           <strong>Économies potentielles :</strong>{" "}
           {formatFrequency(
             lastComparison.calculations.savings,
+            lastComparison.calculations.frequency,
             selectedFrequency,
           )}
         </p>
@@ -105,9 +133,14 @@ function MonComparatif() {
           vehicleName={`${lastComparison.vehicleData.brand} ${lastComparison.vehicleData.model}`}
           vehicleImage={lastComparison.vehicleData.car_picture}
           costs={{
-            fuel: formatFrequency(lastComparison.calculations.fuelCost, "jour"),
+            fuel: formatFrequency(
+              lastComparison.calculations.fuelCost,
+              lastComparison.calculations.frequency,
+              "jour",
+            ),
             total: formatFrequency(
               lastComparison.calculations.fuelCost,
+              lastComparison.calculations.frequency,
               selectedFrequency,
             ),
           }}
@@ -125,10 +158,12 @@ function MonComparatif() {
           costs={{
             electricity: formatFrequency(
               lastComparison.calculations.electricCost,
+              lastComparison.calculations.frequency,
               "jour",
             ),
             savings: formatFrequency(
               lastComparison.calculations.savings,
+              lastComparison.calculations.frequency,
               selectedFrequency,
             ),
           }}
