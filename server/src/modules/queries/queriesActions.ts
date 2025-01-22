@@ -48,7 +48,9 @@ const edit: RequestHandler = async (req, res, next) => {
       message: req.body.message,
       submit_date: new Date(req.body.submit_date),
     };
-    await queriesRepository.update(updatedQuery);
+    await queriesRepository.update(updatedQuery.id, {
+      message: updatedQuery.message,
+    });
     res.sendStatus(204);
   } catch (err) {
     next(err);

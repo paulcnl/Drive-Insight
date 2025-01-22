@@ -32,4 +32,41 @@ const add: RequestHandler = async (req, res, next) => {
     next(err);
   }
 };
-export default { browse, add };
+
+const edit: RequestHandler = async (req, res, next) => {
+  try {
+    const updatedEntry = {
+      id: Number(req.params.id),
+      user_id: req.body.user_id,
+      email: req.body.email,
+      vehicle_brand: req.body.vehicle_brand,
+      vehicle_model: req.body.vehicle_model,
+      compared_vehicle_brand: req.body.compared_vehicle_brand,
+      compared_vehicle_model: req.body.compared_vehicle_model,
+      yearly_savings: req.body.yearly_savings,
+      distance: req.body.distance,
+      insurance_cost: req.body.insurance_cost || null,
+      trip_type: req.body.trip_type || null,
+      mixed_trip_details: req.body.mixed_trip_details || null,
+      renewal_date: req.body.renewal_date || null,
+      different_brand: req.body.different_brand || null,
+      trip_modifications: req.body.trip_modifications || null,
+    };
+    await historyRepository.update(updatedEntry.id, updatedEntry);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const remove: RequestHandler = async (req, res, next) => {
+  try {
+    const entryId = Number(req.params.id);
+    await historyRepository.delete(entryId);
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export default { browse, add, edit, remove };

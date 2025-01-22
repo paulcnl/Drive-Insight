@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./Admin.css";
 
 type Query = {
@@ -33,54 +33,53 @@ function Admin() {
   const [history, setHistory] = useState<History[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchHistory = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/history`,
+        {
+          credentials: "include",
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch history");
+      }
+      const data: History[] = await response.json();
+      const uniqueEntries = Array.from(
+        new Map(data.map((item: History) => [item.id, item])).values(),
+      );
+      setHistory(uniqueEntries);
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "An unknown error occurred",
+      );
+    }
+  }, []);
+
+  const fetchQueries = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/queries`,
+        {
+          credentials: "include",
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch queries");
+      }
+      const data = await response.json();
+      setQueries(data);
+    } catch (error) {
+      setError(
+        error instanceof Error ? error.message : "An unknown error occurred",
+      );
+    }
+  }, []);
+
   useEffect(() => {
-    const fetchQueries = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/queries`,
-          {
-            credentials: "include",
-          },
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch queries");
-        }
-        const data = await response.json();
-        setQueries(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
-      }
-    };
-
-    const fetchHistory = async () => {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/history`,
-          {
-            credentials: "include",
-          },
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch history");
-        }
-        const data = await response.json();
-        setHistory(data);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
-      }
-    };
-
     fetchQueries();
     fetchHistory();
-  }, []);
+  }, [fetchQueries, fetchHistory]);
 
   const handleEdit = async (id: number) => {
     const newMessage = prompt("Message à modifier :");
@@ -132,6 +131,61 @@ function Admin() {
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while deleting the query");
+    }
+  };
+
+  const handleEditHistory = async (id: number) => {
+    const newDistance = prompt("Nouvelle distance (km) :");
+    if (newDistance && !Number.isNaN(Number(newDistance))) {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/history/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ distance: Number(newDistance) }),
+          },
+        );
+        if (response.ok) {
+          setHistory((prevHistory) =>
+            prevHistory.map((item) =>
+              item.id === id
+                ? { ...item, distance: Number(newDistance) }
+                : item,
+            ),
+          );
+        } else {
+          alert("Failed to update the history entry");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while updating the history entry");
+      }
+    }
+  };
+
+  const handleDeleteHistory = async (id: number) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/history/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        },
+      );
+      if (response.ok) {
+        setHistory((prevHistory) =>
+          prevHistory.filter((item) => item.id !== id),
+        );
+      } else {
+        alert("Failed to delete the history entry");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while deleting the history entry");
     }
   };
 
@@ -228,6 +282,22 @@ function Admin() {
                 <strong>Date de comparaison :</strong>{" "}
                 {new Date(entry.comparison_date).toLocaleString()}
               </p>
+              <div className="admin-buttons-container">
+                <button
+                  type="button"
+                  className="admin-edit-button"
+                  onClick={() => handleEditHistory(entry.id)}
+                >
+                  Modifier
+                </button>
+                <button
+                  type="button"
+                  className="admin-delete-button"
+                  onClick={() => handleDeleteHistory(entry.id)}
+                >
+                  Supprimer
+                </button>
+              </div>
             </li>
           ))}
         </ul>

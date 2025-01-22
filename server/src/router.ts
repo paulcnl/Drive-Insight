@@ -26,6 +26,8 @@ router.use(authActions.verifyToken);
 
 router.get("/api/history", historyActions.browse);
 router.post("/api/history", historyActions.add);
+router.put("/api/history/:id", historyActions.edit);
+router.delete("/api/history/:id", historyActions.remove);
 
 router.get("/api/items", itemActions.browse);
 router.get("/api/items/:id", itemActions.read);

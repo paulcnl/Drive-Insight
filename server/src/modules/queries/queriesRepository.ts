@@ -32,11 +32,22 @@ class QueriesRepository {
     return rows[0];
   }
 
-  async update(query: Query) {
-    await databaseClient.query<Result>(
-      "update queries set contact_email = ?, category = ?, message = ? where id = ?",
-      [query.contact_email, query.category, query.message, query.id],
+  async update(id: number, changes: { message: string }) {
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from queries where id = ?",
+      [id],
     );
+    const existingQuery = rows[0];
+
+    if (!existingQuery) {
+      return { affectedRows: 0 };
+    }
+    const [result] = await databaseClient.query<Result>(
+      "update queries set message = ? where id = ?",
+      [changes.message, id],
+    );
+
+    return result;
   }
 
   async delete(id: number) {

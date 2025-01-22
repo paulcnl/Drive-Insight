@@ -61,5 +61,19 @@ class HistoryRepository {
     );
     return result.insertId;
   }
+  async delete(id: number) {
+    const [result] = await databaseClient.query<Result>(
+      "delete from history where id = ?",
+      [id],
+    );
+    return result;
+  }
+  async update(id: number, entry: HistoryEntry) {
+    const [result] = await databaseClient.query<Result>(
+      "update history set ? where id = ?",
+      [entry, id],
+    );
+    return result;
+  }
 }
 export default new HistoryRepository();
