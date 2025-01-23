@@ -66,9 +66,7 @@ function Compte() {
         }
         const data = await response.json();
         setVehicles(data);
-      } catch (error) {
-        console.info("fetchData", error);
-      }
+      } catch (error) {}
     };
     fetchData();
   }, [auth?.user?.id]);
