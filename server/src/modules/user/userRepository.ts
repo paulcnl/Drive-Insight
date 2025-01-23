@@ -110,20 +110,12 @@ class UserRepository {
 
     return rows[0] as User | null;
   }
-
-  // The U of CRUD - Update operation
-  // TODO: Implement the update operation to modify an existing item
-
-  // async update(item: Item) {
-  //   ...
-  // }
-
-  // The D of CRUD - Delete operation
-  // TODO: Implement the delete operation to remove an item by its ID
-
-  // async delete(id: number) {
-  //   ...
-  // }
+  async delete(id: number) {
+    await databaseClient.query<Result>(
+      "delete from website_user where id = ?",
+      [id],
+    );
+  }
 }
 
 export default new UserRepository();

@@ -89,4 +89,20 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add, edit, getDetails };
+const remove: RequestHandler = async (req, res, next) => {
+  try {
+    // Extract the ID of the user to be deleted
+    const userId = Number(req.params.id);
+
+    // Delete the user
+    await userRepository.delete(userId);
+
+    // Respond with HTTP 204 (No Content)
+    res.sendStatus(204);
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+export default { browse, read, add, edit, getDetails, remove };

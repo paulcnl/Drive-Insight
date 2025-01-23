@@ -45,6 +45,7 @@ router.get("/api/users", userActions.browse);
 router.get("/api/users/details", userActions.getDetails);
 router.get("/api/users/:id", userActions.read);
 router.put("/api/users/:id", userActions.edit);
+router.delete("/api/users/:id", userActions.remove);
 
 router.get("/api/vehicles", vehicleActions.browse);
 router.get("/api/vehicles/:id", vehicleActions.read);
