@@ -201,17 +201,6 @@ function Compte() {
               ))}
             </div>
           </div>
-          <div className="compte-box">
-            <div className="comparaison">
-              <p>Mes dernières comparaisons</p>
-            </div>
-            <div className="box-contenu">
-              <div className="box-card">
-                <div className="car-card-red"> </div>
-                <div className="car-card-green"> </div>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="compte-question">
           <button type="button">?</button>

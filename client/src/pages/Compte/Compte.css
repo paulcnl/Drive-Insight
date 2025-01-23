@@ -185,6 +185,12 @@
     margin-right: 5rem;
     width: 10rem;
     height: 1.5rem;
+    border: .5px solid var(--primary-color);
+    font-family: var(--font-family-texte);
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
   }
 
   .compte hr {
@@ -224,47 +230,12 @@
     box-shadow: none;
   }
 
-  .comparaison {
-    width: 100%;
-    text-align: start;
-    margin-left: 1rem;
-    margin-top: .75rem;
-  }
-
   .box-contenu {
     display: flex;
     flex-direction: row;
     gap: .5rem;
     margin-top: 2rem;
     width: 100%;
-  }
-
-  .car-card-green {
-    height: 22em;
-    width: 50%;
-    border: solid 1px var(--primary-color);
-    border-radius: 15px;
-    box-shadow: var(--box-shadow);
-  }
-
-  .car-card-red {
-    height: 22rem;
-    width: 50%;
-    border: solid 1px rgba(255, 0, 0, 0.435);
-    border-radius: 15px;
-    box-shadow: var(--box-shadow);
-  }
-
-  .box-card {
-    border: solid 1px black;
-    padding: .5rem;
-    border-radius: 25px;
-    display: flex;
-    flex-direction: row;
-    gap: .5rem;
-    box-shadow: var(--box-shadow);
-    width: 100%;
-    justify-content: space-between;
   }
 
   .vehicule {
