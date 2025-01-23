@@ -254,6 +254,14 @@ function Admin() {
   };
 
   const handleDeleteUser = async (id: number) => {
+    const confirmed = window.confirm(
+      "Êtes-vous sûr de vouloir supprimer cet utilisateur ?",
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/users/${id}`,
