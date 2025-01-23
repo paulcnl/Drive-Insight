@@ -9,151 +9,64 @@
   font-family: var(--font-family-texte);
 }
 
-@media screen and (min-width: 768px) {
-  .admin-container {
-    padding: 2rem;
-  }
-}
-
-h2 {
-  text-align: center;
-  font-family: var(--font-family-title);
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
+h2,
 h3 {
   text-align: center;
   font-family: var(--font-family-title);
+  margin-bottom: 1rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+h3 {
   font-size: 1.5rem;
-  margin-bottom: 10px;
 }
 
 .queries-section,
-.history-section {
+.history-section,
+.users-section {
   width: 100%;
   max-width: 90%;
   margin: 1rem 0;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: var(--box-shadow);
+  scroll-margin-top: 2rem;
 }
 
 .queries-list,
-.history-list {
+.history-list,
+.users-list {
   list-style-type: none;
   padding: 0;
   width: 100%;
 }
 
 .query-item,
-.history-item {
-  border: 1px solid var(--primary-color);
+.history-item,
+.user-item {
+  border: 1px solid #27dda64b;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
-  box-shadow: var(--box-shadow);
   background-color: white;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
 .query-item:hover,
-.history-item:hover {
-  transform: translateY(-2px);
+.history-item:hover,
+.user-item:hover {
+  transform: translateY(-1px);
 }
 
 .query-item p,
-.history-item p {
-  margin: 0.5rem 0;
+.history-item p,
+.user-details p {
   line-height: 1.4;
-}
-
-.error {
-  color: #dc3545;
-  padding: 1rem;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 4px;
-  margin: 1rem 0;
-}
-
-.admin-buttons-container {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  margin-top: 1rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid #eee;
-}
-
-.admin-edit-button,
-.admin-delete-button {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  font-family: var(--font-family-texte);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.admin-edit-button {
-  background-color: var(--primary-color);
-  color: white;
-}
-
-.admin-delete-button {
-  background-color: #dc3545;
-  color: white;
-}
-
-.admin-edit-button:hover,
-.admin-delete-button:hover {
-  filter: brightness(110%);
-}
-
-@media screen and (min-width: 768px) {
-  .admin-container {
-    padding: 2rem;
-  }
-
-  .queries-section,
-  .history-section {
-    max-width: 80%;
-  }
-
-  .query-item,
-  .history-item {
-    padding: 1.5rem;
-  }
-
-  .admin-buttons-container {
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .query-item:hover .admin-buttons-container,
-  .history-item:hover .admin-buttons-container {
-    opacity: 1;
-  }
-}
-
-.users-section {
-  margin-top: 2rem;
-  background-color: white;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.users-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.user-item {
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  background-color: #f8f9fa;
+  padding: 0.8rem;
+  background-color: #f5f5f5;
 }
 
 .user-header {
@@ -169,6 +82,7 @@ h3 {
   margin: 0;
   color: #333;
   font-size: 1.1rem;
+  font-family: var(--font-family-title);
 }
 
 .user-badge {
@@ -179,47 +93,151 @@ h3 {
 }
 
 .user-badge.admin {
+  background-color: var(--result-red-color);
+  color: #dc3545;
+}
+
+.user-badge.user {
+  background-color: var(--result-green-color);
+  color: #28a745;
+}
+
+.user-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.user-details strong {
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+.admin-buttons-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.admin-edit-button,
+.admin-delete-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-family-texte);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.admin-edit-button {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.admin-delete-button {
+  background-color: var(--result-red-color);
+  color: #dc3545;
+  border: 1px solid #dc3545;
+}
+
+.admin-edit-button:hover {
+  background-color: #20c997;
+}
+
+.admin-delete-button:hover {
   background-color: #dc3545;
   color: white;
 }
 
-.user-badge.user {
-  background-color: #28a745;
-  color: white;
-}
-
-.user-details {
+.error {
+  color: #dc3545;
+  padding: 1rem;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 4px;
   margin: 1rem 0;
 }
 
-.user-details p {
-  margin: 0.5rem 0;
-  color: #666;
+.admin-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.user-vehicles {
-  margin-top: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
+.admin-nav-button {
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  color: var(--primary-color);
+  font-family: var(--font-family-texte);
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.user-vehicles h5 {
-  margin: 0 0 0.5rem 0;
-  color: #333;
+.admin-nav-button:hover {
+  background-color: var(--primary-color);
+  color: white;
 }
 
-.vehicles-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  opacity: 0.8;
 }
 
-.vehicle-item {
-  padding: 0.5rem;
-  margin: 0.25rem 0;
-  background-color: #fff;
-  border-radius: 4px;
-  border: 1px solid #e0e0e0;
+.back-to-top:hover {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+@media screen and (min-width: 768px) {
+  .admin-container {
+    padding: 2rem;
+  }
+
+  .queries-section,
+  .history-section,
+  .users-section {
+    max-width: 80%;
+  }
+
+  .query-item,
+  .history-item,
+  .user-item {
+    padding: 1.5rem;
+  }
+
+  .admin-buttons-container {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .query-item:hover .admin-buttons-container,
+  .history-item:hover .admin-buttons-container,
+  .user-item:hover .admin-buttons-container {
+    opacity: 1;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -232,23 +250,18 @@ h3 {
   .user-badge {
     align-self: flex-start;
   }
-}
 
-.user-details {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.5rem;
-  margin: 1rem 0;
-}
+  .admin-navigation {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 1rem;
+  }
 
-.user-details p {
-  margin: 0;
-  padding: 0.5rem;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-}
-
-.user-details strong {
-  color: #666;
-  margin-right: 0.5rem;
+  .back-to-top {
+    bottom: 1rem;
+    right: 1rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
+  }
 }

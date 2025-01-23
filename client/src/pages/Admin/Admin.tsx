@@ -273,11 +273,47 @@ function Admin() {
     }
   };
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <div className="admin-container">
       <h2>Admin Panel</h2>
       {error && <div className="error">{error}</div>}
-      <div className="queries-section">
+
+      <div className="admin-navigation">
+        <button
+          type="button"
+          className="admin-nav-button"
+          onClick={() => scrollToSection("queries")}
+        >
+          Formulaires de contact
+        </button>
+        <button
+          type="button"
+          className="admin-nav-button"
+          onClick={() => scrollToSection("history")}
+        >
+          Historique
+        </button>
+        <button
+          type="button"
+          className="admin-nav-button"
+          onClick={() => scrollToSection("users")}
+        >
+          Utilisateurs
+        </button>
+      </div>
+
+      <div id="queries" className="queries-section">
         <h3>Formulaires de contact</h3>
         <ul className="queries-list">
           {queries.map((query) => (
@@ -315,7 +351,8 @@ function Admin() {
           ))}
         </ul>
       </div>
-      <div className="history-section">
+
+      <div id="history" className="history-section">
         <h3>Historique des Comparaisons</h3>
         <ul className="history-list">
           {history.map((entry) => (
@@ -386,7 +423,8 @@ function Admin() {
           ))}
         </ul>
       </div>
-      <div className="users-section">
+
+      <div id="users" className="users-section">
         <h3>Utilisateurs</h3>
         <ul className="users-list">
           {users.map((user) => (
@@ -439,6 +477,15 @@ function Admin() {
           ))}
         </ul>
       </div>
+
+      <button
+        type="button"
+        className="back-to-top"
+        onClick={scrollToTop}
+        title="Retour en haut"
+      >
+        ↑
+      </button>
     </div>
   );
 }
