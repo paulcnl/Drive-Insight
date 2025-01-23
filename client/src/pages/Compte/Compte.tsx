@@ -75,8 +75,14 @@ function Compte() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.info("click");
-    const userId = auth?.user?.id;
+
+    if (!auth?.user?.id) {
+      console.error("User ID is undefined");
+      return;
+    }
+
+    const userId = auth.user.id;
+
     const updatedUser = {
       firstname,
       lastname,
@@ -84,7 +90,7 @@ function Compte() {
       phone_number,
       address,
     };
-    console.info("hundlesub", updatedUser);
+
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
@@ -97,15 +103,15 @@ function Compte() {
           body: JSON.stringify(updatedUser),
         },
       );
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
+
       const data = await response.json();
       setAuth(data);
       setIsDisabled(true);
-    } catch (error) {
-      console.info("handleSubmit", error);
-    }
+    } catch (error) {}
   };
 
   return (
