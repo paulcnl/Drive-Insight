@@ -28,9 +28,20 @@ type History = {
   comparison_date: string;
 };
 
+type User = {
+  id: number;
+  email: string;
+  firstname: string | null;
+  lastname: string | null;
+  address: string | null;
+  phone_number: string | null;
+  isAdmin: boolean;
+};
+
 function Admin() {
   const [queries, setQueries] = useState<Query[]>([]);
   const [history, setHistory] = useState<History[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const fetchHistory = useCallback(async () => {
@@ -76,10 +87,32 @@ function Admin() {
     }
   }, []);
 
+  const fetchUsers = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/details`,
+        {
+          credentials: "include",
+        },
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch users");
+      }
+      const data = await response.json();
+      setUsers(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      setError(
+        error instanceof Error ? error.message : "An unknown error occurred",
+      );
+    }
+  }, []);
+
   useEffect(() => {
     fetchQueries();
     fetchHistory();
-  }, [fetchQueries, fetchHistory]);
+    fetchUsers();
+  }, [fetchQueries, fetchHistory, fetchUsers]);
 
   const handleEdit = async (id: number) => {
     const newMessage = prompt("Message à modifier :");
@@ -189,6 +222,57 @@ function Admin() {
     }
   };
 
+  const handleEditUser = async (id: number) => {
+    const newEmail = prompt("Nouvel email :");
+    if (newEmail) {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/users/${id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({ email: newEmail }),
+          },
+        );
+        if (response.ok) {
+          setUsers((prevUsers) =>
+            prevUsers.map((user) =>
+              user.id === id ? { ...user, email: newEmail } : user,
+            ),
+          );
+        } else {
+          alert("Failed to update the user");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while updating the user");
+      }
+    }
+  };
+
+  const handleDeleteUser = async (id: number) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/users/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        },
+      );
+      if (response.ok) {
+        setUsers((prevUsers) => prevUsers.filter((user) => user.id !== id));
+      } else {
+        alert("Failed to delete the user");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while deleting the user");
+    }
+  };
+
   return (
     <div className="admin-container">
       <h2>Admin Panel</h2>
@@ -294,6 +378,59 @@ function Admin() {
                   type="button"
                   className="admin-delete-button"
                   onClick={() => handleDeleteHistory(entry.id)}
+                >
+                  Supprimer
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="users-section">
+        <h3>Utilisateurs</h3>
+        <ul className="users-list">
+          {users.map((user) => (
+            <li key={user.id} className="user-item">
+              <div className="user-header">
+                <h4>{user.email}</h4>
+                <span
+                  className={`user-badge ${user.isAdmin ? "admin" : "user"}`}
+                >
+                  {user.isAdmin ? "Admin" : "Utilisateur"}
+                </span>
+              </div>
+
+              <div className="user-details">
+                <p>
+                  <strong>ID:</strong> {user.id}
+                </p>
+                <p>
+                  <strong>Nom:</strong> {user.lastname || "Non renseigné"}
+                </p>
+                <p>
+                  <strong>Prénom:</strong> {user.firstname || "Non renseigné"}
+                </p>
+                <p>
+                  <strong>Adresse:</strong> {user.address || "Non renseignée"}
+                </p>
+                <p>
+                  <strong>Téléphone:</strong>{" "}
+                  {user.phone_number || "Non renseigné"}
+                </p>
+              </div>
+
+              <div className="admin-buttons-container">
+                <button
+                  type="button"
+                  className="admin-edit-button"
+                  onClick={() => handleEditUser(user.id)}
+                >
+                  Modifier
+                </button>
+                <button
+                  type="button"
+                  className="admin-delete-button"
+                  onClick={() => handleDeleteUser(user.id)}
                 >
                   Supprimer
                 </button>
