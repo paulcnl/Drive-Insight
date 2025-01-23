@@ -9,6 +9,7 @@ function Comparer() {
         <VehicleCard
           size="large"
           vehicleData={{
+            id: 1,
             brand: "Toyota",
             model: "Corolla",
             license_plate: "ABC-123",

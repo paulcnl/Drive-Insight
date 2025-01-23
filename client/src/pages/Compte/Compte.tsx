@@ -32,18 +32,19 @@ function Compte() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = auth?.user?.id;
+      if (!auth || !auth.user) {
+        console.error("User is not authenticated.");
+        return;
+      }
+
       try {
-        const response = await fetch(
-          `http://localhost:3310/api/vehicles?userId=${userId}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            credentials: "include",
+        const response = await fetch("http://localhost:3310/api/vehicles", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          credentials: "include",
+        });
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -82,7 +83,6 @@ function Compte() {
           <div className="compte-box">
             <div className="vehicule">
               <p>Mes véhicules</p>
-              <button type="button">Modifier mes véhicules ✏️</button>
             </div>
             <div className="box-contenu">
               {vehicles?.map((vehicle) => (
@@ -90,6 +90,7 @@ function Compte() {
                   key={vehicle.id}
                   size="small"
                   vehicleData={{
+                    id: vehicle.id,
                     brand: vehicle.brand,
                     model: vehicle.model,
                     license_plate: vehicle.licensePlate,
@@ -102,17 +103,6 @@ function Compte() {
                   }}
                 />
               ))}
-            </div>
-          </div>
-          <div className="compte-box">
-            <div className="comparaison">
-              <p>Mes dernières comparaisons</p>
-            </div>
-            <div className="box-contenu">
-              <div className="box-card">
-                <div className="car-card-red"> </div>
-                <div className="car-card-green"> </div>
-              </div>
             </div>
           </div>
         </div>

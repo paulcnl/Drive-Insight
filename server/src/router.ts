@@ -42,6 +42,7 @@ router.get("/api/users/:id", userActions.read);
 
 router.get("/api/vehicles", vehicleActions.browse);
 router.get("/api/vehicles/:id", vehicleActions.read);
+router.delete("/api/vehicles/:id", vehicleActions.remove);
 
 router.get("/api/protected-user", (req, res) => {
   if (!req.auth) {
