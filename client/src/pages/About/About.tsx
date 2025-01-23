@@ -13,13 +13,18 @@ function QuiSommesNous() {
             </h2>
             <div className="about-card">
               <p>
-                Car Insight est une site s'adresse aux professionnels (artisans,
-                commerçants, profession libérales, TPE, PME) ayant entre 1 et
-                plusieurs dizaines de véhicules. Parce qu'il est difficile
-                d'avoir l'expertise et la force de négociation pour faire les
-                bons choix, Yooliz vous propose un service et un accompagnement
-                unique en France pour répondre à l'ensemble de vos besoins
-                automobiles.
+                Bienvenue sur Drive Insight, votre plateforme pour faciliter la
+                transition vers une mobilité plus durable. Nous vous aidons à
+                comparer les coûts entre voiture thermique et électrique, en
+                prenant en compte des facteurs comme l’émission de CO2, les
+                coûts de carburant ou d’électricité, et la consommation.
+              </p>
+              <br />
+              <p className="no-text">
+                Avec notre calculateur, vous obtiendrez des données claires pour
+                faire un choix éclairé, adapté à vos besoins. Que vous soyez
+                convaincu par l’électrique ou simplement curieux, Drive Insight
+                est là pour vous guider vers un avenir plus vert.
               </p>
             </div>
           </div>
