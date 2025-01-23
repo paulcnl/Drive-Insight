@@ -13,6 +13,15 @@ type User = {
   isAdmin: boolean;
 };
 
+type UserInfo = {
+  id: number;
+  email: string;
+  firstname: string;
+  lastname: string;
+  address: string;
+  phone_number: string;
+};
+
 class UserRepository {
   // The C of CRUD - Create operation
 
@@ -25,6 +34,20 @@ class UserRepository {
 
     // Return the ID of the newly inserted item
     return result.insertId;
+  }
+
+  async update(userInfo: UserInfo) {
+    await databaseClient.query<Result>(
+      "update website_user set email = ?, phone_number = ?, address = ?, firstname = ?, lastname = ? where id = ?",
+      [
+        userInfo.email,
+        userInfo.phone_number,
+        userInfo.address,
+        userInfo.firstname,
+        userInfo.lastname,
+        userInfo.id,
+      ],
+    );
   }
 
   // The Rs of CRUD - Read operations
