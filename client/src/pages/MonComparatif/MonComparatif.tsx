@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useOutletContext } from "react-router-dom";
+import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import CardResultGreen from "../../components/CardResultGreen/CardResultGreen";
 import CardResultRed from "../../components/CardResultRed/CardResultRed";
 import { useComparison } from "../../context/ComparisonContext";
@@ -16,6 +16,7 @@ type Auth = {
 };
 
 function MonComparatif() {
+  const navigate = useNavigate();
   const { lastComparison } = useComparison();
   const [selectedFrequency, setSelectedFrequency] = useState<string>(
     lastComparison?.calculations.frequency || "jour",
@@ -126,7 +127,13 @@ function MonComparatif() {
           {lastComparison.calculations.co2Emission.toFixed(0)} kg par an
         </p>
       </div>
-
+      <button
+        type="button"
+        className="makenew-button"
+        onClick={() => navigate("/")}
+      >
+        Faire une nouvelle comparaison
+      </button>
       <div className="result_cards">
         <CardResultRed
           title="Votre véhicule actuel"
