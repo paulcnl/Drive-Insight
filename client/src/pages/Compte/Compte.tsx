@@ -244,7 +244,6 @@ function Compte() {
           <div className="compte-box">
             <div className="vehicule">
               <p>Mes véhicules</p>
-              <p>Mes informations</p>
               <button type="button">Modifier mes véhicules ✏️</button>
             </div>
             <div className="box-contenu">
@@ -272,7 +271,7 @@ function Compte() {
         <div className="user-info-vehicle-2">
           <div className="compte-box">
             <div className="vehicule">
-              <p>Mes vehicules</p>
+              <p>Mes informations</p>
               <button type="button">Modifier mes véhicules ✏️</button>
             </div>
             <div className="box-contenu">

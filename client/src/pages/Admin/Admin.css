@@ -155,11 +155,10 @@ h3 {
 
 .error {
   color: #dc3545;
-  padding: 1rem;
-  text-align: center;
-  background-color: #fff;
-  border-radius: 4px;
-  margin: 1rem 0;
+  font-size: small;
+  width: 10rem;
+  padding-left: .5rem;
+  padding-top: .5rem;
 }
 
 .admin-navigation {
