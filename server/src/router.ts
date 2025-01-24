@@ -12,6 +12,7 @@ import historyActions from "./modules/history/historyActions";
 import itemActions from "./modules/item/itemActions";
 import queriesActions from "./modules/queries/queriesActions";
 import userActions from "./modules/user/userActions";
+
 import vehicleActions from "./modules/vehicle/vehicleActions";
 
 router.post("/api/users", authActions.hashPassword, userActions.add);
@@ -22,7 +23,11 @@ router.get("/api/engine/:id", engineActions.read);
 
 router.post("/api/vehicle", vehicleActions.add);
 
+router.post("/api/queries", queriesActions.add);
+
 router.use(authActions.verifyToken);
+
+router.get("/api/login", authActions.verifyAuth);
 
 router.get("/api/history", historyActions.browse);
 router.post("/api/history", historyActions.add);
@@ -34,11 +39,11 @@ router.post("/api/items", itemActions.add);
 router.get("/api/queries", queriesActions.browse);
 router.get("/api/queries/:id", queriesActions.read);
 router.put("/api/queries/:id", queriesActions.edit);
-router.post("/api/queries", queriesActions.add);
 router.delete("/api/queries/:id", queriesActions.remove);
 
 router.get("/api/users", userActions.browse);
 router.get("/api/users/:id", userActions.read);
+router.put("/api/users/:id", userActions.edit);
 
 router.get("/api/vehicles", vehicleActions.browse);
 router.get("/api/vehicles/:id", vehicleActions.read);

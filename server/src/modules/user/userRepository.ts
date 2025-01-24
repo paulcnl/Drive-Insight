@@ -13,6 +13,15 @@ type User = {
   isAdmin: boolean;
 };
 
+type UserInfo = {
+  id: number;
+  email: string;
+  firstname: string;
+  lastname: string;
+  address: string;
+  phone_number: string;
+};
+
 class UserRepository {
   // The C of CRUD - Create operation
 
@@ -27,7 +36,30 @@ class UserRepository {
     return result.insertId;
   }
 
+  async update(userInfo: UserInfo) {
+    await databaseClient.query<Result>(
+      "update website_user set email = ?, phone_number = ?, address = ?, firstname = ?, lastname = ? where id = ?",
+      [
+        userInfo.email,
+        userInfo.phone_number,
+        userInfo.address,
+        userInfo.firstname,
+        userInfo.lastname,
+        userInfo.id,
+      ],
+    );
+  }
+
   // The Rs of CRUD - Read operations
+  async findById(userId: string | undefined) {
+    // Execute the SQL SELECT query to retrieve a user by email
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from website_user where id = ?",
+      [userId],
+    );
+
+    return rows[0] as User | null;
+  }
 
   async read(id: number) {
     // Execute the SQL SELECT query to retrieve a specific item by its ID
