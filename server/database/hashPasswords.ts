@@ -11,12 +11,9 @@ const hashingOptions = {
 
 async function hashStoredPasswords() {
   try {
-    console.info("Connecting to database...");
     const [users] = await databaseClient.query(
       "SELECT id, email FROM website_user",
     );
-
-    console.info("Hashing passwords...");
     const hashedPassword = await argon2.hash("password", hashingOptions);
 
     interface User {
@@ -29,10 +26,7 @@ async function hashStoredPasswords() {
         "UPDATE website_user SET hashed_password = ? WHERE id = ?",
         [hashedPassword, user.id],
       );
-      console.info(`Updated password for user ${user.email}`);
     }
-
-    console.info("All passwords have been hashed successfully");
     process.exit(0);
   } catch (error) {
     console.error("Error updating passwords:", error);
