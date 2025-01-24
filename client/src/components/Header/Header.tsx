@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
-import logo from "../../assets/images/drive_insight_logo.png";
+import logo from "../../assets/images/drive_insight_logo2.png";
 import Navigation from "../Navigation/Navigation";
 
 function Header() {
