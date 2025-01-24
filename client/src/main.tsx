@@ -46,7 +46,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/compte",
-        element: <Compte />,
+        element: (
+          <ProtectedRoute>
+            <Compte />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/versdemain",

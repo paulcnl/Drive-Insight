@@ -31,6 +31,8 @@ router.get("/api/login", authActions.verifyAuth);
 
 router.get("/api/history", historyActions.browse);
 router.post("/api/history", historyActions.add);
+router.put("/api/history/:id", historyActions.edit);
+router.delete("/api/history/:id", historyActions.remove);
 
 router.get("/api/items", itemActions.browse);
 router.get("/api/items/:id", itemActions.read);
@@ -42,8 +44,10 @@ router.put("/api/queries/:id", queriesActions.edit);
 router.delete("/api/queries/:id", queriesActions.remove);
 
 router.get("/api/users", userActions.browse);
+router.get("/api/users/details", userActions.getDetails);
 router.get("/api/users/:id", userActions.read);
 router.put("/api/users/:id", userActions.edit);
+router.delete("/api/users/:id", userActions.remove);
 
 router.get("/api/vehicles", vehicleActions.browse);
 router.get("/api/vehicles/:id", vehicleActions.read);

@@ -23,6 +23,10 @@ const read: RequestHandler = async (req, res, next) => {
   try {
     // Fetch a specific user based on the provided ID
     const userId = Number(req.params.id);
+    if (Number.isNaN(userId)) {
+      res.status(400).json({ message: "Invalid user ID format" });
+      return;
+    }
     const user = await userRepository.read(userId);
 
     // If the user is not found, respond with HTTP 404 (Not Found)
@@ -34,6 +38,16 @@ const read: RequestHandler = async (req, res, next) => {
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+const getDetails: RequestHandler = async (req, res, next) => {
+  try {
+    const users = await userRepository.readAll();
+    res.json(users);
+  } catch (err) {
+    console.error("Error in getDetails:", err);
     next(err);
   }
 };
@@ -75,4 +89,20 @@ const add: RequestHandler = async (req, res, next) => {
   }
 };
 
-export default { browse, read, add, edit };
+const remove: RequestHandler = async (req, res, next) => {
+  try {
+    // Extract the ID of the user to be deleted
+    const userId = Number(req.params.id);
+
+    // Delete the user
+    await userRepository.delete(userId);
+
+    // Respond with HTTP 204 (No Content)
+    res.sendStatus(204);
+  } catch (err) {
+    // Pass any errors to the error-handling middleware
+    next(err);
+  }
+};
+
+export default { browse, read, add, edit, getDetails, remove };
