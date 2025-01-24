@@ -49,8 +49,13 @@ function Compte() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = auth?.user?.id;
+      if (!auth || !auth.user) {
+        console.error("User is not authenticated.");
+        return;
+      }
+
       try {
+        const userId = auth.user.id;
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/vehicles?userId=${userId}`,
           {
@@ -69,7 +74,7 @@ function Compte() {
       } catch (error) {}
     };
     fetchData();
-  }, [auth?.user?.id]);
+  }, [auth]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -195,6 +200,7 @@ function Compte() {
         <div className="user-info-vehicle">
           <div className="compte-box">
             <div className="vehicule">
+              <p>Mes véhicules</p>
               <p>Mes informations</p>
               <button type="button">Modifier mes véhicules ✏️</button>
             </div>
@@ -204,6 +210,7 @@ function Compte() {
                   key={vehicle.id}
                   size="small"
                   vehicleData={{
+                    id: vehicle.id,
                     brand: vehicle.brand,
                     model: vehicle.model,
                     license_plate: vehicle.licensePlate,
@@ -231,6 +238,7 @@ function Compte() {
                   key={vehicle.id}
                   size="small"
                   vehicleData={{
+                    id: vehicle.id,
                     brand: vehicle.brand,
                     model: vehicle.model,
                     license_plate: vehicle.licensePlate,
