@@ -43,8 +43,20 @@ function Compte() {
   const [firstname, setFirstname] = useState(auth?.user?.firstname || "");
   const [lastname, setLastname] = useState(auth?.user?.lastname || "");
   const [email, setEmail] = useState(auth?.user?.email || "");
-  const [phoneNumber, setPhoneNumber] = useState(auth?.user?.phone_number);
+  const [phoneNumber, setPhoneNumber] = useState(
+    auth?.user?.phone_number || "",
+  );
   const [address, setAddress] = useState(auth?.user?.address || "");
+  const [errors, setErrors] = useState({
+    phone: "",
+    email: "",
+    firstname: "",
+    lastname: "",
+  });
+
+  const validatePhoneNumber = (phone: string) => {
+    return phone.length === 10 && /^\d+$/.test(phone);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -75,45 +87,50 @@ function Compte() {
     fetchData();
   }, [auth]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrors({ phone: "", email: "", firstname: "", lastname: "" });
 
-    if (!auth?.user?.id) {
-      console.error("User ID is undefined");
+    if (phoneNumber && !validatePhoneNumber(phoneNumber)) {
+      setErrors((prev) => ({
+        ...prev,
+        phone: "Le numéro de téléphone doit contenir 10 chiffres",
+      }));
       return;
     }
 
-    const userId = auth.user.id;
-
-    const updatedUser = {
-      firstname,
-      lastname,
-      email,
-      phone_number: phoneNumber !== "" ? phoneNumber : null,
-      address,
-    };
-
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/users/${auth?.user?.id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           credentials: "include",
-          body: JSON.stringify(updatedUser),
+          body: JSON.stringify({
+            email,
+            phone_number: phoneNumber,
+            firstname,
+            lastname,
+            address,
+          }),
         },
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const error = await response.json();
+        throw new Error(error.message);
       }
 
-      const data = await response.json();
-      setAuth(data);
       setIsDisabled(true);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error updating user:", error);
+      setErrors((prev) => ({
+        ...prev,
+        submit: "Erreur lors de la mise à jour",
+      }));
+    }
   };
 
   const handleLogout = async () => {
@@ -186,11 +203,15 @@ function Compte() {
                       <label htmlFor="phoneNumber">Numéro de telephone</label>
                       <input
                         type="text"
-                        title={"phoneNumber"}
+                        id="phoneNumber"
+                        name="phoneNumber"
                         disabled={isdisabled}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
                         value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                       />
+                      {errors.phone && (
+                        <span className="error">{errors.phone}</span>
+                      )}
                     </div>
                     <div className="label-input">
                       <label htmlFor="adresse">Adresse</label>
