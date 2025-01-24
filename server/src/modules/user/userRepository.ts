@@ -56,6 +56,15 @@ class UserRepository {
   }
 
   // The Rs of CRUD - Read operations
+  async findById(userId: string | undefined) {
+    // Execute the SQL SELECT query to retrieve a user by email
+    const [rows] = await databaseClient.query<Rows>(
+      "select * from website_user where id = ?",
+      [userId],
+    );
+
+    return rows[0] as User | null;
+  }
 
   async read(id: number) {
     if (Number.isNaN(id)) {
