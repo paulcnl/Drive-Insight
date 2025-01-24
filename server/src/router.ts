@@ -27,6 +27,8 @@ router.post("/api/queries", queriesActions.add);
 
 router.use(authActions.verifyToken);
 
+router.get("/api/login", authActions.verifyAuth);
+
 router.get("/api/history", historyActions.browse);
 router.post("/api/history", historyActions.add);
 
