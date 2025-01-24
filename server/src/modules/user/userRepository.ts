@@ -57,6 +57,8 @@ class UserRepository {
       "select * from website_user where id = ?",
       [userId],
     );
+
+    return rows[0] as User | null;
   }
 
   async read(id: number) {
