@@ -22,7 +22,7 @@ type User = {
   firstname: string;
   lastname: string;
   address: string;
-  phoneNumber: string;
+  phone_number: string;
 };
 
 type Auth = {
@@ -42,9 +42,7 @@ function Compte() {
   const [firstname, setFirstname] = useState(auth?.user?.firstname || "");
   const [lastname, setLastname] = useState(auth?.user?.lastname || "");
   const [email, setEmail] = useState(auth?.user?.email || "");
-  const [phone_number, setPhone_number] = useState(
-    auth?.user?.phoneNumber || "",
-  );
+  const [phoneNumber, setPhoneNumber] = useState(auth?.user?.phone_number);
   const [address, setAddress] = useState(auth?.user?.address || "");
 
   useEffect(() => {
@@ -85,7 +83,7 @@ function Compte() {
       firstname,
       lastname,
       email,
-      phone_number,
+      phone_number: phoneNumber !== "" ? phoneNumber : null,
       address,
     };
 
@@ -161,8 +159,8 @@ function Compte() {
                         type="text"
                         title={"phoneNumber"}
                         disabled={isdisabled}
-                        onChange={(e) => setPhone_number(e.target.value)}
-                        value={phone_number}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        value={phoneNumber}
                       />
                     </div>
                     <div className="label-input">
@@ -177,7 +175,7 @@ function Compte() {
                     </div>
                     <div className="compte-button-container">
                       <button
-                        type="submit"
+                        type={isdisabled ? "submit" : "button"}
                         onClick={() => setIsDisabled(!isdisabled)}
                         disabled={false}
                       >
