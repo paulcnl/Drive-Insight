@@ -152,9 +152,19 @@ const verifyToken: RequestHandler = (req, res, next) => {
   }
 };
 
+const logout: RequestHandler = (req, res) => {
+  res.clearCookie("authToken", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+  res.status(200).json({ message: "Logged out successfully" });
+};
+
 export default {
   verifyAuth,
   hashPassword,
   login: [loginLimiter, login],
   verifyToken,
+  logout,
 };

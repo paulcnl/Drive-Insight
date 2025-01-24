@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
 
 type ComparisonData = {
@@ -36,17 +36,24 @@ type ComparisonContextType = {
 
 const ComparisonContext = createContext<ComparisonContextType | null>(null);
 
-export function ComparisonProvider({ children }: { children: ReactNode }) {
-  const [lastComparison, setLastComparison] = useState<ComparisonData | null>(
-    null,
-  );
+export const ComparisonProvider = ({ children }: { children: ReactNode }) => {
+  const [lastComparison, setLastComparison] = useState(() => {
+    const saved = localStorage.getItem("lastComparison");
+    return saved ? JSON.parse(saved) : null;
+  });
+
+  useEffect(() => {
+    if (lastComparison) {
+      localStorage.setItem("lastComparison", JSON.stringify(lastComparison));
+    }
+  }, [lastComparison]);
 
   return (
     <ComparisonContext.Provider value={{ lastComparison, setLastComparison }}>
       {children}
     </ComparisonContext.Provider>
   );
-}
+};
 
 export function useComparison() {
   const context = useContext(ComparisonContext);

@@ -1,6 +1,6 @@
 import "./Compte.css";
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import avatar from "../../assets/images/538474-user_512x512.webp";
 import VehicleCard from "../../components/VehicleCard/VehicleCard";
 
@@ -36,6 +36,7 @@ type Context = {
 };
 
 function Compte() {
+  const navigate = useNavigate();
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const { auth, setAuth } = useOutletContext() as Context;
   const [isdisabled, setIsDisabled] = useState(true);
@@ -117,11 +118,34 @@ function Compte() {
     } catch (error) {}
   };
 
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/logout`,
+        {
+          method: "POST",
+          credentials: "include",
+        },
+      );
+
+      if (response.ok) {
+        setAuth(null);
+        navigate("/");
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
+
   return (
     <>
       <div className="compte">
         <div className="deco">
-          <button type="button">Déconnexion</button>
+          <button type="button" onClick={handleLogout}>
+            Déconnexion
+          </button>
         </div>
         <div className="user">
           <img src={avatar} alt="" className="avatar" />
