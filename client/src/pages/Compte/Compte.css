@@ -220,6 +220,9 @@
     flex-direction: row;
     justify-content: space-between;
   }
+  .user-info-vehicle-2 {
+    display: none;
+  }
 
   .compte-box {
     width: 50%;

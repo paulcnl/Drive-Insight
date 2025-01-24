@@ -178,7 +178,34 @@ function Compte() {
         <div className="user-info-vehicle">
           <div className="compte-box">
             <div className="vehicule">
-              <p>Mes véhicules</p>
+              <p>Mes informations</p>
+              <button type="button">Modifier mes véhicules ✏️</button>
+            </div>
+            <div className="box-contenu">
+              {vehicles?.map((vehicle) => (
+                <VehicleCard
+                  key={vehicle.id}
+                  size="small"
+                  vehicleData={{
+                    brand: vehicle.brand,
+                    model: vehicle.model,
+                    license_plate: vehicle.licensePlate,
+                    engine: {
+                      power_type: vehicle.powerType,
+                      horsepower: vehicle.horsepower,
+                    },
+                    price: vehicle.price,
+                    car_picture: vehicle.imageUrl,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="user-info-vehicle-2">
+          <div className="compte-box">
+            <div className="vehicule">
+              <p>Mes vehicules</p>
               <button type="button">Modifier mes véhicules ✏️</button>
             </div>
             <div className="box-contenu">
