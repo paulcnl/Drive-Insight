@@ -115,58 +115,75 @@ function Compte() {
   return (
     <>
       <div className="compte">
+        <div className="deco">
+          <button type="button">Déconnexion</button>
+        </div>
         <div className="user">
           <img src={avatar} alt="" className="avatar" />
           <div className="info-box">
             <div className="user-info">
               <form className="user-info-perso" onSubmit={handleSubmit}>
                 <div className="info-box">
-                  <div className="nickname">
-                    <h2>user_nickname</h2>
-                    <button
-                      type="submit"
-                      onClick={() => setIsDisabled(!isdisabled)}
-                      disabled={false}
-                    >
-                      {isdisabled ? "Modifier" : "Enregistrer"}
-                    </button>
-                  </div>
                   <div className="input-compte">
-                    <input
-                      type="text"
-                      title={firstname}
-                      disabled={isdisabled}
-                      onChange={(e) => setFirstname(e.target.value)}
-                      value={firstname}
-                    />
-                    <input
-                      type="text"
-                      title={lastname}
-                      disabled={isdisabled}
-                      onChange={(e) => setLastname(e.target.value)}
-                      value={lastname}
-                    />
-                    <input
-                      type="text"
-                      title={email}
-                      disabled={isdisabled}
-                      onChange={(e) => setEmail(e.target.value)}
-                      value={email}
-                    />
-                    <input
-                      type="text"
-                      title={"phoneNumber"}
-                      disabled={isdisabled}
-                      onChange={(e) => setPhone_number(e.target.value)}
-                      value={phone_number}
-                    />
-                    <input
-                      type="text"
-                      title={address}
-                      disabled={isdisabled}
-                      onChange={(e) => setAddress(e.target.value)}
-                      value={address}
-                    />
+                    <div className="label-input">
+                      <label htmlFor="prenom">Prénom</label>
+                      <input
+                        type="text"
+                        title={firstname}
+                        disabled={isdisabled}
+                        onChange={(e) => setFirstname(e.target.value)}
+                        value={firstname}
+                      />
+                    </div>
+                    <div className="label-input">
+                      <label htmlFor="nom">Nom</label>
+                      <input
+                        type="text"
+                        title={lastname}
+                        disabled={isdisabled}
+                        onChange={(e) => setLastname(e.target.value)}
+                        value={lastname}
+                      />
+                    </div>
+                    <div className="label-input">
+                      <label htmlFor="email">Email</label>
+                      <input
+                        type="text"
+                        title={email}
+                        disabled={isdisabled}
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                      />
+                    </div>
+                    <div className="label-input">
+                      <label htmlFor="phoneNumber">Numéro de telephone</label>
+                      <input
+                        type="text"
+                        title={"phoneNumber"}
+                        disabled={isdisabled}
+                        onChange={(e) => setPhone_number(e.target.value)}
+                        value={phone_number}
+                      />
+                    </div>
+                    <div className="label-input">
+                      <label htmlFor="adresse">Adresse</label>
+                      <input
+                        type="text"
+                        title={address}
+                        disabled={isdisabled}
+                        onChange={(e) => setAddress(e.target.value)}
+                        value={address}
+                      />
+                    </div>
+                    <div className="compte-button-container">
+                      <button
+                        type="submit"
+                        onClick={() => setIsDisabled(!isdisabled)}
+                        disabled={false}
+                      >
+                        {isdisabled ? "Modifier" : "Enregistrer"}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </form>
