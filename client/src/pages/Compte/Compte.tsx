@@ -1,6 +1,6 @@
 import "./Compte.css";
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import avatar from "../../assets/images/538474-user_512x512.webp";
 import VehicleCard from "../../components/VehicleCard/VehicleCard";
 
@@ -22,7 +22,7 @@ type User = {
   firstname: string;
   lastname: string;
   address: string;
-  phoneNumber: string;
+  phone_number: string;
 };
 
 type Auth = {
@@ -36,21 +36,37 @@ type Context = {
 };
 
 function Compte() {
+  const navigate = useNavigate();
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const { auth, setAuth } = useOutletContext() as Context;
   const [isdisabled, setIsDisabled] = useState(true);
   const [firstname, setFirstname] = useState(auth?.user?.firstname || "");
   const [lastname, setLastname] = useState(auth?.user?.lastname || "");
   const [email, setEmail] = useState(auth?.user?.email || "");
-  const [phone_number, setPhone_number] = useState(
-    auth?.user?.phoneNumber || "",
+  const [phoneNumber, setPhoneNumber] = useState(
+    auth?.user?.phone_number || "",
   );
   const [address, setAddress] = useState(auth?.user?.address || "");
+  const [errors, setErrors] = useState({
+    phone: "",
+    email: "",
+    firstname: "",
+    lastname: "",
+  });
+
+  const validatePhoneNumber = (phone: string) => {
+    return phone.length === 10 && /^\d+$/.test(phone);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
-      const userId = auth?.user?.id;
+      if (!auth || !auth.user) {
+        console.error("User is not authenticated.");
+        return;
+      }
+
       try {
+        const userId = auth.user.id;
         const response = await fetch(
           `${import.meta.env.VITE_API_URL}/api/vehicles?userId=${userId}`,
           {
@@ -69,54 +85,82 @@ function Compte() {
       } catch (error) {}
     };
     fetchData();
-  }, [auth?.user?.id]);
+  }, [auth]);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrors({ phone: "", email: "", firstname: "", lastname: "" });
 
-    if (!auth?.user?.id) {
-      console.error("User ID is undefined");
+    if (phoneNumber && !validatePhoneNumber(phoneNumber)) {
+      setErrors((prev) => ({
+        ...prev,
+        phone: "Le numéro de téléphone doit contenir 10 chiffres",
+      }));
       return;
     }
 
-    const userId = auth.user.id;
-
-    const updatedUser = {
-      firstname,
-      lastname,
-      email,
-      phone_number,
-      address,
-    };
-
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_URL}/api/users/${userId}`,
+        `${import.meta.env.VITE_API_URL}/api/users/${auth?.user?.id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           credentials: "include",
-          body: JSON.stringify(updatedUser),
+          body: JSON.stringify({
+            email,
+            phone_number: phoneNumber,
+            firstname,
+            lastname,
+            address,
+          }),
         },
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const error = await response.json();
+        throw new Error(error.message);
       }
 
-      const data = await response.json();
-      setAuth(data);
       setIsDisabled(true);
-    } catch (error) {}
+    } catch (error) {
+      console.error("Error updating user:", error);
+      setErrors((prev) => ({
+        ...prev,
+        submit: "Erreur lors de la mise à jour",
+      }));
+    }
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/logout`,
+        {
+          method: "POST",
+          credentials: "include",
+        },
+      );
+
+      if (response.ok) {
+        setAuth(null);
+        navigate("/");
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
   };
 
   return (
     <>
       <div className="compte">
         <div className="deco">
-          <button type="button">Déconnexion</button>
+          <button type="button" onClick={handleLogout}>
+            Déconnexion
+          </button>
         </div>
         <div className="user">
           <img src={avatar} alt="" className="avatar" />
@@ -159,11 +203,15 @@ function Compte() {
                       <label htmlFor="phoneNumber">Numéro de telephone</label>
                       <input
                         type="text"
-                        title={"phoneNumber"}
+                        id="phoneNumber"
+                        name="phoneNumber"
                         disabled={isdisabled}
-                        onChange={(e) => setPhone_number(e.target.value)}
-                        value={phone_number}
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
                       />
+                      {errors.phone && (
+                        <span className="error">{errors.phone}</span>
+                      )}
                     </div>
                     <div className="label-input">
                       <label htmlFor="adresse">Adresse</label>
@@ -177,7 +225,7 @@ function Compte() {
                     </div>
                     <div className="compte-button-container">
                       <button
-                        type="submit"
+                        type={isdisabled ? "submit" : "button"}
                         onClick={() => setIsDisabled(!isdisabled)}
                         disabled={false}
                       >
@@ -195,6 +243,7 @@ function Compte() {
         <div className="user-info-vehicle">
           <div className="compte-box">
             <div className="vehicule">
+              <p>Mes véhicules</p>
               <p>Mes informations</p>
               <button type="button">Modifier mes véhicules ✏️</button>
             </div>
@@ -204,6 +253,7 @@ function Compte() {
                   key={vehicle.id}
                   size="small"
                   vehicleData={{
+                    id: vehicle.id,
                     brand: vehicle.brand,
                     model: vehicle.model,
                     license_plate: vehicle.licensePlate,
@@ -231,6 +281,7 @@ function Compte() {
                   key={vehicle.id}
                   size="small"
                   vehicleData={{
+                    id: vehicle.id,
                     brand: vehicle.brand,
                     model: vehicle.model,
                     license_plate: vehicle.licensePlate,
